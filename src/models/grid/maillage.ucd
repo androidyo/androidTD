@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="maillage" size="751,1035" id="models.maillage" metadata="uml2-1.0" initialized="true" scrolledY="171" tag="1000" key="32303037303533312D31303030204153445F54442F5069657272652D446F">
+  <children xsi:type="editmodel:ClassEditModel" name="Arc" location="585,540" size="227,145" id="models.maillage/Arc" runTimeClassModel="depart,getArrivee(),getDepart(),arrivee,Arc(Lmodels.maillage.Noeud;Lmodels.maillage.Noeud;),serialVersionUID,toLine2D()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="112,48">
+      <children xsi:type="editmodel:AttributeEditModel" name="serialVersionUID" id="models.maillage/Arc#serialVersionUID"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="depart" id="models.maillage/Arc#depart"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="204,64">
+      <children xsi:type="editmodel:MethodEditModel" name="Arc" id="models.maillage/Arc#Arc(Lmodels.maillage.Noeud;Lmodels.maillage.Noeud;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getArrivee" id="models.maillage/Arc#getArrivee()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDepart" id="models.maillage/Arc#getDepart()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toLine2D" id="models.maillage/Arc#toLine2D()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Maillage" location="30,45" size="524,497" id="models.maillage/Maillage" runTimeClassModel="yOffset,lARGEUR_NOEUD,hAUTEUR_EN_PIXELS,Maillage(IIIII),getArcs(),graphe,toString(),getNoeuds(),lARGEUR_EN_PIXELS,activer(Lmodels.maillage.Noeud;),getHauteurPixels(),testInt(I),dEMI_NOEUD,plusCourtChemin(IIII),nOMBRE_NOEUDS_X,activerZone(Ljava.awt.Rectangle;),pOIDS_DIAGO,noeudContenantLePoint(II),zoneActive(Ljava.awt.Rectangle;Z),getLargeurPixels(),desactiverZone(Ljava.awt.Rectangle;),desactiver(Lmodels.maillage.Noeud;),xOffset,noeuds,nOMBRE_NOEUDS_Y,rectangleEstDansLeTerrain(Ljava.awt.Rectangle;),Maillage(III),construireGraphe()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="217,176">
+      <children xsi:type="editmodel:AttributeEditModel" name="dEMI_NOEUD" id="models.maillage/Maillage#dEMI_NOEUD"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="graphe" id="models.maillage/Maillage#graphe"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="hAUTEUR_EN_PIXELS" id="models.maillage/Maillage#hAUTEUR_EN_PIXELS"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lARGEUR_EN_PIXELS" id="models.maillage/Maillage#lARGEUR_EN_PIXELS"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lARGEUR_NOEUD" id="models.maillage/Maillage#lARGEUR_NOEUD"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nOMBRE_NOEUDS_X" id="models.maillage/Maillage#nOMBRE_NOEUDS_X"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nOMBRE_NOEUDS_Y" id="models.maillage/Maillage#nOMBRE_NOEUDS_Y"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="noeuds" id="models.maillage/Maillage#noeuds"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="pOIDS_DIAGO" id="models.maillage/Maillage#pOIDS_DIAGO"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="xOffset" id="models.maillage/Maillage#xOffset"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="yOffset" id="models.maillage/Maillage#yOffset"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="501,272">
+      <children xsi:type="editmodel:MethodEditModel" name="Maillage" id="models.maillage/Maillage#Maillage(III)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Maillage" id="models.maillage/Maillage#Maillage(IIIII)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="activer" id="models.maillage/Maillage#activer(Lmodels.maillage.Noeud;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="activerZone" id="models.maillage/Maillage#activerZone(Ljava.awt.Rectangle;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="construireGraphe" id="models.maillage/Maillage#construireGraphe()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="desactiver" id="models.maillage/Maillage#desactiver(Lmodels.maillage.Noeud;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="desactiverZone" id="models.maillage/Maillage#desactiverZone(Ljava.awt.Rectangle;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getArcs" id="models.maillage/Maillage#getArcs()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getHauteurPixels" id="models.maillage/Maillage#getHauteurPixels()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLargeurPixels" id="models.maillage/Maillage#getLargeurPixels()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNoeuds" id="models.maillage/Maillage#getNoeuds()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="noeudContenantLePoint" id="models.maillage/Maillage#noeudContenantLePoint(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="plusCourtChemin" id="models.maillage/Maillage#plusCourtChemin(IIII)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="rectangleEstDansLeTerrain" id="models.maillage/Maillage#rectangleEstDansLeTerrain(Ljava.awt.Rectangle;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="models.maillage/Maillage#toString()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="zoneActive" id="models.maillage/Maillage#zoneActive(Ljava.awt.Rectangle;Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="testInt" id="models.maillage/Maillage#testInt(I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="PathNotFoundException" location="585,702" size="246,81" id="models.maillage/PathNotFoundException" runTimeClassModel="PathNotFoundException(Ljava.lang.String;),serialVersionUID">
+    <children xsi:type="editmodel:CompartmentEditModel" size="112,16">
+      <children xsi:type="editmodel:AttributeEditModel" name="serialVersionUID" id="models.maillage/PathNotFoundException#serialVersionUID"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="223,16">
+      <children xsi:type="editmodel:MethodEditModel" name="PathNotFoundException" id="models.maillage/PathNotFoundException#PathNotFoundException(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Noeud" location="585,286" size="330,241" id="models.maillage/Noeud" runTimeClassModel="equals(Lmodels.maillage.Noeud;),pixelANodale(II),lARGEUR_NOEUD,Noeud(III),setActif(Z),Noeud(Lmodels.maillage.Noeud;),centre(II),isActif(),serialVersionUID,actif,coordonnee(Lmodels.maillage.Noeud;II),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,48">
+      <children xsi:type="editmodel:AttributeEditModel" name="actif" id="models.maillage/Noeud#actif"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lARGEUR_NOEUD" id="models.maillage/Noeud#lARGEUR_NOEUD"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="serialVersionUID" id="models.maillage/Noeud#serialVersionUID"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="307,144">
+      <children xsi:type="editmodel:MethodEditModel" name="Noeud" id="models.maillage/Noeud#Noeud(III)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="centre" id="models.maillage/Noeud#centre(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="coordonnee" id="models.maillage/Noeud#coordonnee(Lmodels.maillage.Noeud;II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="models.maillage/Noeud#equals(Lmodels.maillage.Noeud;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isActif" id="models.maillage/Noeud#isActif()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="pixelANodale" id="models.maillage/Noeud#pixelANodale(II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setActif" id="models.maillage/Noeud#setActif(Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="models.maillage/Noeud#toString()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Noeud" id="models.maillage/Noeud#Noeud(Lmodels.maillage.Noeud;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="GenerateurDArcs" location="585,795" size="349,65" id="models.maillage/GenerateurDArcs" runTimeClassModel="createEdge(Lmodels.maillage.Noeud;Lmodels.maillage.Noeud;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="326,16">
+      <children xsi:type="editmodel:MethodEditModel" name="createEdge" id="models.maillage/GenerateurDArcs#createEdge(Lmodels.maillage.Noeud;Lmodels.maillage.Noeud;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="-1" showScope="InPackage" properties="wireOptions=1;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" showMethodsParameterTypes="true" showMethodsReturnType="true" showMethodsParameterNames="true" showMethodsParameterKinds="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+</editmodel:ClassDiagramEditModel>
