@@ -28,8 +28,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import net.ChannelException;
-import net.jeu.client.EcouteurDeClientJeu;
-import net.jeu.server.ServeurJeu;
+import net.game.client.ClientListener;
+import net.game.server.ServeurJeu;
 
 import exceptions.MessageChatInvalide;
 
@@ -55,7 +55,7 @@ import models.utils.Tools;
  * @version 1.0 | mai 2010
  */
 public class Panel_AttendreJoueurs extends JPanel implements 
-    ActionListener, GameListener, EcouteurDeClientJeu
+    ActionListener, GameListener, ClientListener
 {
     private static final long serialVersionUID = 1L;
     private final int MARGES_PANEL = 40;

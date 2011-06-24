@@ -48,8 +48,8 @@ import models.game.Game_Client;
 import models.game.GameMode;
 import models.game.GameResult;
 import net.ChannelException;
-import net.jeu.client.EcouteurDeClientJeu;
-import net.jeu.server.ServeurJeu;
+import net.game.client.ClientListener;
+import net.game.server.ServeurJeu;
 
 /**
  * Fenetre princiale du jeu 1 joueur. 
@@ -67,7 +67,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
                                                     GameListener,
                                                     EcouteurDeLanceurDeVagues,
                                                     EcouteurDePanelTerrain,
-                                                    EcouteurDeClientJeu,
+                                                    ClientListener,
                                                     WindowListener,
                                                     KeyListener
                                                     

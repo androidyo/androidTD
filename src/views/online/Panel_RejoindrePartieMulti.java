@@ -31,7 +31,7 @@ import models.game.Game_Client;
 import models.player.Team;
 import models.player.Player;
 import net.*;
-import net.jeu.client.EcouteurDeClientJeu;
+import net.game.client.ClientListener;
 
 import org.json.*;
 import exceptions.NoLocationAvailableException;
@@ -49,7 +49,7 @@ import views.Panel_MenuPrincipal;
  */
 @SuppressWarnings("serial")
 public class Panel_RejoindrePartieMulti extends JPanel implements
-        ActionListener, KeyListener, MouseListener, EcouteurDeClientJeu
+        ActionListener, KeyListener, MouseListener, ClientListener
 {  
     private final int MARGES_PANEL = 40;
     private JFrame parent;

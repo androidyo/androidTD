@@ -20,8 +20,8 @@ package models.game;
 import java.net.ConnectException;
 
 import net.ChannelException;
-import net.jeu.client.ClientJeu;
-import net.jeu.client.EcouteurDeClientJeu;
+import net.game.client.ClientJeu;
+import net.game.client.ClientListener;
 import exceptions.*;
 import models.creatures.*;
 import models.player.*;
@@ -224,7 +224,7 @@ public class Game_Client extends Game
      * @param edcj l'écouteur du client jeu
      */
     public void setEcouteurDeClientJeu(
-            EcouteurDeClientJeu edcj)
+            ClientListener edcj)
     {
         clientJeu.setEcouteurDeClientJeu(edcj);
     }

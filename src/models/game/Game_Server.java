@@ -28,7 +28,7 @@ import models.player.RevenueManager;
 import models.player.Player;
 import net.ChannelException;
 import net.ChannelTCP;
-import net.jeu.server.ServeurJeu;
+import net.game.server.ServeurJeu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
