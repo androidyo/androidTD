@@ -18,7 +18,7 @@
 
 package views.common;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.io.*;
 import javax.swing.border.EmptyBorder;
@@ -44,7 +44,7 @@ public class View_HTML extends JFrame implements ActionListener
 
     private JEditorPane epHTML;
     private static final long serialVersionUID = 1L;
-    private JButton bFermer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_FERMER));
+    private JButton bFermer = new JButton(Language.getTexte(Language.ID_TXT_BTN_FERMER));
 
     /**
      * Constructeur

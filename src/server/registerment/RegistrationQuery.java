@@ -18,7 +18,7 @@
 
 package server.registerment;
 
-public class RequeteEnregistrement
+public class RegistrationQuery
 {
     public final static String STOP = "{\"donnees\" :{\"code\" : "
             + CodeRegisterment.STOP + "}}";

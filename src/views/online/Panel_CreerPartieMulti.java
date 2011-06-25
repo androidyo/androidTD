@@ -18,7 +18,7 @@
 
 package views.online;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -61,17 +61,17 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
     private JFrame parent;
  
     // form
-    private JLabel lblNomServeur = new JLabel(Langue.getTexte(Langue.ID_TITRE_NOM_SERVEUR));
+    private JLabel lblNomServeur = new JLabel(Language.getTexte(Language.ID_TITRE_NOM_SERVEUR));
     private JTextField tfNomServeur = new JTextField(Configuration.getPseudoJoueur()+"Server");
     //private JLabel lblEquipeAleatoire = new JLabel("Equipes aleatoires :");
     //private JCheckBox cbEquipeAleatoire = new JCheckBox();
-    private JLabel lblTitreTerrains = new JLabel(Langue.getTexte(Langue.ID_TITRE_CHOISISSEZ_VOTRE_TERRAIN));
+    private JLabel lblTitreTerrains = new JLabel(Language.getTexte(Language.ID_TITRE_CHOISISSEZ_VOTRE_TERRAIN));
     private JLabel lblEtat = new JLabel();
     
-    private JLabel lblPseudo = new JLabel(Langue.getTexte(Langue.ID_TITRE_PSEUDO));
+    private JLabel lblPseudo = new JLabel(Language.getTexte(Language.ID_TITRE_PSEUDO));
     private JTextField tfPseudo = new JTextField("", 10);
-    private JButton bCreer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_CREER));
-    private JButton bRetour = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR));
+    private JButton bCreer = new JButton(Language.getTexte(Language.ID_TXT_BTN_CREER));
+    private JButton bRetour = new JButton(Language.getTexte(Language.ID_TXT_BTN_RETOUR));
     
     // terrains
     private ArrayList<Field> terrains = new ArrayList<Field>();
@@ -89,7 +89,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
         // initialisation
         super(new BorderLayout());
         this.parent = parent;
-        parent.setTitle(Langue.getTexte(Langue.ID_TITRE_CREER_PARTIE_MULTI));
+        parent.setTitle(Language.getTexte(Language.ID_TITRE_CREER_PARTIE_MULTI));
         setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
 
@@ -102,7 +102,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
 
         pTop.setOpaque(false);
 
-        JLabel lblTitre = new JLabel(Langue.getTexte(Langue.ID_TITRE_CREER_PARTIE_MULTI));
+        JLabel lblTitre = new JLabel(Language.getTexte(Language.ID_TITRE_CREER_PARTIE_MULTI));
         lblTitre.setFont(ManageFonts.POLICE_TITRE);
         lblTitre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
         pTop.add(lblTitre, BorderLayout.NORTH);
@@ -215,11 +215,11 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
         tbTerrains.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // nom de colonnes
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_DESCRIPTION));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_MODE));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_JOUEURS_MAX));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_EQUIPES_MAX));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_APERCU));
+        model.addColumn(Language.getTexte(Language.ID_TXT_DESCRIPTION));
+        model.addColumn(Language.getTexte(Language.ID_TXT_MODE));
+        model.addColumn(Language.getTexte(Language.ID_TXT_JOUEURS_MAX));
+        model.addColumn(Language.getTexte(Language.ID_TXT_EQUIPES_MAX));
+        model.addColumn(Language.getTexte(Language.ID_TXT_APERCU));
 
         
         // Taille des colonnes
@@ -371,19 +371,19 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
             
             if(tfNomServeur.getText().isEmpty())
             {
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_NOM_SERVEUR_VIDE));
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_NOM_SERVEUR_VIDE));
                 return;
             }
  
             if(tbTerrains.getSelectedRow() == -1)
             {
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_PAS_DE_TERRAIN_SELECTIONNE));
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_PAS_DE_TERRAIN_SELECTIONNE));
                 return;
             }
   
             if(tfPseudo.getText().isEmpty())
             {
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_PSEUDO_VIDE));
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_PSEUDO_VIDE));
                 return;
             }
             
@@ -459,7 +459,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                     try
                     {
                         lblEtat.setForeground(LookInterface.COULEUR_TEXTE_PRI);
-                        lblEtat.setText(Langue.getTexte(Langue.ID_TXT_TENTATIVE_DE_CONNEXION));
+                        lblEtat.setText(Language.getTexte(Language.ID_TXT_TENTATIVE_DE_CONNEXION));
                         
                         // TODO port dynamique
                         try
@@ -472,7 +472,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                         
                             // Information
                             lblEtat.setForeground(LookInterface.COULEUR_TEXTE_PRI);
-                            lblEtat.setText(Langue.getTexte(Langue.ID_TXT_ENREGISTREMENT_AU_SRV_CENTRAL)+"...");
+                            lblEtat.setText(Language.getTexte(Language.ID_TXT_ENREGISTREMENT_AU_SRV_CENTRAL)+"...");
     
                             if (jeuServeur.enregistrerSurSE(tfNomServeur.getText(),
                                     terrain.getNbJoueursMax(),
@@ -480,12 +480,12 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                                     terrain.getMode()))
                             {
                                 lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-                                lblEtat.setText(Langue.getTexte(Langue.ID_TXT_ENREGISTREMENT_AU_SRV_CENTRAL_REUSSI));
+                                lblEtat.setText(Language.getTexte(Language.ID_TXT_ENREGISTREMENT_AU_SRV_CENTRAL_REUSSI));
                             } 
                             else
                             {
                                 lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_ENREGISTREMENT_AU_SRV_CENTRAL_ECHOUE));
+                                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_ENREGISTREMENT_AU_SRV_CENTRAL_ECHOUE));
                             }
                             
                             // connexion réussie
@@ -498,24 +498,24 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                         catch (NoLocationAvailableException e1)
                         {
                             lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                            lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_PAS_DE_PLACE));
+                            lblEtat.setText(Language.getTexte(Language.ID_ERREUR_PAS_DE_PLACE));
                         }
                     }
                     catch (ConnectException e2)
                     {
                         lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                        lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CONNEXION_IMPOSSIBLE));
+                        lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CONNEXION_IMPOSSIBLE));
                     } 
                     catch (ChannelException e3)
                     {
                         lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                        lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CONNEXION_IMPOSSIBLE));
+                        lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CONNEXION_IMPOSSIBLE));
                     } 
                 } 
                 catch (IOException e1)
                 {
                     lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                    lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CREATION_IMPOSSIBLE_UN_SRV_PAR_MACHINE));
+                    lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CREATION_IMPOSSIBLE_UN_SRV_PAR_MACHINE));
                 }
             }
         } 

@@ -18,7 +18,7 @@
 
 package views.editorMap;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -107,16 +107,16 @@ public class View_CreationTerrain extends    JFrame
     
     // Menu
     private final JMenuBar  menuPrincipal   = new JMenuBar();
-    private final JMenu     menuFichier     = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_FICHIER));
-    private final JMenu     menuEdition     = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_EDITION));
-    private final JMenu     menuAide        = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_AIDE));
-    private final JMenuItem itemNouveau      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_NOUVEAU),I_NOUVEAU);
-    private final JMenuItem itemOuvrir      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_OUVRIR)+"..",I_OUVRIR);
-    private final JMenuItem itemEnregistrer = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_ENREGISTRER),I_ENREGISTRER);
-    private final JMenuItem itemEnregistrerSous = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_ENREGISTRER_SOUS)+"...",I_ENREGISTRER_SOUS);
-    private final JMenuItem itemQuitter      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_QUITTER),I_QUITTER);
-    private final JMenuItem itemMenuPrincipal      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR_MENU_P),I_MAISON);
-    private final JMenuItem itemTester      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_TESTER),I_TESTER);
+    private final JMenu     menuFichier     = new JMenu(Language.getTexte(Language.ID_TXT_BTN_FICHIER));
+    private final JMenu     menuEdition     = new JMenu(Language.getTexte(Language.ID_TXT_BTN_EDITION));
+    private final JMenu     menuAide        = new JMenu(Language.getTexte(Language.ID_TXT_BTN_AIDE));
+    private final JMenuItem itemNouveau      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_NOUVEAU),I_NOUVEAU);
+    private final JMenuItem itemOuvrir      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_OUVRIR)+"..",I_OUVRIR);
+    private final JMenuItem itemEnregistrer = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_ENREGISTRER),I_ENREGISTRER);
+    private final JMenuItem itemEnregistrerSous = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_ENREGISTRER_SOUS)+"...",I_ENREGISTRER_SOUS);
+    private final JMenuItem itemQuitter      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_QUITTER),I_QUITTER);
+    private final JMenuItem itemMenuPrincipal      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P),I_MAISON);
+    private final JMenuItem itemTester      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_TESTER),I_TESTER);
     
     // TODO Traduire
     private final JMenuItem itemCommentUtiliserLEditeur      = new JMenuItem("Comment marche l'éditeur ?",I_AIDE);
@@ -140,7 +140,7 @@ public class View_CreationTerrain extends    JFrame
     /**
      * Etat de l'editeur
      */
-    private JLabel lblEtat = new JLabel(Langue.getTexte(Langue.ID_TXT_PRET));
+    private JLabel lblEtat = new JLabel(Language.getTexte(Language.ID_TXT_PRET));
     
     // Chercheurs de fichiers
     private JFileChooser fcOuvrir = new JFileChooser("./maps");
@@ -166,7 +166,7 @@ public class View_CreationTerrain extends    JFrame
      */
     public View_CreationTerrain()
     {
-        super(Langue.getTexte(Langue.ID_TITRE_EDITEUR_DE_TERRAIN));
+        super(Language.getTexte(Language.ID_TITRE_EDITEUR_DE_TERRAIN));
         
         setIconImage(I_FENETRE.getImage());
         getContentPane().setLayout(new BorderLayout());
@@ -245,13 +245,13 @@ public class View_CreationTerrain extends    JFrame
         bSupprimer.addActionListener(this);
         bTester.addActionListener(this);
  
-        bNouveau.setToolTipText(Langue.getTexte(Langue.ID_TXT_BTN_NOUVEAU));
-        bOuvrir.setToolTipText(Langue.getTexte(Langue.ID_TXT_BTN_OUVRIR)+"...");
-        bEnregistrer.setToolTipText(Langue.getTexte(Langue.ID_TXT_BTN_ENREGISTRER));
+        bNouveau.setToolTipText(Language.getTexte(Language.ID_TXT_BTN_NOUVEAU));
+        bOuvrir.setToolTipText(Language.getTexte(Language.ID_TXT_BTN_OUVRIR)+"...");
+        bEnregistrer.setToolTipText(Language.getTexte(Language.ID_TXT_BTN_ENREGISTRER));
         bMain.setToolTipText("Déplacements");
         bMurs.setToolTipText("Edition de zone");
         bSupprimer.setToolTipText("Supprimer la zone sélectionnée");
-        bTester.setToolTipText(Langue.getTexte(Langue.ID_TXT_BTN_TESTER));
+        bTester.setToolTipText(Language.getTexte(Language.ID_TXT_BTN_TESTER));
         
         add(tbPrincipale,BorderLayout.NORTH);
         
@@ -276,8 +276,8 @@ public class View_CreationTerrain extends    JFrame
         panelOptionsTerrain = new Panel_OptionsTerrain(jeu);
         panelCreationEquipes = new Panel_CreationEquipes(jeu, panelCreationTerrain);
         
-        panelOnglets.add(Langue.getTexte(Langue.ID_TXT_PROPRIETES),panelOptionsTerrain );
-        panelOnglets.add(Langue.getTexte(Langue.ID_TXT_EQUIPES),panelCreationEquipes);
+        panelOnglets.add(Language.getTexte(Language.ID_TXT_PROPRIETES),panelOptionsTerrain );
+        panelOnglets.add(Language.getTexte(Language.ID_TXT_EQUIPES),panelCreationEquipes);
         
         JPanel p = new JPanel(new BorderLayout());
         p.add(panelOnglets,BorderLayout.CENTER);
@@ -326,7 +326,7 @@ public class View_CreationTerrain extends    JFrame
                 } 
         
         // Anglais uniquement
-        Langue.initaliser("lang/en_EN.json");
+        Language.initaliser("lang/en_EN.json");
                       
         new View_CreationTerrain();
     }
@@ -422,7 +422,7 @@ public class View_CreationTerrain extends    JFrame
         jeu.setTerrain(t);
         
         // creation de la premiere equipe
-        Team equipe = new Team(1, Langue.getTexte(Langue.ID_TXT_EQUIPE)+" 1", Color.BLACK);
+        Team equipe = new Team(1, Language.getTexte(Language.ID_TXT_EQUIPE)+" 1", Color.BLACK);
         equipe.ajouterZoneDepart(new Rectangle(40,40,40,40));
         equipe.setZoneArriveeCreatures(new Rectangle(140,140,40,40));
         equipe.ajouterEmplacementJoueur(new PlayerLocation(1, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));

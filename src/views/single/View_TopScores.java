@@ -18,7 +18,7 @@
 
 package views.single;
 
-import i18n.Langue;
+import i18n.Language;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormat;
@@ -44,7 +44,7 @@ public class View_TopScores extends JDialog
     private static final ImageIcon I_FENETRE    = new ImageIcon("img/icones/star.png");
 
     // membre graphiques
-    private JButton bFermer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_FERMER));
+    private JButton bFermer = new JButton(Language.getTexte(Language.ID_TXT_BTN_FERMER));
     
     // autres membres
     private HighScores ms;
@@ -59,7 +59,7 @@ public class View_TopScores extends JDialog
     public View_TopScores(String nomTerrain, Dialog parent)
     {
         // preference de la fenetre
-        super(parent,String.format(Langue.getTexte(Langue.ID_TXT_LES_X_MEILLEURS_SCORES),HighScores.NOMBRE_MAX_SCORES),true);
+        super(parent,String.format(Language.getTexte(Language.ID_TXT_LES_X_MEILLEURS_SCORES),HighScores.NOMBRE_MAX_SCORES),true);
         
         construire(nomTerrain);
     }
@@ -73,7 +73,7 @@ public class View_TopScores extends JDialog
      */
     public View_TopScores(String nomTerrain, Frame parent)
     {
-        super(parent,String.format(Langue.getTexte(Langue.ID_TXT_LES_X_MEILLEURS_SCORES),HighScores.NOMBRE_MAX_SCORES),true);
+        super(parent,String.format(Language.getTexte(Language.ID_TXT_LES_X_MEILLEURS_SCORES),HighScores.NOMBRE_MAX_SCORES),true);
   
         construire(nomTerrain);
     }
@@ -101,10 +101,10 @@ public class View_TopScores extends JDialog
         
         // nom de colonnes
         model.addColumn("");
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_JOUEUR));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_SCORE));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_DUREE));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_DATE));
+        model.addColumn(Language.getTexte(Language.ID_TXT_JOUEUR));
+        model.addColumn(Language.getTexte(Language.ID_TXT_SCORE));
+        model.addColumn(Language.getTexte(Language.ID_TXT_DUREE));
+        model.addColumn(Language.getTexte(Language.ID_TXT_DATE));
         
         // création de la table avec boquage des editions
         JTable tbScores = new JTable(model)

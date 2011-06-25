@@ -18,7 +18,7 @@
 
 package views.single;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -44,11 +44,11 @@ public class View_DialogGameOver extends JDialog implements ActionListener
 {
     // constantes statiques
     private static final long serialVersionUID      = 1L;
-    private static final String TITRE_FORM          = Langue.getTexte(Langue.ID_TITRE_PARTIE_TERMINEE);
+    private static final String TITRE_FORM          = Language.getTexte(Language.ID_TITRE_PARTIE_TERMINEE);
     
     // membrea graphiques
-    private JButton bOk             = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_OK));
-    private JButton bAnnuler        = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_FERMER));
+    private JButton bOk             = new JButton(Language.getTexte(Language.ID_TXT_BTN_OK));
+    private JButton bAnnuler        = new JButton(Language.getTexte(Language.ID_TXT_BTN_FERMER));
     private JTextField tfPseudo  = new JTextField();
     private JPanel pFormulaire;
     private String nomTerrain;
@@ -64,7 +64,7 @@ public class View_DialogGameOver extends JDialog implements ActionListener
     public View_DialogGameOver(Frame fenParent, int score, long dureePartie, String nomTerrain)
     {
         // modal preferences de la fenetre
-        super(fenParent,Langue.getTexte(Langue.ID_TITRE_PARTIE_TERMINEE),true); 
+        super(fenParent,Language.getTexte(Language.ID_TITRE_PARTIE_TERMINEE),true); 
         setLayout(new BorderLayout());
         setResizable(false);
         getContentPane().setBackground(LookInterface.COULEUR_DE_FOND_PRI);
@@ -79,10 +79,10 @@ public class View_DialogGameOver extends JDialog implements ActionListener
         pFormulaire.setOpaque(false);
         pFormulaire.setBorder(new EmptyBorder(20,20,20,20));
         
-        pFormulaire.add(new JLabel(Langue.getTexte(Langue.ID_TXT_SCORE_OBTENU)+" : "));
+        pFormulaire.add(new JLabel(Language.getTexte(Language.ID_TXT_SCORE_OBTENU)+" : "));
         pFormulaire.add(new JLabel(score+""));
         
-        pFormulaire.add(new JLabel(Langue.getTexte(Langue.ID_TXT_VOTRE_PSEUDO)+" : "));
+        pFormulaire.add(new JLabel(Language.getTexte(Language.ID_TXT_VOTRE_PSEUDO)+" : "));
         tfPseudo.setText(Configuration.getPseudoJoueur());
         pFormulaire.add(tfPseudo);
         pFormulaire.add(bAnnuler);

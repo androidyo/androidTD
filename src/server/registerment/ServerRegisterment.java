@@ -23,8 +23,8 @@ import utils.Configuration;
 
 /**
  * Classe de lancement du serveur d'enregistrement 
+ * Class server start recording
  * 
- * @author lazhar
  */
 public class ServerRegisterment
 {

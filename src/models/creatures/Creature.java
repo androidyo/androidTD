@@ -18,7 +18,7 @@
 
 package models.creatures;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.util.*;
@@ -382,9 +382,9 @@ public abstract class Creature extends Rectangle
     public String getNomType()
     {
         if(TYPE == TYPE_TERRIENNE)
-            return Langue.getTexte(Langue.ID_TXT_TERRIENNE);
+            return Language.getTexte(Language.ID_TXT_TERRIENNE);
         else
-            return Langue.getTexte(Langue.ID_TXT_AERIENNE);
+            return Language.getTexte(Language.ID_TXT_AERIENNE);
     }
 
     /**

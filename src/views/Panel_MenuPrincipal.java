@@ -17,7 +17,7 @@
 */
 
 package views;
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -42,29 +42,28 @@ import models.game.Game;
 /**
  * 游戏的主菜单.单机与联机游戏模式的选择
  * 
- * @author Aurelien Da Campo
- * @version 1.0 | mai 2010
  */
 public class Panel_MenuPrincipal extends JPanel implements ActionListener
 {
-    // constantes statiques
+    // static constants
     private final int MARGES_PANEL = 40;
     private static final long serialVersionUID = 1L;
     private static final Image IMAGE_DE_FOND = Toolkit.getDefaultToolkit().getImage("img/interfaces/menuPrincipal.png");
     
-    // elements du formulaire
+    // elements of the form
     private JLabel version;
-
-    private JButton bPartieSolo = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_SOLO));
-    private JButton bRejoindrePartieMulti = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_REJOINDRE));
-    private JButton bCreerPartieMulti = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_CREER));
-    private JButton bRegles = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_REGLES));
-    private JButton bAPropos = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS));
-    private JButton bOptions = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_OPTIONS));
-    private JButton bQuitter = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_QUITTER));
-    private JButton bPartiePerso = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_VOS_PARTIES));
+    // 左边游戏模式选择按钮
+    private JButton bPartieSolo = new JButton(Language.getTexte(Language.ID_TXT_BTN_SOLO));
+    private JButton bRejoindrePartieMulti = new JButton(Language.getTexte(Language.ID_TXT_BTN_REJOINDRE));
+    private JButton bCreerPartieMulti = new JButton(Language.getTexte(Language.ID_TXT_BTN_CREER));
+    private JButton bPartiePerso = new JButton(Language.getTexte(Language.ID_TXT_BTN_VOS_PARTIES));
+    // 右边其它按钮
+    private JButton bRegles = new JButton(Language.getTexte(Language.ID_TXT_BTN_REGLES));
+    private JButton bAPropos = new JButton(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS));
+    private JButton bOptions = new JButton(Language.getTexte(Language.ID_TXT_BTN_OPTIONS));
+    private JButton bQuitter = new JButton(Language.getTexte(Language.ID_TXT_BTN_QUITTER));
     
-    private JLabel lblReseau = new JLabel(Langue.getTexte(Langue.ID_TITRE_RESEAU)+" \"beta\"");
+    private JLabel lblReseau = new JLabel(Language.getTexte(Language.ID_TITRE_RESEAU)+" \"beta\"");
     
     
     private JFrame parent;
@@ -80,7 +79,7 @@ public class Panel_MenuPrincipal extends JPanel implements ActionListener
         // -------------------------------
         // -- preferances de le fenetre --
         // -------------------------------
-        parent.setTitle(Langue.getTexte(Langue.ID_TITRE_MENU_PRINCIPAL)+" - ASD Tower Defense");
+        parent.setTitle(Language.getTexte(Language.ID_TITRE_MENU_PRINCIPAL)+" - ASD Tower Defense");
 
         setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
@@ -188,6 +187,7 @@ public class Panel_MenuPrincipal extends JPanel implements ActionListener
         if (source == bPartieSolo)
         {//单人游戏
             parent.getContentPane().removeAll();
+            // 进入单人游戏模式
             parent.getContentPane().add(new Panel_ModeSingle(parent),
                     BorderLayout.CENTER);
             parent.getContentPane().validate();
@@ -214,10 +214,10 @@ public class Panel_MenuPrincipal extends JPanel implements ActionListener
             parent.getContentPane().validate();
         }
         else if(source == bRegles)
-            new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_REGLES), new File(Langue.getTexte(Langue.ID_ADRESSE_REGLES_DU_JEU)), parent);
+            new View_HTML(Language.getTexte(Language.ID_TXT_BTN_REGLES), new File(Language.getTexte(Language.ID_ADRESSE_REGLES_DU_JEU)), parent);
        
         else if(source == bAPropos)
-            new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS),new File(Langue.getTexte(Langue.ID_ADRESSE_A_PROPOS)), parent);
+            new View_HTML(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS),new File(Language.getTexte(Language.ID_ADRESSE_A_PROPOS)), parent);
         
         else if(source == bOptions)
             new View_Options();

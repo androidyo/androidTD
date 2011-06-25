@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -47,7 +47,7 @@ public class Tower_AntiAerial extends Tower
 	public static final Image ICONE;
 	public static final int NIVEAU_MAX = 5;
 	public static final int PRIX_ACHAT = 30;
-	public static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_ANTI_AERIENNE);   
+	public static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_ANTI_AERIENNE);   
 
 	
 	static
@@ -67,7 +67,7 @@ public class Tower_AntiAerial extends Tower
 			  20, 				// largeur
 			  20, 				// hauteur
 			  COULEUR,			// couleur de fond
-			  Langue.getTexte(Langue.ID_TXT_NOM_TOUR_ANTI_AERIENNE),	// nom
+			  Language.getTexte(Language.ID_TXT_NOM_TOUR_ANTI_AERIENNE),	// nom
 			  PRIX_ACHAT,		// prix achat
 			  40,				// degats
 			  50,				// rayon de portee

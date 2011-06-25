@@ -18,7 +18,7 @@
 
 package views;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -47,7 +47,7 @@ public class View_Options extends JFrame implements ActionListener
             setBackground(LookInterface.COULEUR_DE_FOND_PRI);
             
             pFormulaire.setOpaque(false);
-            JLabel lblIPSrv = new JLabel(Langue.getTexte(Langue.ID_TXT_IP_SRV_ENR)+" :");
+            JLabel lblIPSrv = new JLabel(Language.getTexte(Language.ID_TXT_IP_SRV_ENR)+" :");
             lblIPSrv.setForeground(LookInterface.COULEUR_TEXTE_PRI);
             pFormulaire.add(lblIPSrv,0,0);
             
@@ -167,18 +167,18 @@ public class View_Options extends JFrame implements ActionListener
         private static final long serialVersionUID = 1L;
         private Panel_Table pFormulaire = new Panel_Table();
         
-        private JLabel lDeplHaut = new JLabel(Langue.getTexte(Langue.ID_TXT_DEPL_HAUT));
-        private JLabel lDeplGauche = new JLabel(Langue.getTexte(Langue.ID_TXT_DEPL_GAUCHE));
-        private JLabel lDeplBas = new JLabel(Langue.getTexte(Langue.ID_TXT_DEPL_BAS));
-        private JLabel lDeplDroite = new JLabel(Langue.getTexte(Langue.ID_TXT_DEPL_DROITE));
-        private JLabel lLancerVague = new JLabel(Langue.getTexte(Langue.ID_TXT_LANCER_VAGUE_SUIVANTE));
-        private JLabel lAmeliorerTour = new JLabel(Langue.getTexte(Langue.ID_TXT_AMELIORER_TOUR));
-        private JLabel lVendreTour = new JLabel(Langue.getTexte(Langue.ID_TXT_VENDRE_TOUR));
-        private JLabel lMettreEnPause = new JLabel(Langue.getTexte(Langue.ID_TXT_METTRE_JEU_EN_PAUSE));
-        private JLabel lSuivreCreature = new JLabel(Langue.getTexte(Langue.ID_TXT_SUIVRE_CREATURE));
-        private JLabel lAugmenterVitesse = new JLabel(Langue.getTexte(Langue.ID_TXT_AUGMENTER_VITESSE_JEU));
-        private JLabel lDiminuerVitesse = new JLabel(Langue.getTexte(Langue.ID_TXT_DIMINUER_VITESSE_JEU));
-        private JLabel lZoomer = new JLabel(Langue.getTexte(Langue.ID_TXT_ZOMMER));
+        private JLabel lDeplHaut = new JLabel(Language.getTexte(Language.ID_TXT_DEPL_HAUT));
+        private JLabel lDeplGauche = new JLabel(Language.getTexte(Language.ID_TXT_DEPL_GAUCHE));
+        private JLabel lDeplBas = new JLabel(Language.getTexte(Language.ID_TXT_DEPL_BAS));
+        private JLabel lDeplDroite = new JLabel(Language.getTexte(Language.ID_TXT_DEPL_DROITE));
+        private JLabel lLancerVague = new JLabel(Language.getTexte(Language.ID_TXT_LANCER_VAGUE_SUIVANTE));
+        private JLabel lAmeliorerTour = new JLabel(Language.getTexte(Language.ID_TXT_AMELIORER_TOUR));
+        private JLabel lVendreTour = new JLabel(Language.getTexte(Language.ID_TXT_VENDRE_TOUR));
+        private JLabel lMettreEnPause = new JLabel(Language.getTexte(Language.ID_TXT_METTRE_JEU_EN_PAUSE));
+        private JLabel lSuivreCreature = new JLabel(Language.getTexte(Language.ID_TXT_SUIVRE_CREATURE));
+        private JLabel lAugmenterVitesse = new JLabel(Language.getTexte(Language.ID_TXT_AUGMENTER_VITESSE_JEU));
+        private JLabel lDiminuerVitesse = new JLabel(Language.getTexte(Language.ID_TXT_DIMINUER_VITESSE_JEU));
+        private JLabel lZoomer = new JLabel(Language.getTexte(Language.ID_TXT_ZOMMER));
         
         private BoutonKeyCode bDeplHaut = new BoutonKeyCode(Configuration.DEPL_HAUT);
         private BoutonKeyCode bDeplBas = new BoutonKeyCode(Configuration.DEPL_BAS);
@@ -192,7 +192,7 @@ public class View_Options extends JFrame implements ActionListener
         private BoutonKeyCode bAugmenterVitesseJeu = new BoutonKeyCode(Configuration.AUG_VIT_JEU);
         private BoutonKeyCode bDiminuerVitesseJeu = new BoutonKeyCode(Configuration.DIM_VIT_JEU);
         
-        private JLabel lZoom = new JLabel(Langue.getTexte(Langue.ID_TXT_ROULETTE_SOURIS));
+        private JLabel lZoom = new JLabel(Language.getTexte(Language.ID_TXT_ROULETTE_SOURIS));
         private ArrayList<BoutonKeyCode> boutons = new ArrayList<BoutonKeyCode>();
         private boolean attenteTouche;
         private BoutonKeyCode boutonCourant;
@@ -322,7 +322,7 @@ public class View_Options extends JFrame implements ActionListener
     {
         private static final long serialVersionUID = 1L;
         private Panel_Table pFormulaire = new Panel_Table();
-        private JButton bSonActif = new JButton(Langue.getTexte(Langue.ID_TXT_OUI));
+        private JButton bSonActif = new JButton(Language.getTexte(Language.ID_TXT_OUI));
         private JSlider sVolumeSon = new JSlider(0,100); // %
         
         public Panel_OptionsSon()
@@ -331,7 +331,7 @@ public class View_Options extends JFrame implements ActionListener
             
             pFormulaire.setOpaque(false);
             
-            JLabel lActif = new JLabel(Langue.getTexte(Langue.ID_TXT_ACTIF)+" ?");
+            JLabel lActif = new JLabel(Language.getTexte(Language.ID_TXT_ACTIF)+" ?");
             lActif.setForeground(LookInterface.COULEUR_TEXTE_PRI);
             
             pFormulaire.add(lActif,0,0);
@@ -339,7 +339,7 @@ public class View_Options extends JFrame implements ActionListener
             
             
             sVolumeSon.setValue(SoundManagement.getVolumeSysteme());
-            JLabel lVolume = new JLabel(Langue.getTexte(Langue.ID_TXT_VOLUME));
+            JLabel lVolume = new JLabel(Language.getTexte(Language.ID_TXT_VOLUME));
             lVolume.setForeground(LookInterface.COULEUR_TEXTE_PRI);
             pFormulaire.add(lVolume,0,1);
             pFormulaire.add(sVolumeSon,1,1);
@@ -349,9 +349,9 @@ public class View_Options extends JFrame implements ActionListener
             sVolumeSon.addChangeListener(this);
             
             if(SoundManagement.isVolumeMute())
-                bSonActif.setText(Langue.getTexte(Langue.ID_TXT_NON));
+                bSonActif.setText(Language.getTexte(Language.ID_TXT_NON));
             else
-                bSonActif.setText(Langue.getTexte(Langue.ID_TXT_OUI));
+                bSonActif.setText(Language.getTexte(Language.ID_TXT_OUI));
 
             add(pFormulaire); 
         }
@@ -361,12 +361,12 @@ public class View_Options extends JFrame implements ActionListener
         {
             if(SoundManagement.isVolumeMute())
             {
-                bSonActif.setText(Langue.getTexte(Langue.ID_TXT_OUI));
+                bSonActif.setText(Language.getTexte(Language.ID_TXT_OUI));
                 SoundManagement.setVolumeMute(false);
             }
             else
             {
-                bSonActif.setText(Langue.getTexte(Langue.ID_TXT_NON));
+                bSonActif.setText(Language.getTexte(Language.ID_TXT_NON));
                 SoundManagement.setVolumeMute(true);
             }
         }
@@ -391,14 +391,14 @@ public class View_Options extends JFrame implements ActionListener
         private JButton bCouleurDeFond_Boutons = new JButton();
         private JButton bCouleurTexte_Boutons = new JButton();
         
-        private JButton bReinitialiser = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_REINITIALISER));
+        private JButton bReinitialiser = new JButton(Language.getTexte(Language.ID_TXT_BTN_REINITIALISER));
         
-        private JLabel lCouleurDeFondPri = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_PRI));
-        private JLabel lCouleurTxtPri = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_TXT_PRI));
-        private JLabel lCouleurDeFondSec = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_SEC));
-        private JLabel lCouleurTxtSec = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_TEXTE_SEC));
-        private JLabel lCouleurDeFondBtn = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_BTN));
-        private JLabel lCouleurTxtBtn = new JLabel(Langue.getTexte(Langue.ID_TXT_COULEUR_TEXTE_BTN));
+        private JLabel lCouleurDeFondPri = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_PRI));
+        private JLabel lCouleurTxtPri = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_TXT_PRI));
+        private JLabel lCouleurDeFondSec = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_SEC));
+        private JLabel lCouleurTxtSec = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_TEXTE_SEC));
+        private JLabel lCouleurDeFondBtn = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_BTN));
+        private JLabel lCouleurTxtBtn = new JLabel(Language.getTexte(Language.ID_TXT_COULEUR_TEXTE_BTN));
 
         
         public Panel_OptionsStyle()
@@ -469,7 +469,7 @@ public class View_Options extends JFrame implements ActionListener
             if(src == bCouleurDeFond_Pri)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_PRI),LookInterface.COULEUR_DE_FOND_PRI);
+                        Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_PRI),LookInterface.COULEUR_DE_FOND_PRI);
                   
                 if(couleur != null)
                 {
@@ -481,7 +481,7 @@ public class View_Options extends JFrame implements ActionListener
             else if(src == bCouleurTexte_Pri)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_TXT_PRI),LookInterface.COULEUR_TEXTE_PRI);
+                        Language.getTexte(Language.ID_TXT_COULEUR_TXT_PRI),LookInterface.COULEUR_TEXTE_PRI);
                   
                 if(couleur != null)
                 {
@@ -493,7 +493,7 @@ public class View_Options extends JFrame implements ActionListener
             else if(src == bCouleurDeFond_Sec)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_SEC),LookInterface.COULEUR_DE_FOND_SEC);
+                        Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_SEC),LookInterface.COULEUR_DE_FOND_SEC);
                   
                 if(couleur != null)
                 {
@@ -505,7 +505,7 @@ public class View_Options extends JFrame implements ActionListener
             else if(src == bCouleurTexte_Sec)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_TEXTE_SEC),LookInterface.COULEUR_TEXTE_SEC);
+                        Language.getTexte(Language.ID_TXT_COULEUR_TEXTE_SEC),LookInterface.COULEUR_TEXTE_SEC);
                   
                 if(couleur != null)
                 {
@@ -517,7 +517,7 @@ public class View_Options extends JFrame implements ActionListener
             else if(src == bCouleurDeFond_Boutons)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND_BTN),LookInterface.COULEUR_DE_FOND_BTN);
+                        Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND_BTN),LookInterface.COULEUR_DE_FOND_BTN);
                   
                 if(couleur != null)
                 {
@@ -529,7 +529,7 @@ public class View_Options extends JFrame implements ActionListener
             else if(src == bCouleurTexte_Boutons)
             {
                 Color couleur = JColorChooser.showDialog(null,
-                        Langue.getTexte(Langue.ID_TXT_COULEUR_TEXTE_BTN),LookInterface.COULEUR_TEXTE_BTN);
+                        Language.getTexte(Language.ID_TXT_COULEUR_TEXTE_BTN),LookInterface.COULEUR_TEXTE_BTN);
                   
                 if(couleur != null)
                 {
@@ -582,7 +582,7 @@ public class View_Options extends JFrame implements ActionListener
     private static final ImageIcon I_STYLE = new ImageIcon("img/icones/palette.png");
     
     private JTabbedPane onglets;
-    private JButton bFermer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_FERMER));
+    private JButton bFermer = new JButton(Language.getTexte(Language.ID_TXT_BTN_FERMER));
 
     public View_Options()
     {
@@ -622,11 +622,11 @@ public class View_Options extends JFrame implements ActionListener
         
         
         
-        onglets.addTab(Langue.getTexte(Langue.ID_TXT_JOUEUR)+"  ", I_JOUEUR, panelOptionsJeu);
-        onglets.addTab(Langue.getTexte(Langue.ID_TXT_COMMANDES)+"  ", I_CMD, new JScrollPane(panelOptionsCommandes));
-        onglets.addTab(Langue.getTexte(Langue.ID_TXT_BTN_SON)+"  ", I_SON, panelOptionsSon);
-        onglets.addTab(Langue.getTexte(Langue.ID_TXT_RESEAU)+"  ", I_RESEAU, panelOptionsReseau);
-        onglets.addTab(Langue.getTexte(Langue.ID_TXT_STYLE)+"  ", I_STYLE, new JScrollPane(panelOptionsStyle));
+        onglets.addTab(Language.getTexte(Language.ID_TXT_JOUEUR)+"  ", I_JOUEUR, panelOptionsJeu);
+        onglets.addTab(Language.getTexte(Language.ID_TXT_COMMANDES)+"  ", I_CMD, new JScrollPane(panelOptionsCommandes));
+        onglets.addTab(Language.getTexte(Language.ID_TXT_BTN_SON)+"  ", I_SON, panelOptionsSon);
+        onglets.addTab(Language.getTexte(Language.ID_TXT_RESEAU)+"  ", I_RESEAU, panelOptionsReseau);
+        onglets.addTab(Language.getTexte(Language.ID_TXT_STYLE)+"  ", I_STYLE, new JScrollPane(panelOptionsStyle));
         
         
         add(onglets,BorderLayout.CENTER);

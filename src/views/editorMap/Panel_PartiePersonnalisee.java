@@ -18,7 +18,7 @@
 
 package views.editorMap;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -76,13 +76,13 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
     private JFrame parent;
     
     // form
-    private JLabel lblTitreTerrains = new JLabel(Langue.getTexte(Langue.ID_TITRE_CHOIX_TERRAIN));
+    private JLabel lblTitreTerrains = new JLabel(Language.getTexte(Language.ID_TITRE_CHOIX_TERRAIN));
     private JLabel lblEtat = new JLabel();
     
-    private JButton bLancer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_DEMARRER),I_PLAY);
+    private JButton bLancer = new JButton(Language.getTexte(Language.ID_TXT_BTN_DEMARRER),I_PLAY);
     private JButton bEditerCarte = new JButton("Edit this map",I_EDITEUR_T);
-    private JButton bRetour = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR));
-    private JButton bEditeurDeTerrain = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_EDITEUR_DE_TERRAIN), I_EDITEUR_T);
+    private JButton bRetour = new JButton(Language.getTexte(Language.ID_TXT_BTN_RETOUR));
+    private JButton bEditeurDeTerrain = new JButton(Language.getTexte(Language.ID_TXT_BTN_EDITEUR_DE_TERRAIN), I_EDITEUR_T);
     
     // terrains
     
@@ -114,7 +114,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
         pEmplacementTerrain.basculeraffichageZonesDepartArrivee();
         
         this.parent = parent;
-        parent.setTitle(Langue.getTexte(Langue.ID_TITRE_PARTIE_PERSONNALISEES)+" - ASD Tower Defense");
+        parent.setTitle(Language.getTexte(Language.ID_TITRE_PARTIE_PERSONNALISEES)+" - ASD Tower Defense");
         setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
 
@@ -127,7 +127,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
 
         pTop.setOpaque(false);
 
-        JLabel lblTitre = new JLabel(Langue.getTexte(Langue.ID_TITRE_PARTIE_PERSONNALISEES));
+        JLabel lblTitre = new JLabel(Language.getTexte(Language.ID_TITRE_PARTIE_PERSONNALISEES));
         
         lblTitre.setFont(ManageFonts.POLICE_TITRE);
         lblTitre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
@@ -214,8 +214,8 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
         tbTerrains.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // nom de colonnes
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_DESCRIPTION));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_APERCU));
+        model.addColumn(Language.getTexte(Language.ID_TXT_DESCRIPTION));
+        model.addColumn(Language.getTexte(Language.ID_TXT_APERCU));
 
         
         // Taille des colonnes

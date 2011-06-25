@@ -18,7 +18,7 @@
 
 package views.common;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -70,7 +70,7 @@ public class Panel_AjoutTour extends JPanel implements ActionListener
         pTours.setPreferredSize(new Dimension(largeur,hauteur));
         
         
-        String titrePrixAchat = Langue.getTexte(Langue.ID_TXT_PRIX_ACHAT);
+        String titrePrixAchat = Language.getTexte(Language.ID_TXT_PRIX_ACHAT);
         
         boutonsTours.add(bTourArcher);
         bTourArcher.setToolTipText(titrePrixAchat+" : "+Tower_Archer.PRIX_ACHAT);

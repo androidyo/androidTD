@@ -18,7 +18,7 @@
 
 package views.common;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -70,7 +70,7 @@ public class Panel_Selection extends JPanel
 		setPreferredSize(new Dimension(280,300));
 		//setBackground(LookInterface.COULEUR_DE_FOND_2);
 		
-		JLabel lTitre = new JLabel(Langue.getTexte(Langue.ID_TITRE_INFO_SELECTION));
+		JLabel lTitre = new JLabel(Language.getTexte(Language.ID_TITRE_INFO_SELECTION));
 		lTitre.setFont(ManageFonts.POLICE_SOUS_TITRE);
 		lTitre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
 		add(lTitre,BorderLayout.NORTH);

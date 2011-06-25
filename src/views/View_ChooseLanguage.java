@@ -17,7 +17,7 @@
 */
 
 package views;
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -125,12 +125,12 @@ public class View_ChooseLanguage extends JDialog implements ActionListener
         
         if(src == bFR)
         {
-            Langue.initaliser("lang/fr_FR.json");
+            Language.initaliser("lang/fr_FR.json");
             dispose();
         }
         else if(src == bEN)
         {
-            Langue.initaliser("lang/en_EN.json");
+            Language.initaliser("lang/en_EN.json");
             dispose();
         } 
         else

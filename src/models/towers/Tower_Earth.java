@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -50,7 +50,7 @@ public class Tower_Earth extends Tower
     public static final int PRIX_ACHAT = 250;
     private static final double RAYON_IMPACT = 30;
    
-    private static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_TERRE); 
+    private static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_TERRE); 
 
     static
     {
@@ -66,7 +66,7 @@ public class Tower_Earth extends Tower
               20,               // largeur
               20,               // hauteur
               COULEUR,          // couleur de fond
-              Langue.getTexte(Langue.ID_TXT_NOM_TOUR_TERRE),          // nom
+              Language.getTexte(Language.ID_TXT_NOM_TOUR_TERRE),          // nom
               PRIX_ACHAT,       // prix achat
               400,              // degats
               150,              // rayon de portee

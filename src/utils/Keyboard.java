@@ -1,12 +1,12 @@
 package utils;
 
-// classe fournissant des fonctions de lecture au clavier
+// class providing playback functions to the keyboard
 import java.io.*;
 
 @SuppressWarnings ("serial")
 class SaisieIncorrecteException extends Exception {}
 
-public class Clavier
+public class Keyboard
 {
 
    /* Lecture d'une cha�ne */

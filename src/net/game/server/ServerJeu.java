@@ -44,7 +44,7 @@ import models.towers.*;
  * @author Aurelien Da Campo
  * @version 1.0 | mai 2010
  */
-public class ServeurJeu implements ConstantsServerJeu, GameListener, Runnable
+public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 {
 	/**
 	 * La version courante du serveur
@@ -92,7 +92,7 @@ public class ServeurJeu implements ConstantsServerJeu, GameListener, Runnable
 	 * @param jeuServeur
 	 * @throws IOException
 	 */
-	public ServeurJeu(final Game jeuServeur) throws IOException
+	public ServerJeu(final Game jeuServeur) throws IOException
 	{
 		// Assignation du serveur
 		this.jeuServeur = jeuServeur;

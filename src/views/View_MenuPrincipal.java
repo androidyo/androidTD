@@ -49,7 +49,7 @@ public class View_MenuPrincipal extends JFrame
     = new File("snd/ambient/Oursvince - Perdue.mp3");
     
     /**
-     * Constructeur de la fenetre du menu principal
+     * Manufacturer of window main menu
      */
     public View_MenuPrincipal()
     {
@@ -70,6 +70,7 @@ public class View_MenuPrincipal extends JFrame
         
         // ---------------------
         // -- panel principal --
+        // 游戏模式的选择菜单
         // ---------------------
         getContentPane().add(new Panel_MenuPrincipal(this), BorderLayout.CENTER);
 

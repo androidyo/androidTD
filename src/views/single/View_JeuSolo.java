@@ -19,7 +19,7 @@
 package views.single;
 
 import models.animations.*;
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -87,7 +87,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	
 	
 	private static final String FENETRE_TITRE = "ASD - Tower Defense";
-    private static final String TXT_VAGUE_SUIVANTE  = Langue.getTexte(Langue.ID_TXT_BTN_LANCER_VAGUE);
+    private static final String TXT_VAGUE_SUIVANTE  = Language.getTexte(Language.ID_TXT_BTN_LANCER_VAGUE);
     private static final double VITESSE_JEU_MAX = 3.0;
     private static final double VITESSE_JEU_MIN = 1.0;
     
@@ -95,32 +95,32 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	//-- declaration des menus --
 	//---------------------------
 	private final JMenuBar 	menuPrincipal 	= new JMenuBar();
-	private final JMenu 	menuFichier 	= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_FICHIER));
-	private final JMenu 	menuAffichage 	= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_AFFICHAGE));
-	private final JMenu     menuJeu         = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_JEU));
-	private final JMenu     menuSon         = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_SON));
-	private final JMenu 	menuAide 		= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_AIDE));
-	private final JMenuItem itemRegles      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_REGLES)+"...",I_REGLES);
-	private final JMenuItem itemAPropos	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS)+"...",I_AIDE);
+	private final JMenu 	menuFichier 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_FICHIER));
+	private final JMenu 	menuAffichage 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AFFICHAGE));
+	private final JMenu     menuJeu         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_JEU));
+	private final JMenu     menuSon         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_SON));
+	private final JMenu 	menuAide 		= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AIDE));
+	private final JMenuItem itemRegles      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_REGLES)+"...",I_REGLES);
+	private final JMenuItem itemAPropos	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS)+"...",I_AIDE);
 
 	private final JMenuItem itemPause
-        = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_PAUSE)); 
+        = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_PAUSE)); 
 	private final JMenuItem itemActiverDesactiverSon 
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_ACTIVE_DESACTIVE),I_SON_ACTIF); 
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_ACTIVE_DESACTIVE),I_SON_ACTIF); 
 	private final JMenuItem itemAfficherMaillage	    
-		= new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_MAILLAGE),I_MAILLAGE);
+		= new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_MAILLAGE),I_MAILLAGE);
 	private final JMenuItem itemModeDebug       
-        = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_MODE_DEBUG),I_DEBUG);
+        = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_MODE_DEBUG),I_DEBUG);
 	private final JMenuItem itemAfficherRayonsPortee	    
-		= new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_RAYONS_DE_PORTEE),I_RAYON);
+		= new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_RAYONS_DE_PORTEE),I_RAYON);
 	private final JMenuItem itemQuitter	    
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_QUITTER),I_QUITTER);
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_QUITTER),I_QUITTER);
 	private final JMenuItem itemRetourMenu  
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR_MENU_P),I_RETOUR);
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P),I_RETOUR);
 	private final JMenuItem itemRedemarrer  
-        = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_REDEMARRER_PARTIE),I_REDEMARRER);
+        = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_REDEMARRER_PARTIE),I_REDEMARRER);
 	private final JMenuItem itemOptions  
-    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_OPTIONS)+"...",I_OPTIONS);
+    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_OPTIONS)+"...",I_OPTIONS);
 	
 	//----------------------------
 	//-- declaration des panels --
@@ -155,7 +155,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	 * bouton pour lancer la vagues suivante
 	 */
     private JButton bLancerVagueSuivante = new JButton(TXT_VAGUE_SUIVANTE 
-                                                       + " ["+Langue.getTexte(Langue.ID_TXT_NIVEAU)+" 1]");
+                                                       + " ["+Language.getTexte(Language.ID_TXT_NIVEAU)+" 1]");
     /**
      * Console d'affichages des vagues suivantes
      */  
@@ -269,8 +269,8 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         //Dimension dimBouton = new Dimension(51, 32);
         
         // zoom
-        bZoomAvant.setToolTipText(Langue.getTexte(Langue.ID_TXT_ZOOM_AVANT_ET_RACCOURCI));
-        bZoomArriere.setToolTipText(Langue.getTexte(Langue.ID_TXT_ZOOM_ARRIERE_ET_RACCOURCI));
+        bZoomAvant.setToolTipText(Language.getTexte(Language.ID_TXT_ZOOM_AVANT_ET_RACCOURCI));
+        bZoomArriere.setToolTipText(Language.getTexte(Language.ID_TXT_ZOOM_ARRIERE_ET_RACCOURCI));
         ManageFonts.setStyle(bZoomAvant);
         ManageFonts.setStyle(bZoomArriere);
         //bZoomAvant.setPreferredSize(dimBouton);
@@ -281,14 +281,14 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         bZoomArriere.addActionListener(this);
         
         // centrer
-        bCentrer.setToolTipText(Langue.getTexte(Langue.ID_TXT_CENTRER_ET_RACCOURCI));
+        bCentrer.setToolTipText(Language.getTexte(Language.ID_TXT_CENTRER_ET_RACCOURCI));
         ManageFonts.setStyle(bCentrer);
         //bCentrer.setPreferredSize(dimBouton);
         boutonsHaut.add(bCentrer);
         bCentrer.addActionListener(this);
         
         // maximisation / minimisation
-        bPleinEcran.setToolTipText(Langue.getTexte(Langue.ID_TXT_MAXI_MINI_FENETRE));
+        bPleinEcran.setToolTipText(Language.getTexte(Language.ID_TXT_MAXI_MINI_FENETRE));
         ManageFonts.setStyle(bPleinEcran);
         //bPleinEcran.setPreferredSize(dimBouton);
         boutonsHaut.add(bPleinEcran);
@@ -299,7 +299,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         //boutonsHaut.add(new JLabel(I_VITESSE_JEU));
         bVitesseJeu.setIcon(I_VITESSE_JEU);
         bVitesseJeu.setText("x"+jeu.getCoeffVitesse());
-        bVitesseJeu.setToolTipText(Langue.getTexte(Langue.ID_TXT_VITESSE_DU_JEU));
+        bVitesseJeu.setToolTipText(Language.getTexte(Language.ID_TXT_VITESSE_DU_JEU));
         ManageFonts.setStyle(bVitesseJeu);
         
         //bVitesseJeu.setPreferredSize(dimBouton);
@@ -419,11 +419,11 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 		
 		// règles
 		else if(source == itemRegles)
-		    new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_REGLES), new File(Langue.getTexte(Langue.ID_ADRESSE_REGLES_DU_JEU)), this);
+		    new View_HTML(Language.getTexte(Language.ID_TXT_BTN_REGLES), new File(Language.getTexte(Language.ID_ADRESSE_REGLES_DU_JEU)), this);
 
 		// a propos
 		else if(source == itemAPropos)
-			new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS),new File(Langue.getTexte(Langue.ID_ADRESSE_A_PROPOS)),this);
+			new View_HTML(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS),new File(Language.getTexte(Language.ID_ADRESSE_A_PROPOS)),this);
 		
 		// basculer affichage du maillage
 		else if(source == itemAfficherMaillage)
@@ -508,7 +508,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	private void demanderRedemarrerPartie()
     {
 	    if(JOptionPane.showConfirmDialog(this,
-	            Langue.getTexte(Langue.ID_TXT_DIALOG_ARRETER_PARTIE), 
+	            Language.getTexte(Language.ID_TXT_DIALOG_ARRETER_PARTIE), 
                 "", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
         {
             demanderEnregistrementDuScore();
@@ -530,7 +530,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	private void demanderQuitter()
     {
 	    if(JOptionPane.showConfirmDialog(this, 
-	            Langue.getTexte(Langue.ID_TXT_DIALOG_QUITTER_JEU), 
+	            Language.getTexte(Language.ID_TXT_DIALOG_QUITTER_JEU), 
 	            "", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
 	    {  
             quitter();
@@ -552,7 +552,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	private void demanderRetourAuMenuPrincipal()
     {
 	    if(JOptionPane.showConfirmDialog(this, 
-	            Langue.getTexte(Langue.ID_TXT_DIALOG_ARRETER_PARTIE), 
+	            Language.getTexte(Language.ID_TXT_DIALOG_ARRETER_PARTIE), 
 	            "", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
         {
 	        //demanderEnregistrementDuScore();
@@ -575,7 +575,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	        demandeDEnregistrementDuScoreEffectuee = true;
 	        
 	        if(JOptionPane.showConfirmDialog(this, 
-	                Langue.getTexte(Langue.ID_TXT_DIALOG_SAUVER), 
+	                Language.getTexte(Language.ID_TXT_DIALOG_SAUVER), 
                     "", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION)
             {
 	            new View_DialogGameOver(this, jeu.getJoueurPrincipal().getScore(), jeu.getTimer().getTime() / 1000, jeu.getTerrain().getBreveDescription()); 
@@ -758,9 +758,9 @@ public class View_JeuSolo extends JFrame implements ActionListener,
      */
     public void ajouterInfoVagueSuivanteDansConsole()
     {
-        ajouterTexteHTMLDansConsole("["+(jeu.getNumVagueCourante())+"] "+Langue.getTexte(Langue.ID_TXT_VAGUE_SUIVANTE)+" : "+jeu.getTerrain().getDescriptionVague(jeu.getNumVagueCourante())+"<br />");
+        ajouterTexteHTMLDansConsole("["+(jeu.getNumVagueCourante())+"] "+Language.getTexte(Language.ID_TXT_VAGUE_SUIVANTE)+" : "+jeu.getTerrain().getDescriptionVague(jeu.getNumVagueCourante())+"<br />");
         
-        bLancerVagueSuivante.setText(TXT_VAGUE_SUIVANTE + " ["+Langue.getTexte(Langue.ID_TXT_NIVEAU)+" "+(jeu.getNumVagueCourante())+"]");
+        bLancerVagueSuivante.setText(TXT_VAGUE_SUIVANTE + " ["+Language.getTexte(Language.ID_TXT_NIVEAU)+" "+(jeu.getNumVagueCourante())+"]");
     }
 	
     @Override
@@ -926,7 +926,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         // le bouton lancer vague suivante devient un retour au menu
         bLancerVagueSuivante.setEnabled(true);
         vaguePeutEtreLancee = false;
-        bLancerVagueSuivante.setText(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR_MENU_P));
+        bLancerVagueSuivante.setText(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P));
         bLancerVagueSuivante.setIcon(I_RETOUR);
 
         

@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -49,7 +49,7 @@ public class Tower_Ice extends Tower
     private static final double COEFF_RALENTISSMENT = 0.4; // perd 40% de sa vitesse
     
     public static final int PRIX_ACHAT = 50;
-    private static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_GLACE);
+    private static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_GLACE);
 
     static
     {
@@ -65,7 +65,7 @@ public class Tower_Ice extends Tower
               20,               // largeur
               20,               // hauteur
               COULEUR,          // couleur de fond
-              Langue.getTexte(Langue.ID_TXT_NOM_TOUR_GLACE),          // nom
+              Language.getTexte(Language.ID_TXT_NOM_TOUR_GLACE),          // nom
               PRIX_ACHAT,       // prix achat
               20,               // degats
               50,               // rayon de portee

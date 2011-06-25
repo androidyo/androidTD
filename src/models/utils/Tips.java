@@ -18,7 +18,7 @@
 
 package models.utils;
 
-import i18n.Langue;
+import i18n.Language;
 
 /**
  * Classe de gestion des astuces
@@ -33,14 +33,14 @@ import i18n.Langue;
 public class Tips
 {
     private static final String[] astuces = new String[] {
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_1),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_2),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_3),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_4),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_5),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_6),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_7),
-        Langue.getTexte(Langue.ID_TXT_ASTUCE_8),
+        Language.getTexte(Language.ID_TXT_ASTUCE_1),
+        Language.getTexte(Language.ID_TXT_ASTUCE_2),
+        Language.getTexte(Language.ID_TXT_ASTUCE_3),
+        Language.getTexte(Language.ID_TXT_ASTUCE_4),
+        Language.getTexte(Language.ID_TXT_ASTUCE_5),
+        Language.getTexte(Language.ID_TXT_ASTUCE_6),
+        Language.getTexte(Language.ID_TXT_ASTUCE_7),
+        Language.getTexte(Language.ID_TXT_ASTUCE_8),
     };
      
     /**

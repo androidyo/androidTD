@@ -18,7 +18,7 @@
 
 package views.online;
 
-import i18n.Langue;
+import i18n.Language;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
@@ -59,21 +59,21 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
     private ArrayList<ServeurInfo> serveurs = new ArrayList<ServeurInfo>();
 
     private String filtre = "";
-    private static final String FILTRE_DEFAUT = Langue.getTexte(Langue.ID_TXT_FILTRE);
+    private static final String FILTRE_DEFAUT = Language.getTexte(Language.ID_TXT_FILTRE);
     private JTextField tfFiltre = new JTextField(FILTRE_DEFAUT);
 
-    private JLabel lblConnexionParIP = new JLabel(Langue.getTexte(Langue.ID_TITRE_CONN_PAR_IP));
+    private JLabel lblConnexionParIP = new JLabel(Language.getTexte(Language.ID_TITRE_CONN_PAR_IP));
     private JTextField tfConnexionParIP = new JTextField("127.0.0.1",10);
 
-    private JLabel lblPseudo = new JLabel(Langue.getTexte(Langue.ID_TITRE_PSEUDO));
+    private JLabel lblPseudo = new JLabel(Language.getTexte(Language.ID_TITRE_PSEUDO));
     private JTextField tfPseudo = new JTextField("",10);
 
-    private JButton bRejoindre = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_REJOINDRE));
-    private JButton bRafraichir = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_RAFRAICHIR));
+    private JButton bRejoindre = new JButton(Language.getTexte(Language.ID_TXT_BTN_REJOINDRE));
+    private JButton bRafraichir = new JButton(Language.getTexte(Language.ID_TXT_BTN_RAFRAICHIR));
     
     private JLabel lblEtat = new JLabel();
 
-    private JButton bRetour = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR));
+    private JButton bRetour = new JButton(Language.getTexte(Language.ID_TXT_BTN_RETOUR));
 
     private ChannelTCP canalServeurEnregistrement;
     
@@ -159,7 +159,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         // initialisation
         super(new BorderLayout());
         this.parent = parent;
-        parent.setTitle(Langue.getTexte(Langue.ID_TITRE_REJOINDRE_UNE_PARTIE_MULTI));
+        parent.setTitle(Language.getTexte(Language.ID_TITRE_REJOINDRE_UNE_PARTIE_MULTI));
         setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
         setBackground(LookInterface.COULEUR_DE_FOND_PRI);
@@ -170,7 +170,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         JPanel pTop = new JPanel(new BorderLayout());
         pTop.setBackground(LookInterface.COULEUR_DE_FOND_PRI);
         
-        JLabel titre = new JLabel(Langue.getTexte(Langue.ID_TITRE_REJOINDRE_UNE_PARTIE_MULTI));
+        JLabel titre = new JLabel(Language.getTexte(Language.ID_TITRE_REJOINDRE_UNE_PARTIE_MULTI));
         titre.setFont(ManageFonts.POLICE_TITRE);
         titre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
         pTop.add(titre, BorderLayout.NORTH);
@@ -209,12 +209,12 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         tbServeurs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // nom de colonnes
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_NOM));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_IP));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_PORT));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_MODE));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_TERRAIN));
-        model.addColumn(Langue.getTexte(Langue.ID_TXT_PLACES_DISPO));
+        model.addColumn(Language.getTexte(Language.ID_TXT_NOM));
+        model.addColumn(Language.getTexte(Language.ID_TXT_IP));
+        model.addColumn(Language.getTexte(Language.ID_TXT_PORT));
+        model.addColumn(Language.getTexte(Language.ID_TXT_MODE));
+        model.addColumn(Language.getTexte(Language.ID_TXT_TERRAIN));
+        model.addColumn(Language.getTexte(Language.ID_TXT_PLACES_DISPO));
 
         // Création du canal avec le serveur d'enregistrement
         try
@@ -293,7 +293,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         bRafraichir.setEnabled(false);
         tfFiltre.setEnabled(false);
         lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-        lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CON_SRV_CENTRAL_IMP_ENREZ_IP)); 
+        lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CON_SRV_CENTRAL_IMP_ENREZ_IP)); 
     }
 
     /**
@@ -310,7 +310,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
             try
             {
                 // envoie de la requete d'enregistrement
-                canalServeurEnregistrement.envoyerString(RequeteEnregistrement.INFOS_PARTIES);
+                canalServeurEnregistrement.envoyerString(RegistrationQuery.INFOS_PARTIES);
                 
                 // attente du résultat
                 String resultat = canalServeurEnregistrement.recevoirString();
@@ -321,7 +321,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
             catch (ChannelException e)
             {
                 lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CON_SRV_CENTRAL_INVALIDE));          
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CON_SRV_CENTRAL_INVALIDE));          
             } 
         }
     }
@@ -366,12 +366,12 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
                     tbServeurs.setRowSelectionInterval(0, 0);
                 
                 lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-                lblEtat.setText(Langue.getTexte(Langue.ID_TXT_CON_SRV_CENTRAL_ETABLIE)); 
+                lblEtat.setText(Language.getTexte(Language.ID_TXT_CON_SRV_CENTRAL_ETABLIE)); 
             }
             else
             {
                 lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-                lblEtat.setText(Langue.getTexte(Langue.ID_TXT_CON_SRV_CENTRAL_ETABLIE)+" ["+Langue.getTexte(Langue.ID_TXT_AUCUN_SRV_DISPONIBLE)+"]");
+                lblEtat.setText(Language.getTexte(Language.ID_TXT_CON_SRV_CENTRAL_ETABLIE)+" ["+Language.getTexte(Language.ID_TXT_AUCUN_SRV_DISPONIBLE)+"]");
             }
         } 
         catch (JSONException e1)
@@ -456,7 +456,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
             try
             {
                 if (tfPseudo.getText().trim().isEmpty())
-                    throw new Exception(Langue.getTexte(Langue.ID_ERREUR_PSEUDO_VIDE));
+                    throw new Exception(Language.getTexte(Language.ID_ERREUR_PSEUDO_VIDE));
 
                 Configuration.setPseudoJoueur(tfPseudo.getText());
                 
@@ -485,7 +485,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
                 try
                 {
                     // fermeture propre du canal
-                    canalServeurEnregistrement.envoyerString(RequeteEnregistrement.STOP);
+                    canalServeurEnregistrement.envoyerString(RegistrationQuery.STOP);
                     canalServeurEnregistrement.recevoirString();
                
                     canalServeurEnregistrement.fermer();  
@@ -512,10 +512,10 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         
         // sinon on retourne l'ip manuelle si elle est valide
         else if (tfConnexionParIP.getText().isEmpty())
-            throw new Exception(Langue.getTexte(Langue.ID_ERREUR_SEL_SRV_OU_IP));
+            throw new Exception(Language.getTexte(Language.ID_ERREUR_SEL_SRV_OU_IP));
         
         else if(!checkIp(tfConnexionParIP.getText()))
-            throw new Exception(Langue.getTexte(Langue.ID_ERREUR_IP_INCORRECT));
+            throw new Exception(Language.getTexte(Language.ID_ERREUR_IP_INCORRECT));
         else
             return tfConnexionParIP.getText();
     }
@@ -564,7 +564,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
      */
     private void connexion(String IP, int port)
     {
-        bRejoindre.setText(Langue.getTexte(Langue.ID_TXT_CONNEXION)+"...");
+        bRejoindre.setText(Language.getTexte(Language.ID_TXT_CONNEXION)+"...");
         bRejoindre.setEnabled(false);
 
         joueur = new Player(tfPseudo.getText());
@@ -574,7 +574,7 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
         try
         {
             lblEtat.setForeground(LookInterface.COULEUR_TEXTE_PRI);
-            lblEtat.setText(Langue.getTexte(Langue.ID_TXT_TENTATIVE_DE_CONNEXION)+"...");
+            lblEtat.setText(Language.getTexte(Language.ID_TXT_TENTATIVE_DE_CONNEXION)+"...");
             
             try
             { 
@@ -583,27 +583,27 @@ public class Panel_RejoindrePartieMulti extends JPanel implements
             catch (NoLocationAvailableException e)
             {
                 lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_PAS_DE_PLACE));
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_PAS_DE_PLACE));
                 
-                bRejoindre.setText(Langue.getTexte(Langue.ID_TXT_BTN_REJOINDRE));
+                bRejoindre.setText(Language.getTexte(Language.ID_TXT_BTN_REJOINDRE));
                 bRejoindre.setEnabled(true);
             }
         }
         catch (ConnectException e)
         {
-            bRejoindre.setText(Langue.getTexte(Langue.ID_TXT_BTN_REJOINDRE));
+            bRejoindre.setText(Language.getTexte(Language.ID_TXT_BTN_REJOINDRE));
             bRejoindre.setEnabled(true);
             
             lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-            lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CONNEXION_IMPOSSIBLE));
+            lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CONNEXION_IMPOSSIBLE));
         } 
         catch (ChannelException e)
         {
-            bRejoindre.setText(Langue.getTexte(Langue.ID_TXT_BTN_REJOINDRE));
+            bRejoindre.setText(Language.getTexte(Language.ID_TXT_BTN_REJOINDRE));
             bRejoindre.setEnabled(true);
             
             lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-            lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_CONNEXION_IMPOSSIBLE));
+            lblEtat.setText(Language.getTexte(Language.ID_ERREUR_CONNEXION_IMPOSSIBLE));
         }
     }
 

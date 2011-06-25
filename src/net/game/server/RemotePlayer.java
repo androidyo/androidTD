@@ -64,7 +64,7 @@ public class RemotePlayer implements Runnable, ConstantsServerJeu
 	/**
 	 * Serveur de jeu
 	 */
-	private ServeurJeu serveur;
+	private ServerJeu serveur;
 	
 	/**
 	 * Etat (initialement en validation)
@@ -96,7 +96,7 @@ public class RemotePlayer implements Runnable, ConstantsServerJeu
 	 * @param serveur
 	 *            Le serveur de jeu associé au joueur.
 	 */
-	public RemotePlayer(Player joueur, ChannelTCP canal, ServeurJeu serveur)
+	public RemotePlayer(Player joueur, ChannelTCP canal, ServerJeu serveur)
 	{
 		this.canal    = canal;
 		this.joueur   = joueur;
@@ -198,7 +198,7 @@ public class RemotePlayer implements Runnable, ConstantsServerJeu
 	private void actionsEtatValidation() throws ChannelException, IOException
     {
 	    // Envoi de la version du serveur au client
-        envoyer(ServeurJeu.VERSION);
+        envoyer(ServerJeu.VERSION);
         
         // Réservation du port pour le canal temporaire
         Port port = new Port(offset_port++);
@@ -514,7 +514,7 @@ public class RemotePlayer implements Runnable, ConstantsServerJeu
 	private void log(String msg)
     {
         if(verbeux)
-            ServeurJeu.log("[JOUEUR " + joueur.getId() + "]" + msg);
+            ServerJeu.log("[JOUEUR " + joueur.getId() + "]" + msg);
     }
 	
     /**

@@ -9,7 +9,7 @@ import java.util.Properties;
 /*****************************************************************************
  * 本类用于帮助获取和跟新配置文件 
  ******************************************************************************/
-public class fichierDeConfiguration
+public class ConfigurationFile
 {
     Properties config = new Properties();
     File fichier;
@@ -20,7 +20,7 @@ public class fichierDeConfiguration
      * @param cheminFichier le chemin complet vers le fichier de configuration
      * @throws IOException 
      */
-    public fichierDeConfiguration(String cheminFichier)
+    public ConfigurationFile(String cheminFichier)
     {
         try
         {

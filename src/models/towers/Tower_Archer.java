@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -48,7 +48,7 @@ public class Tower_Archer extends Tower
 	public static final Image ICONE;
 	public static final int NIVEAU_MAX = 5;
 	public static final int PRIX_ACHAT = 10;
-    private static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_ARCHER);
+    private static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_ARCHER);
 
     static
     {
@@ -67,7 +67,7 @@ public class Tower_Archer extends Tower
 			  20, 				// largeur
 			  20, 				// hauteur
 			  COULEUR,			// couleur de fond
-			  Langue.getTexte(Langue.ID_TXT_NOM_TOUR_ARCHER),	        // nom
+			  Language.getTexte(Language.ID_TXT_NOM_TOUR_ARCHER),	        // nom
 			  PRIX_ACHAT,       // prix achat
 			  5,                // degats
 			  50,               // rayon de portee

@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.util.Enumeration;
@@ -418,11 +418,11 @@ public abstract class Tower extends Rectangle
     public String getTexteType()
     {
         if(type == TYPE_TERRESTRE_ET_AIR)
-            return Langue.getTexte(Langue.ID_TXT_TERRE)+" + "+Langue.getTexte(Langue.ID_TXT_AIR);
+            return Language.getTexte(Language.ID_TXT_TERRE)+" + "+Language.getTexte(Language.ID_TXT_AIR);
         else if(type == TYPE_TERRESTRE)
-            return Langue.getTexte(Langue.ID_TXT_TERRE);
+            return Language.getTexte(Language.ID_TXT_TERRE);
         else
-            return Langue.getTexte(Langue.ID_TXT_AIR);
+            return Language.getTexte(Language.ID_TXT_AIR);
     }
     
     /**

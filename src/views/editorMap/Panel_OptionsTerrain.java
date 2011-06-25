@@ -18,7 +18,7 @@
 
 package views.editorMap;
 
-import i18n.Langue;
+import i18n.Language;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -67,7 +67,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
     private JTextField tfHauteurT = new JTextField();
     private JSlider sOpaciteMurs = new JSlider(0, 100);
     private JButton bImageDeFond = new JButton(
-            Langue.getTexte(Langue.ID_TXT_BTN_PARCOURIR) + "...");
+            Language.getTexte(Language.ID_TXT_BTN_PARCOURIR) + "...");
     private JButton bSupprImageDeFond = new JButton(I_DEL);
     private JButton bCouleurDeFond = new JButton();
     private JButton bCouleurDesMurs = new JButton();
@@ -121,7 +121,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
         // cbModeDeJeu.addItem(ModeDeJeu.getNomMode(ModeDeJeu.MODE_COOP));
         
 
-        JLabel lMode = new JLabel(Langue.getTexte(Langue.ID_TXT_MODE));
+        JLabel lMode = new JLabel(Language.getTexte(Language.ID_TXT_MODE));
         lMode.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lMode, 0, ligne);
         cbModeDeJeu.setPreferredSize(dim);
@@ -153,7 +153,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Description du terrain
         JLabel lDescription = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_DESCRIPTION));
+                Language.getTexte(Language.ID_TXT_DESCRIPTION));
         lDescription.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lDescription, 0, ligne);
         tfBreveDescription.setPreferredSize(dim);
@@ -166,7 +166,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Nombre de pieces d'or initiales
         JLabel lNbPiecesOrInit = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_NB_PIECES_OR_INIT));
+                Language.getTexte(Language.ID_TXT_NB_PIECES_OR_INIT));
         lNbPiecesOrInit.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lNbPiecesOrInit, 0, ligne);
         tfNbPiecesOrInit.setPreferredSize(dim);
@@ -180,7 +180,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Nombre de vies initiales
         JLabel lNbViesInit = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_NB_VIES_INIT));
+                Language.getTexte(Language.ID_TXT_NB_VIES_INIT));
         lNbViesInit.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lNbViesInit, 0, ligne);
         tfNbViesInit.setPreferredSize(dim);
@@ -193,7 +193,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Couleur de fond
         JLabel lCouleurDeFond = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_COULEUR_DE_FOND));
+                Language.getTexte(Language.ID_TXT_COULEUR_DE_FOND));
         lCouleurDeFond.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lCouleurDeFond, 0, ligne);
         bCouleurDeFond.setPreferredSize(dim);
@@ -204,7 +204,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Image de fond
         JLabel lImageDeFond = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_IMAGE_DE_FOND));
+                Language.getTexte(Language.ID_TXT_IMAGE_DE_FOND));
         lImageDeFond.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lImageDeFond, 0, ligne);
         bImageDeFond.setPreferredSize(dim);
@@ -216,7 +216,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Couleur des murs
         JLabel lCouleurDesMurs = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_COULEUR_MURS));
+                Language.getTexte(Language.ID_TXT_COULEUR_MURS));
         lCouleurDesMurs.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lCouleurDesMurs, 0, ligne);
         bCouleurDesMurs.setPreferredSize(dim);
@@ -227,7 +227,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
 
         // Afficher les murs
         JLabel lAlphaMurs = new JLabel(
-                Langue.getTexte(Langue.ID_TXT_MURS_VISIBLES_PAR_DEF));
+                Language.getTexte(Language.ID_TXT_MURS_VISIBLES_PAR_DEF));
         lAlphaMurs.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lAlphaMurs, 0, ligne);
         sOpaciteMurs.addChangeListener(this);
@@ -324,8 +324,8 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
         } else if (src == bSupprImageDeFond) {
             jeu.getTerrain().setImageDeFond(null);
         } else if (src == bCouleurDeFond) {
-            Color couleur = JColorChooser.showDialog(null, Langue
-                    .getTexte(Langue.ID_TXT_COULEUR_DE_FOND), jeu.getTerrain()
+            Color couleur = JColorChooser.showDialog(null, Language
+                    .getTexte(Language.ID_TXT_COULEUR_DE_FOND), jeu.getTerrain()
                     .getCouleurDeFond());
 
             if (couleur != null) {
@@ -333,8 +333,8 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
                 bCouleurDeFond.setBackground(couleur);
             }
         } else if (src == bCouleurDesMurs) {
-            Color couleur = JColorChooser.showDialog(null, Langue
-                    .getTexte(Langue.ID_TXT_COULEUR_MURS), jeu.getTerrain()
+            Color couleur = JColorChooser.showDialog(null, Language
+                    .getTexte(Language.ID_TXT_COULEUR_MURS), jeu.getTerrain()
                     .getCouleurDeFond());
 
             if (couleur != null) {

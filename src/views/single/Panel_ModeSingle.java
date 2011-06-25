@@ -18,7 +18,7 @@
 
 package views.single;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -70,11 +70,11 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	private final int MARGES_PANEL                 = 40;
     
 
-	// elements du formulaire
-	JLabel lblTitre = new JLabel(Langue.getTexte(Langue.ID_TITRE_PARTIE_SOLO));
+	// elements of the form
+	JLabel lblTitre = new JLabel(Language.getTexte(Language.ID_TITRE_PARTIE_SOLO));
 	
-	private final JMenuItem itemAPropos	    	= new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS),I_AIDE);
-	private final JMenuItem itemQuitter	   		= new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_QUITTER),I_QUITTER);
+	private final JMenuItem itemAPropos	    	= new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS),I_AIDE);
+	private final JMenuItem itemQuitter	   		= new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_QUITTER),I_QUITTER);
 	// 显示得分按钮
 	private final JMenuItem itemMSElementTD     = new JMenuItem(ElementTD.NOM);
     private final JMenuItem itemMSSpiral        = new JMenuItem(Spiral.NOM);
@@ -83,14 +83,14 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	// 四种游戏地图按钮
 	private final JButton[] boutonsTerrains     = new JButton[4]; 
 	private final JButton[] boutonsScore        = new JButton[4]; 
-	private final JButton bRetour              = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR));
+	private final JButton bRetour              = new JButton(Language.getTexte(Language.ID_TXT_BTN_RETOUR));
 	
 	private JProgressBar chargementTerrain;
 	private Thread thread;
     private boolean chargementTermine;
 	private JFrame parent;
 	
-	private JLabel lblInfo = new JLabel(Langue.getTexte(Langue.ID_TXT_CLIQUER_SUR_TERRAIN));
+	private JLabel lblInfo = new JLabel(Language.getTexte(Language.ID_TXT_CLIQUER_SUR_TERRAIN));
 
 	/**
 	 * Constructeur de la fenetre du menu principal
@@ -102,7 +102,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		//-------------------------------
 	    this.parent = parent;
 	    setLayout(new BorderLayout());
-		parent.setTitle(Langue.getTexte(Langue.ID_TITRE_PARTIE_SOLO)+" - ASD Tower Defense");
+		parent.setTitle(Language.getTexte(Language.ID_TITRE_PARTIE_SOLO)+" - ASD Tower Defense");
 
 		setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
@@ -257,7 +257,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		    {
 		        bouton.setEnabled(false);
 		        
-		        JLabel lbl = new JLabel(Langue.getTexte(Langue.ID_TXT_1_ETOILE_MIN),icoCADENAS,0);
+		        JLabel lbl = new JLabel(Language.getTexte(Language.ID_TXT_1_ETOILE_MIN),icoCADENAS,0);
                 lbl.setForeground(LookInterface.COULEUR_TEXTE_PRI);
 		        
 		        pInfoTerrain.add(lbl,BorderLayout.SOUTH);
@@ -267,7 +267,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		    {
                 bouton.setEnabled(false);
                 
-                JLabel lbl = new JLabel(String.format(Langue.getTexte(Langue.ID_TXT_X_ETOILES_MIN),3),icoCADENAS,0);
+                JLabel lbl = new JLabel(String.format(Language.getTexte(Language.ID_TXT_X_ETOILES_MIN),3),icoCADENAS,0);
                 lbl.setForeground(LookInterface.COULEUR_TEXTE_PRI);
                 
 		        pInfoTerrain.add(lbl,BorderLayout.SOUTH);
@@ -277,7 +277,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		    {
 		        bouton.setEnabled(false);
 		        
-		        JLabel lbl = new JLabel(String.format(Langue.getTexte(Langue.ID_TXT_X_ETOILES_MIN),7),icoCADENAS,0);
+		        JLabel lbl = new JLabel(String.format(Language.getTexte(Language.ID_TXT_X_ETOILES_MIN),7),icoCADENAS,0);
                 lbl.setForeground(LookInterface.COULEUR_TEXTE_PRI);
                 
                 pInfoTerrain.add(lbl,BorderLayout.SOUTH);
@@ -353,7 +353,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		
 		// a propos
 		else if(source == itemAPropos)
-		    new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS), new File(Langue.getTexte(Langue.ID_ADRESSE_A_PROPOS)),parent);
+		    new View_HTML(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS), new File(Language.getTexte(Language.ID_ADRESSE_A_PROPOS)),parent);
 		
 		// 地图
 		else if(source == boutonsTerrains[0])

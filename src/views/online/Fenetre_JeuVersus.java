@@ -19,7 +19,7 @@
 package views.online;
 
 import models.animations.*;
-import i18n.Langue;
+import i18n.Language;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -49,7 +49,7 @@ import models.game.GameMode;
 import models.game.GameResult;
 import net.ChannelException;
 import net.game.client.ClientListener;
-import net.game.server.ServeurJeu;
+import net.game.server.ServerJeu;
 
 /**
  * Fenetre princiale du jeu 1 joueur. 
@@ -93,25 +93,25 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
 	//-- declaration des menus --
 	//---------------------------
 	private final JMenuBar 	menuPrincipal 	= new JMenuBar();
-	private final JMenu 	menuFichier 	= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_FICHIER));
-	private final JMenu 	menuEdition 	= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_EDITION));
-	private final JMenu     menuSon         = new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_SON));
-	private final JMenu 	menuAide 		= new JMenu(Langue.getTexte(Langue.ID_TXT_BTN_AIDE));
-	private final JMenuItem itemRegles      = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_REGLES)+"...",I_REGLES);
-	private final JMenuItem itemAPropos	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS)+"...",I_AIDE);
+	private final JMenu 	menuFichier 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_FICHIER));
+	private final JMenu 	menuEdition 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_EDITION));
+	private final JMenu     menuSon         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_SON));
+	private final JMenu 	menuAide 		= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AIDE));
+	private final JMenuItem itemRegles      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_REGLES)+"...",I_REGLES);
+	private final JMenuItem itemAPropos	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS)+"...",I_AIDE);
 
 	
 	
 	private final JMenuItem itemActiverDesactiverSon 
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_ACTIVE_DESACTIVE),I_SON_ACTIF); 
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_ACTIVE_DESACTIVE),I_SON_ACTIF); 
 	private final JMenuItem itemAfficherRayonsPortee	    
-		= new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_RAYONS_DE_PORTEE));
+		= new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_RAYONS_DE_PORTEE));
 	private final JMenuItem itemAfficherZonesJoueurs       
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_AFFICHER_ZONES_JOUEURS));
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_AFFICHER_ZONES_JOUEURS));
 	private final JMenuItem itemQuitter	    
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_QUITTER),I_QUITTER);
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_QUITTER),I_QUITTER);
 	private final JMenuItem itemRetourMenu  
-	    = new JMenuItem(Langue.getTexte(Langue.ID_TXT_BTN_RETOUR_MENU_P),I_RETOUR);
+	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P),I_RETOUR);
 	
 	private JLabel lblEtat = new JLabel(" ");
 	
@@ -306,14 +306,14 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
         panelSelectionEtVague.setOpaque(true);
 		panelSelectionEtVague.setPreferredSize(new Dimension(LARGEUR_MENU_DROITE,420));
 		panelSelectionEtVague.setBackground(LookInterface.COULEUR_DE_FOND_PRI);
-        panelSelectionEtVague.add(Langue.getTexte(Langue.ID_TITRE_INFO_SELECTION), panelSelection);
+        panelSelectionEtVague.add(Language.getTexte(Language.ID_TITRE_INFO_SELECTION), panelSelection);
            
         // panel de création de vagues
         panelCreationVague = new Panel_CreationVague(jeu,jeu.getJoueurPrincipal(),this);
         JScrollPane jsCreationVague = new JScrollPane(panelCreationVague);
         jsCreationVague.setOpaque(false);
         jsCreationVague.setPreferredSize(new Dimension(LARGEUR_MENU_DROITE,300));
-        panelSelectionEtVague.add(Langue.getTexte(Langue.ID_TXT_LANCEUR_DE_CREATURES), jsCreationVague);
+        panelSelectionEtVague.add(Language.getTexte(Language.ID_TXT_LANCEUR_DE_CREATURES), jsCreationVague);
         
 		
 		JPanel pN1 = new JPanel(new BorderLayout());
@@ -412,11 +412,11 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
 		
 		// règles
 		else if(source == itemRegles)
-		    new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_REGLES), new File(Langue.getTexte(Langue.ID_ADRESSE_REGLES_DU_JEU)), this);
+		    new View_HTML(Language.getTexte(Language.ID_TXT_BTN_REGLES), new File(Language.getTexte(Language.ID_ADRESSE_REGLES_DU_JEU)), this);
 
 		// a propos
 		else if(source == itemAPropos)
-			new View_HTML(Langue.getTexte(Langue.ID_TXT_BTN_A_PROPOS),new File(Langue.getTexte(Langue.ID_ADRESSE_A_PROPOS)),this);
+			new View_HTML(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS),new File(Language.getTexte(Language.ID_ADRESSE_A_PROPOS)),this);
 
 		// basculer affichage des rayons de portee
 		else if(source == itemAfficherRayonsPortee)
@@ -440,14 +440,14 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
                 {
                     try
                     {
-                        jeu.envoyerMsgChat(tfSaisieMsg.getText(), ServeurJeu.A_TOUS);
+                        jeu.envoyerMsgChat(tfSaisieMsg.getText(), ServerJeu.A_TOUS);
                     
                         tfSaisieMsg.setText("");
                         tfSaisieMsg.requestFocus();
                     } 
                     catch (MessageChatInvalide e)
                     {
-                        ajouterTexteHTMLDansConsole("<font color='red'>"+Langue.getTexte(Langue.ID_TXT_HTML_INTERDIT)+"</font> <br/>");
+                        ajouterTexteHTMLDansConsole("<font color='red'>"+Language.getTexte(Language.ID_TXT_HTML_INTERDIT)+"</font> <br/>");
                     }
                     
                 }
@@ -479,7 +479,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
 	private void quitter()
     {
 	    if(JOptionPane.showConfirmDialog(this, 
-	            Langue.getTexte(Langue.ID_TXT_DIALOG_QUITTER_JEU), "", 
+	            Language.getTexte(Language.ID_TXT_DIALOG_QUITTER_JEU), "", 
 	            JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
 	    {
 	        deconnexionDuJoueur();
@@ -496,7 +496,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
 	private void demanderRetourAuMenuPrincipal()
     {
 	    if(JOptionPane.showConfirmDialog(this, 
-	            Langue.getTexte(Langue.ID_TXT_DIALOG_ARRETER_PARTIE), "", 
+	            Language.getTexte(Language.ID_TXT_DIALOG_ARRETER_PARTIE), "", 
 	            JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
         {
 	        retourAuMenuPrincipal();
@@ -537,7 +537,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
             
             
             lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-            lblEtat.setText(Langue.getTexte(Langue.ID_TXT_TOUR_POSEE));
+            lblEtat.setText(Language.getTexte(Language.ID_TXT_TOUR_POSEE));
 	    }
 	    catch(Exception e)
 	    {
@@ -556,7 +556,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
 	        panelSelection.setSelection(tour, Panel_InfoTour.MODE_SELECTION);
 	        
 	        lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-            lblEtat.setText(Langue.getTexte(Langue.ID_TXT_TOUR_AMELIOREE));
+            lblEtat.setText(Language.getTexte(Language.ID_TXT_TOUR_AMELIOREE));
         }
 	    catch(Exception e)
         {
@@ -580,7 +580,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
                     );
             
             lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-            lblEtat.setText(Langue.getTexte(Langue.ID_TXT_TOUR_VENDUE));
+            lblEtat.setText(Language.getTexte(Language.ID_TXT_TOUR_VENDUE));
         } 
         catch (ActionUnauthorizedException e)
         {
@@ -830,13 +830,13 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     {
         String couleurHexa = Tools.ColorToHexa(auteur.getEquipe().getCouleur());
         
-        ajouterTexteHTMLDansConsole(String.format(Langue.getTexte(Langue.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
+        ajouterTexteHTMLDansConsole(String.format(Language.getTexte(Language.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
     }
 
     @Override
     public void joueurDeconnecte(Player joueur)
     {
-        ajouterTexteHTMLDansConsole("<font color='#FF0000'>"+String.format(Langue.getTexte(Langue.ID_TXT_PSEUDO_EST_PARTI), joueur.getPseudo())+"</font><br />");
+        ajouterTexteHTMLDansConsole("<font color='#FF0000'>"+String.format(Language.getTexte(Language.ID_TXT_PSEUDO_EST_PARTI), joueur.getPseudo())+"</font><br />");
     }
 
     @Override

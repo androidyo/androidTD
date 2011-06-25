@@ -27,7 +27,7 @@ package utils;
 public class Configuration
 {
     private static final String CFG = "cfg/config.cfg";
-    private static fichierDeConfiguration config = new fichierDeConfiguration(CFG);
+    private static ConfigurationFile config = new ConfigurationFile(CFG);
     
     // COMMANDES
     public static final String DEPL_HAUT            = "KC_DEPL_HAUT";

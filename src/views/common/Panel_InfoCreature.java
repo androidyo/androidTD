@@ -18,7 +18,7 @@
 
 package views.common;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 
@@ -55,9 +55,9 @@ public class Panel_InfoCreature extends JPanel
     
 	// attributs
 	private JLabel lTitreType       = new JLabel("Type");
-	private JLabel lTitreSante      = new JLabel(Langue.getTexte(Langue.ID_TXT_SANTE),I_SANTE,JLabel.LEFT);
-	private JLabel lTitreVitesse    = new JLabel(Langue.getTexte(Langue.ID_TXT_VITESSE),I_VITESSE,JLabel.LEFT);
-	private JLabel lTitreGain       = new JLabel(Langue.getTexte(Langue.ID_TXT_GAIN),I_GAIN,JLabel.LEFT);
+	private JLabel lTitreSante      = new JLabel(Language.getTexte(Language.ID_TXT_SANTE),I_SANTE,JLabel.LEFT);
+	private JLabel lTitreVitesse    = new JLabel(Language.getTexte(Language.ID_TXT_VITESSE),I_VITESSE,JLabel.LEFT);
+	private JLabel lTitreGain       = new JLabel(Language.getTexte(Language.ID_TXT_GAIN),I_GAIN,JLabel.LEFT);
 	private JLabel lSante           = new JLabel();
 	private JLabel lVitesse         = new JLabel();
 	private JLabel lGain            = new JLabel();

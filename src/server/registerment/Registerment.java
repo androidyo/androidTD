@@ -20,11 +20,6 @@ package server.registerment;
 
 import net.*;
 
-/**
- * 
- * @author lazhar
- *
- */
 public class Registerment {
    
    private String nomPartie;

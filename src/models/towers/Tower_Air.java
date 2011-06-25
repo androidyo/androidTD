@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -45,7 +45,7 @@ public class Tower_Air extends Tower
     public static final int NIVEAU_MAX = 5;
     public static final int PRIX_ACHAT = 150;
     
-    private static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_AIR); 
+    private static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_AIR); 
     
     static
     {
@@ -61,7 +61,7 @@ public class Tower_Air extends Tower
               20,               // largeur
               20,               // hauteur
               COULEUR,          // couleur de fond
-              Langue.getTexte(Langue.ID_TXT_NOM_TOUR_AIR),            // nom
+              Language.getTexte(Language.ID_TXT_NOM_TOUR_AIR),            // nom
               PRIX_ACHAT,       // prix achat
               200,               // degats
               100,               // rayon de portee

@@ -29,9 +29,6 @@ import views.View_MenuPrincipal;
  * 配置图形界面风格
  * 打开主程序菜单.
  * 
- * @author Aurelien Da Campo
- * @version 1.0 | 27 novemenbre 2009
- * @since jdk1.6.0_16
  */
 public class Main
 {
@@ -44,7 +41,7 @@ public class Main
     */
    public static void main(String[] args) 
    {
-       // essaye de mettre le nouveau look and feel "Nimbus" fourni par Java
+       // tries to put the new look and feel "Nimbus" provided by Java
        for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels())
            if ("Nimbus".equals(laf.getName())) 
                try 
@@ -54,8 +51,8 @@ public class Main
                catch (Exception e) 
                {
                    /* 
-                    * On fait rien, c'est pas grave. 
-                    * C'est juste le look and feel qui n'est pas installe.
+                    * It is nothing, it does not matter. 
+                    * It's just the look and feel that is not installed.
                     */ 
                }    
              

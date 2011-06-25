@@ -21,7 +21,7 @@ package utils;
 import java.io.File;
 
 /**
- * Classe utilitaire pour les fichiers
+ * Utility class for files
  * 
  * @author Aurélien Da Campo
  * @version 1.0 | mai 2010

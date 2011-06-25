@@ -28,13 +28,13 @@ import models.player.RevenueManager;
 import models.player.Player;
 import net.ChannelException;
 import net.ChannelTCP;
-import net.game.server.ServeurJeu;
+import net.game.server.ServerJeu;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import server.registerment.CodeRegisterment;
-import server.registerment.RequeteEnregistrement;
+import server.registerment.RegistrationQuery;
 import utils.Configuration;
 
 /**
@@ -56,7 +56,7 @@ public class Game_Server extends Game
     /**
      * Connexions réseaux du serveur
      */
-    private ServeurJeu serveurDeJeu;
+    private ServerJeu serveurDeJeu;
     
     /**
      * Permet de savoir si l'enregistrement au SE a réussi
@@ -138,7 +138,7 @@ public class Game_Server extends Game
      */
     public void etablissementDuServeur() throws IOException
     {
-        serveurDeJeu = new ServeurJeu(this);
+        serveurDeJeu = new ServerJeu(this);
     }
 
     /**
@@ -170,7 +170,7 @@ public class Game_Server extends Game
                                                       Configuration.getPortSE());
             
             // Création de la requete d'enregistrement
-            String requete = RequeteEnregistrement.getRequeteEnregistrer(
+            String requete = RegistrationQuery.getRequeteEnregistrer(
                     nomServeur, Configuration.getPortSJ(), nbJoueurs, nomTerrain, GameMode.getNomMode(mode));
 
             // Envoie de la requete
@@ -214,7 +214,7 @@ public class Game_Server extends Game
             try
             {
                 // désenregistrement du serveur
-                canalServeurEnregistrement.envoyerString(RequeteEnregistrement.DESENREGISTRER);
+                canalServeurEnregistrement.envoyerString(RegistrationQuery.DESENREGISTRER);
                 canalServeurEnregistrement.recevoirString();
 
                 // fermeture propre du canal
@@ -239,7 +239,7 @@ public class Game_Server extends Game
         if(enregistrementReussie)
         {
             // Création de la requete d'enregistrement
-            String requete = RequeteEnregistrement.getRequeteMiseAJour(terrain.getNbJoueursMax() - getJoueurs().size());
+            String requete = RegistrationQuery.getRequeteMiseAJour(terrain.getNbJoueursMax() - getJoueurs().size());
     
             try
             {

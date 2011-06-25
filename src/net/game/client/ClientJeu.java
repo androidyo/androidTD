@@ -18,7 +18,7 @@
 
 package net.game.client;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.io.File;
 import java.io.IOException;
@@ -212,11 +212,11 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
 			switch(resultatJSON.getInt("STATUS"))
 			{
 			    case ARGENT_INSUFFISANT : 
-			        throw new MoneyLackException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
+			        throw new MoneyLackException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
 			    case ZONE_INACCESSIBLE :
-                    throw new ZoneInaccessibleException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_ZONE_INACCESSIBLE));
+                    throw new ZoneInaccessibleException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_ZONE_INACCESSIBLE));
 			    case CHEMIN_BLOQUE :
-                    throw new ZoneInaccessibleException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_CHEMIN_BLOQUE));
+                    throw new ZoneInaccessibleException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_CHEMIN_BLOQUE));
                 // TODO case JOUEUR_HORS_JEU:
                 //   throw new JoueurHorsJeu("Tour inconnue");
 			}
@@ -257,9 +257,9 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
                 case TOUR_INCONNUE:
                     throw new NullPointerException("Unknown tower");
                 case ARGENT_INSUFFISANT :
-                    throw new MoneyLackException(Langue.getTexte(Langue.ID_ERROR_AMELIORATON_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
+                    throw new MoneyLackException(Language.getTexte(Language.ID_ERROR_AMELIORATON_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
                 case   NIVEAU_MAX_ATTEINT:
-                    throw new ReachMaxLevelException(Langue.getTexte(Langue.ID_ERROR_AMELIORATON_IMPOSSIBLE_NIVEAU_MAX_ATTEINT));
+                    throw new ReachMaxLevelException(Language.getTexte(Language.ID_ERROR_AMELIORATON_IMPOSSIBLE_NIVEAU_MAX_ATTEINT));
                 case ACTION_NON_AUTORISEE :
                     throw new ActionUnauthorizedException("Non authorized");
                 case JOUEUR_HORS_JEU:

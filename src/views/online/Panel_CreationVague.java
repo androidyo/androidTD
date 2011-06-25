@@ -18,7 +18,7 @@
 
 package views.online;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -79,9 +79,9 @@ public class Panel_CreationVague extends JPanel
         */
         
         tb.setBackground(LookInterface.COULEUR_DE_FOND_SEC);
-        tb.add(new JLabel(Langue.getTexte(Langue.ID_TXT_CREATURE)),0,0);
-        tb.add(new JLabel(Langue.getTexte(Langue.ID_TXT_PRIX)),1,0);
-        tb.add(new JLabel(Langue.getTexte(Langue.ID_TXT_REVENU)),2,0);
+        tb.add(new JLabel(Language.getTexte(Language.ID_TXT_CREATURE)),0,0);
+        tb.add(new JLabel(Language.getTexte(Language.ID_TXT_PRIX)),1,0);
+        tb.add(new JLabel(Language.getTexte(Language.ID_TXT_REVENU)),2,0);
         
         for(int i=0;i < creatures.length;i++)
         {
@@ -124,7 +124,7 @@ public class Panel_CreationVague extends JPanel
             tb.add(new JLabel(""+creature.getNbPiecesDOr() * 
                     RevenueManager.POURCENTAGE_NB_PIECES_OR_CREATURE),2,i+1); 
                
-            JButton bLancer = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_LANCER));
+            JButton bLancer = new JButton(Language.getTexte(Language.ID_TXT_BTN_LANCER));
             bLancers[i] = bLancer;
             tb.add(bLancer,3,i+1);
             

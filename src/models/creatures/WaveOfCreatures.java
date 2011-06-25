@@ -20,7 +20,7 @@ package models.creatures;
 
 import java.util.ArrayList;
 
-import i18n.Langue;
+import i18n.Language;
 
 /**
  * Structure permettant de stoquer des informations et lancer une vague de
@@ -128,15 +128,15 @@ public class WaveOfCreatures
         String type;
         
         if(CREATURE_A_ENVOYER.getType() == Creature.TYPE_AERIENNE)
-            type = Langue.getTexte(Langue.ID_TXT_AIR).toUpperCase();
+            type = Language.getTexte(Language.ID_TXT_AIR).toUpperCase();
         else
-            type = Langue.getTexte(Langue.ID_TXT_TERRE).toUpperCase();
+            type = Language.getTexte(Language.ID_TXT_TERRE).toUpperCase();
 
         return NB_CREATURES + "x " +CREATURE_A_ENVOYER.getNom() + " (<b>"
                 + type + "</b>) [ "
-                + Langue.getTexte(Langue.ID_TXT_SANTE)+" : " + CREATURE_A_ENVOYER.getSanteMax() + ", "
-                + Langue.getTexte(Langue.ID_TXT_GAIN)+" : " + CREATURE_A_ENVOYER.getNbPiecesDOr() + ", "
-                + Langue.getTexte(Langue.ID_TXT_VITESSE)+" : " + CREATURE_A_ENVOYER.getVitesseNormale() + " ]";
+                + Language.getTexte(Language.ID_TXT_SANTE)+" : " + CREATURE_A_ENVOYER.getSanteMax() + ", "
+                + Language.getTexte(Language.ID_TXT_GAIN)+" : " + CREATURE_A_ENVOYER.getNbPiecesDOr() + ", "
+                + Language.getTexte(Language.ID_TXT_VITESSE)+" : " + CREATURE_A_ENVOYER.getVitesseNormale() + " ]";
     }
 
     public static final double VITESSE_CREATURE_LENTE = 30.0;

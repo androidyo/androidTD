@@ -18,7 +18,7 @@
 
 package views.online;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +29,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.ChannelException;
 import net.game.client.ClientListener;
-import net.game.server.ServeurJeu;
+import net.game.server.ServerJeu;
 
 import exceptions.MessageChatInvalide;
 
@@ -61,9 +61,9 @@ public class Panel_AttendreJoueurs extends JPanel implements
     private final int MARGES_PANEL = 40;
     private final boolean ADMIN;
     private JFrame parent;
-    private JButton bDemarrerMaintenant = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_DEMARRER));
+    private JButton bDemarrerMaintenant = new JButton(Language.getTexte(Language.ID_TXT_BTN_DEMARRER));
     private JLabel lblEtat = new JLabel();
-    private JButton bDeconnecter = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_SE_DECONNECTER));
+    private JButton bDeconnecter = new JButton(Language.getTexte(Language.ID_TXT_BTN_SE_DECONNECTER));
     private Game_Server jeuServeur;
     private Game_Client jeuClient;
     private Panel_EmplacementsTerrain pEmplacementsTerrain;
@@ -123,7 +123,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
         // initialisation
         setLayout(new BorderLayout());
 
-        parent.setTitle(Langue.getTexte(Langue.ID_TITRE_ATTENTE_DE_JOUEURS));
+        parent.setTitle(Language.getTexte(Language.ID_TITRE_ATTENTE_DE_JOUEURS));
         setBorder(new EmptyBorder(new Insets(MARGES_PANEL, MARGES_PANEL,
                 MARGES_PANEL, MARGES_PANEL)));
         setBackground(LookInterface.COULEUR_DE_FOND_PRI);
@@ -134,7 +134,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
         JPanel pTop = new JPanel(new BorderLayout());
         pTop.setOpaque(false);
 
-        JLabel lblTitre = new JLabel(Langue.getTexte(Langue.ID_TITRE_ATTENTE_DE_JOUEURS));
+        JLabel lblTitre = new JLabel(Language.getTexte(Language.ID_TITRE_ATTENTE_DE_JOUEURS));
         lblTitre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
         lblTitre.setFont(ManageFonts.POLICE_TITRE);
         pTop.add(lblTitre, BorderLayout.NORTH);
@@ -237,7 +237,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
            
             try
             {
-                String s = Langue.getTexte(Langue.ID_TXT_VOS_ADRESSES_IP)+" : ";
+                String s = Language.getTexte(Language.ID_TXT_VOS_ADRESSES_IP)+" : ";
                 
                 for (NetworkInterface netint : Collections.list(NetworkInterface.getNetworkInterfaces())) {
                     for (InetAddress inetAddress : Collections.list(netint.getInetAddresses())) {
@@ -257,7 +257,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
         }
         else
         {
-            console.ajouterTexteHTMLDansConsole(Langue.getTexte(Langue.ID_TXT_DESCR_CONSOLE_CHAT));
+            console.ajouterTexteHTMLDansConsole(Language.getTexte(Language.ID_TXT_DESCR_CONSOLE_CHAT));
         }
         
         bDeconnecter.addActionListener(this);
@@ -275,12 +275,12 @@ public class Panel_AttendreJoueurs extends JPanel implements
             if (jeuServeur.estEnregisterSurSE())
             {
                 lblEtat.setForeground(LookInterface.COULEUR_SUCCES);
-                lblEtat.setText(Langue.getTexte(Langue.ID_TXT_CON_SRV_CENTRAL_ETABLIE)); 
+                lblEtat.setText(Language.getTexte(Language.ID_TXT_CON_SRV_CENTRAL_ETABLIE)); 
             } 
             else
             {
                 lblEtat.setForeground(LookInterface.COULEUR_ERREUR);
-                lblEtat.setText(Langue.getTexte(Langue.ID_ERREUR_ENREGISTREMENT_AU_SRV_CENTRAL_ECHOUE));
+                lblEtat.setText(Language.getTexte(Language.ID_ERREUR_ENREGISTREMENT_AU_SRV_CENTRAL_ECHOUE));
             }
 
         pBottom.add(lblEtat, BorderLayout.SOUTH);
@@ -367,14 +367,14 @@ public class Panel_AttendreJoueurs extends JPanel implements
                 {
                     try
                     {
-                        jeuClient.envoyerMsgChat(tfSaisieMsg.getText(), ServeurJeu.A_TOUS);
+                        jeuClient.envoyerMsgChat(tfSaisieMsg.getText(), ServerJeu.A_TOUS);
                         
                         tfSaisieMsg.setText("");
                         tfSaisieMsg.requestFocus();
                     }
                     catch (MessageChatInvalide e1)
                     {
-                       console.ajouterTexteHTMLDansConsole("<font color='red'>"+Langue.getTexte(Langue.ID_TXT_HTML_INTERDIT)+"</font> <br/>");
+                       console.ajouterTexteHTMLDansConsole("<font color='red'>"+Language.getTexte(Language.ID_TXT_HTML_INTERDIT)+"</font> <br/>");
                     }
                 }
             } 
@@ -617,13 +617,13 @@ public class Panel_AttendreJoueurs extends JPanel implements
     {
         String couleurHexa = Tools.ColorToHexa(auteur.getEquipe().getCouleur());
         
-        console.ajouterTexteHTMLDansConsole(String.format(Langue.getTexte(Langue.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
+        console.ajouterTexteHTMLDansConsole(String.format(Language.getTexte(Language.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
     }
 
     @Override
     public void joueurDeconnecte(Player joueur)
     {
-        console.ajouterTexteHTMLDansConsole("<font color='#FF0000'>"+String.format(Langue.getTexte(Langue.ID_TXT_PSEUDO_EST_PARTI), joueur.getPseudo())+"</font><br />");
+        console.ajouterTexteHTMLDansConsole("<font color='#FF0000'>"+String.format(Language.getTexte(Language.ID_TXT_PSEUDO_EST_PARTI), joueur.getPseudo())+"</font><br />");
     }
 
     @Override

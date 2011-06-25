@@ -18,7 +18,7 @@
 
 package models.game;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Graphics2D;
 import java.util.*;
@@ -337,15 +337,15 @@ public abstract class Game implements PlayerListener,
 
         // suffisemment d'argent ?
         if(!laTourPeutEtreAchetee(tour))    
-            throw new MoneyLackException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
+            throw new MoneyLackException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
         
         // si elle peut pas etre posee
         if (!laTourPeutEtrePosee(tour))
-            throw new ZoneInaccessibleException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_ZONE_INACCESSIBLE));
+            throw new ZoneInaccessibleException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_ZONE_INACCESSIBLE));
 
         // si elle bloque le chemin de A vers B
         if (terrain.laTourBloqueraLeChemin(tour))
-            throw new BarrierException(Langue.getTexte(Langue.ID_ERROR_POSE_IMPOSSIBLE_CHEMIN_BLOQUE));
+            throw new BarrierException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_CHEMIN_BLOQUE));
         
         // desactive la zone dans le maillage qui correspond a la tour
         terrain.desactiverZone(tour, true);
@@ -406,10 +406,10 @@ public abstract class Game implements PlayerListener,
     public void ameliorerTour(Tower tour) throws ReachMaxLevelException, MoneyLackException, ActionUnauthorizedException, JoueurHorsJeu
     {
         if(!tour.peutEncoreEtreAmelioree())
-            throw new ReachMaxLevelException(Langue.getTexte(Langue.ID_ERROR_AMELIORATON_IMPOSSIBLE_NIVEAU_MAX_ATTEINT));
+            throw new ReachMaxLevelException(Language.getTexte(Language.ID_ERROR_AMELIORATON_IMPOSSIBLE_NIVEAU_MAX_ATTEINT));
         
         if(tour.getPrioprietaire().getNbPiecesDOr() < tour.getPrixAchat())
-            throw new MoneyLackException(Langue.getTexte(Langue.ID_ERROR_AMELIORATON_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
+            throw new MoneyLackException(Language.getTexte(Language.ID_ERROR_AMELIORATON_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
 
         // debit des pieces d'or
         tour.getPrioprietaire().setNbPiecesDOr(tour.getPrioprietaire().getNbPiecesDOr() - tour.getPrixAchat());

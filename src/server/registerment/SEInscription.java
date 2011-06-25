@@ -24,10 +24,8 @@ import java.util.ArrayList;
 import net.*;
 
 /**
- * Classe de gestion d'un serveur d'enregistrement de parties reseaux
+ * Management class to a registration server parts networks
  * 
- * @author lazhar
- * @author Aurelien Da Campo
  */
 public class SEInscription
 {

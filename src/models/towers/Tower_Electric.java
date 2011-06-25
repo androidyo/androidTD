@@ -18,7 +18,7 @@
 
 package models.towers;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -47,7 +47,7 @@ public class Tower_Electric extends Tower
     public static final Image ICONE;
     public static final int NIVEAU_MAX = 5;
     public static final int PRIX_ACHAT = 120;
-    private static final String DESCRIPTION = Langue.getTexte(Langue.ID_TXT_DESC_TOUR_ELECTRIQUE); 
+    private static final String DESCRIPTION = Language.getTexte(Language.ID_TXT_DESC_TOUR_ELECTRIQUE); 
 
     
     static
@@ -64,7 +64,7 @@ public class Tower_Electric extends Tower
               20,               // largeur
               20,               // hauteur
               COULEUR,          // couleur de fond
-              Langue.getTexte(Langue.ID_TXT_NOM_TOUR_ELECTRIQUE),     // nom
+              Language.getTexte(Language.ID_TXT_NOM_TOUR_ELECTRIQUE),     // nom
               PRIX_ACHAT,       // prix achat
               120,              // degats
               70,               // rayon de portee

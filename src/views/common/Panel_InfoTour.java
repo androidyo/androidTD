@@ -18,7 +18,7 @@
 
 package views.common;
 
-import i18n.Langue;
+import i18n.Language;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -54,10 +54,10 @@ public class Panel_InfoTour extends JPanel implements ActionListener
 	
 	
 	
-    private static final String TXT_AMELIORER  = Langue.getTexte(Langue.ID_TXT_BTN_AMELIORER);
-    private static final String TXT_VENDRE     = Langue.getTexte(Langue.ID_TXT_BTN_VENDRE);
-    private static final String TXT_PRIX_ACHAT = Langue.getTexte(Langue.ID_TXT_PRIX_ACHAT);
-    private static final String TXT_PRIX_TOTAL = Langue.getTexte(Langue.ID_TXT_VALEUR_PRIX);
+    private static final String TXT_AMELIORER  = Language.getTexte(Language.ID_TXT_BTN_AMELIORER);
+    private static final String TXT_VENDRE     = Language.getTexte(Language.ID_TXT_BTN_VENDRE);
+    private static final String TXT_PRIX_ACHAT = Language.getTexte(Language.ID_TXT_PRIX_ACHAT);
+    private static final String TXT_PRIX_TOTAL = Language.getTexte(Language.ID_TXT_VALEUR_PRIX);
     private static final Dimension DIMENSION_PANEL = new Dimension(280, 350);
     private static final Dimension DIMENSION_DESCRIPTION = new Dimension(240,120);
     
@@ -148,7 +148,7 @@ public class Panel_InfoTour extends JPanel implements ActionListener
         ajouterChamp(pCaracteristiques, lPrixLvlS, 2, nbChamps++, 1);
 		
 		// champ degats
-        JLabel lTitreDegats = new JLabel(Langue.getTexte(Langue.ID_TXT_DEGATS));
+        JLabel lTitreDegats = new JLabel(Language.getTexte(Language.ID_TXT_DEGATS));
         lTitreDegats.setForeground(LookInterface.COULEUR_TEXTE_SEC);
         lTitreDegats.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         
@@ -161,7 +161,7 @@ public class Panel_InfoTour extends JPanel implements ActionListener
 		ajouterChamp(pCaracteristiques, lDegatsLvlS, 2, nbChamps++, 1);
 		
 		// champ rayon de portee
-		JLabel lTitrePortee = new JLabel(Langue.getTexte(Langue.ID_TXT_PORTEE));
+		JLabel lTitrePortee = new JLabel(Language.getTexte(Language.ID_TXT_PORTEE));
 		lTitrePortee.setForeground(LookInterface.COULEUR_TEXTE_SEC);
 		lTitrePortee.setFont(ManageFonts.POLICE_TITRE_CHAMP);
 		
@@ -174,7 +174,7 @@ public class Panel_InfoTour extends JPanel implements ActionListener
 		ajouterChamp(pCaracteristiques, lRayonPorteeLvlS, 2, nbChamps++, 1);
 		
 		// champ cadence de tir
-		JLabel lTitreCadenceTir = new JLabel(Langue.getTexte(Langue.ID_TXT_TIRS_SEC));
+		JLabel lTitreCadenceTir = new JLabel(Language.getTexte(Language.ID_TXT_TIRS_SEC));
 		lTitreCadenceTir.setForeground(LookInterface.COULEUR_TEXTE_SEC);
 		lTitreCadenceTir.setFont(ManageFonts.POLICE_TITRE_CHAMP);
 		
@@ -187,7 +187,7 @@ public class Panel_InfoTour extends JPanel implements ActionListener
 		ajouterChamp(pCaracteristiques, lCadenceTirLvlS, 2, nbChamps++, 1);
 		
 		// champ DPS : dégats par seconde
-		JLabel lTitreDPS = new JLabel(Langue.getTexte(Langue.ID_TXT_DPS));
+		JLabel lTitreDPS = new JLabel(Language.getTexte(Language.ID_TXT_DPS));
 		lTitreDPS.setForeground(LookInterface.COULEUR_TEXTE_SEC);
 		lTitreDPS.setFont(ManageFonts.POLICE_TITRE_CHAMP);
 		
@@ -217,13 +217,13 @@ public class Panel_InfoTour extends JPanel implements ActionListener
        
         JPanel pCiblage = new JPanel();
         pCiblage.setOpaque(false);
-        JLabel lTypeCiblage = new JLabel(Langue.getTexte(Langue.ID_TXT_ATTAQUE_LA_CREATURE));
+        JLabel lTypeCiblage = new JLabel(Language.getTexte(Language.ID_TXT_ATTAQUE_LA_CREATURE));
         pCiblage.add(lTypeCiblage);
         lTypeCiblage.setForeground(LookInterface.COULEUR_TEXTE_SEC);
-        cbTypeCiblage.addItem(Langue.getTexte(Langue.ID_TXT_LA_PLUS_PROCHE));
-        cbTypeCiblage.addItem(Langue.getTexte(Langue.ID_TXT_LA_PLUS_LOIN));
-        cbTypeCiblage.addItem(Langue.getTexte(Langue.ID_TXT_LA_PLUS_FAIBLE));
-        cbTypeCiblage.addItem(Langue.getTexte(Langue.ID_TXT_LA_PLUS_FORTE));
+        cbTypeCiblage.addItem(Language.getTexte(Language.ID_TXT_LA_PLUS_PROCHE));
+        cbTypeCiblage.addItem(Language.getTexte(Language.ID_TXT_LA_PLUS_LOIN));
+        cbTypeCiblage.addItem(Language.getTexte(Language.ID_TXT_LA_PLUS_FAIBLE));
+        cbTypeCiblage.addItem(Language.getTexte(Language.ID_TXT_LA_PLUS_FORTE));
         cbTypeCiblage.addActionListener(this);
         ManageFonts.setStyle(cbTypeCiblage);
         

@@ -28,7 +28,7 @@ import java.io.PrintWriter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Langue
+public class Language
 {
     /**
      * Identificateur des textes dans le fichier de langue
@@ -607,7 +607,7 @@ public class Langue
             jo.put(ID_ERREUR_PAS_DE_TERRAIN_SELECTIONNE,"Error: No map selected");
 
             
-            Langue.sauver("lang/en_En.json");
+            Language.sauver("lang/en_En.json");
         
 
             
@@ -867,7 +867,7 @@ public class Langue
             jo.put(ID_ERREUR_NOM_SERVEUR_VIDE,"Erreur: Nom du serveur vide");
             jo.put(ID_ERREUR_PAS_DE_TERRAIN_SELECTIONNE,"Erreur: Aucun terrain selectionné");
 
-            Langue.sauver("lang/fr_FR.json");
+            Language.sauver("lang/fr_FR.json");
         } 
         catch (JSONException e)
         {

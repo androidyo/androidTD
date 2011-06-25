@@ -18,7 +18,7 @@
 
 package views.editorMap;
 
-import i18n.Langue;
+import i18n.Language;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -86,7 +86,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
     /**
      * Bouton de creation d'une equipe
      */
-    private JButton bCreerEquipe = new JButton(Langue.getTexte(Langue.ID_TXT_BTN_CREER),I_AJOUTER_EQUIPE);
+    private JButton bCreerEquipe = new JButton(Language.getTexte(Language.ID_TXT_BTN_CREER),I_AJOUTER_EQUIPE);
     
     /**
      * Constructeur
@@ -218,7 +218,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
             
             
             // Zone d'arrivée
-            final JLabel bZoneArrive = new JLabel(Langue.getTexte(Langue.ID_TXT_BTN_ARRIVEE));
+            final JLabel bZoneArrive = new JLabel(Language.getTexte(Language.ID_TXT_BTN_ARRIVEE));
             ManageFonts.setStyle(bZoneArrive);
             pTabEquipes.add(bZoneArrive,0,ligne);
             
@@ -244,7 +244,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
                 final Rectangle z = equipe.getZoneDepartCreatures(noZD);
 
                 // Zone de depart
-                final JLabel bZoneDepart = new JLabel(Langue.getTexte(Langue.ID_TXT_BTN_DEPART) + " - " + noZD);
+                final JLabel bZoneDepart = new JLabel(Language.getTexte(Language.ID_TXT_BTN_DEPART) + " - " + noZD);
                 ManageFonts.setStyle(bZoneDepart);
                 pTabEquipes.add(bZoneDepart,0,ligne);                
                 
@@ -312,7 +312,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
             for(final PlayerLocation ej : equipe.getEmplacementsJoueur())
             { 
                 
-                JLabel lNomEmplacement = new JLabel(Langue.getTexte(Langue.ID_TXT_ZONE_JOUEUR)+ej.getId());
+                JLabel lNomEmplacement = new JLabel(Language.getTexte(Language.ID_TXT_ZONE_JOUEUR)+ej.getId());
                 ManageFonts.setStyle(lNomEmplacement);
                 pTabEquipes.add(lNomEmplacement,0,ligne);
                 
@@ -388,7 +388,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
         
         if(src == bCreerEquipe)
         {
-            Team equipe = new Team(idAutoIncrEquipe, Langue.getTexte(Langue.ID_TXT_EQUIPE)+" "+idAutoIncrEquipe, Color.BLACK);
+            Team equipe = new Team(idAutoIncrEquipe, Language.getTexte(Language.ID_TXT_EQUIPE)+" "+idAutoIncrEquipe, Color.BLACK);
             
             jeu.ajouterEquipe(equipe);
             
