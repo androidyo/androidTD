@@ -93,12 +93,12 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	private JLabel lblInfo = new JLabel(Language.getTexte(Language.ID_TXT_CLIQUER_SUR_TERRAIN));
 
 	/**
-	 * Constructeur de la fenetre du menu principal
+	 * Manufacturer of window main menu
 	 */
 	public Panel_ModeSingle(JFrame parent)
 	{
 		//-------------------------------
-		//-- preferances de le fenetre --
+		//-- preferable to window --
 		//-------------------------------
 	    this.parent = parent;
 	    setLayout(new BorderLayout());
@@ -110,7 +110,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		setBackground(LookInterface.COULEUR_DE_FOND_PRI);
 
 		//--------------------------------------
-        //-- chargement des scores et étoiles --
+        //-- loading scores and stars --
         //--------------------------------------
 		
 	    String[] nomTerrains = new String[]{"ElementTD","Spiral","Desert","WaterWorld"};
@@ -134,7 +134,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		
 		
 		//----------------------------
-        //-- création du formulaire --
+        //-- Form creation --
         //----------------------------
 		
 		JPanel pFormulaire = new JPanel(new BorderLayout());
@@ -147,12 +147,12 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		JPanel pNord = new JPanel(new BorderLayout());
 		pNord.setOpaque(false);
 		
-		// titre
+		// tittle
 		lblTitre.setFont(ManageFonts.POLICE_TITRE);
 		lblTitre.setForeground(LookInterface.COULEUR_TEXTE_PRI);
 		pNord.add(lblTitre,BorderLayout.WEST);
 		
-		// étoiles
+		// stars
 		JPanel pNbEtoiles = new JPanel(new FlowLayout());
 		pNbEtoiles.setOpaque(false);
 		
@@ -168,10 +168,10 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		
 		
 		//-----------------------------
-		//-- chargement des terrains --
+		//-- loading of land --
 		//-----------------------------
 		
-		// attent que toutes les images soit complementements chargees
+		// attent all or images will complement CHARGED
 		MediaTracker tracker = new MediaTracker(this);
 		tracker.addImage(ElementTD.IMAGE_MENU, 0);
 		tracker.addImage(Spiral.IMAGE_MENU, 1);
@@ -185,7 +185,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 			e.printStackTrace(); 
 		}
 		
-		// creation des boutons
+		// creation of buttons
 		boutonsTerrains[0] = new JButton(new ImageIcon(
 							Tools.redimentionner(ElementTD.IMAGE_MENU,
 									IMAGE_MENU_LARGEUR,IMAGE_MENU_HAUTEUR)));
@@ -202,7 +202,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 							Tools.redimentionner(WaterWorld.IMAGE_MENU,
 									IMAGE_MENU_LARGEUR,IMAGE_MENU_HAUTEUR)));
 
-		// ajout des boutons au panel et ajout des ecouteurs
+		// Adding buttons to the panel and add listeners
 		JPanel pBoutonsTerrains = new JPanel(new FlowLayout());
 		
 		pBoutonsTerrains.setBorder(new EmptyBorder(new Insets(60, 0, 0, 0)));
@@ -223,7 +223,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		    bouton.addActionListener(this);
 		    pInfoTerrain.add(bouton,BorderLayout.NORTH);
 		    
-		    // recuperation du meilleur score
+		    // recovery of the score
 		    Score score = scoresMax[i];
 		    
 		    pInfoTerrain.add(new Panel_Star(score),BorderLayout.CENTER);
@@ -250,7 +250,8 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		        pInfoTerrain.add(tmp,BorderLayout.SOUTH);
 		    }
 		    //-----------------------------------------
-	        //-- bloquage des terrains - progression --
+	        //-- blocking of sites - progression --
+		    // 静止访问
 	        //-----------------------------------------
 		    
 		    if(i == 1 && nbEtoiles < 1)
@@ -283,7 +284,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
                 pInfoTerrain.add(lbl,BorderLayout.SOUTH);
 		    }
 
-		    // ajout au panel
+		    // add to the panel
 		    pBoutonsTerrains.add(pInfoTerrain);
 		}
 
@@ -307,7 +308,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		
 		
 	    //-------------------
-        //-- bouton retour --
+        //-- back button --
         //-------------------
 		
 		JPanel pFond = new JPanel(new BorderLayout());
@@ -336,10 +337,9 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	}
 
     /**
-     * Gestionnaire des evenements. 
+     * Manager events. 
      * <p>
-     * Cette methode est appelee en cas d'evenement
-     * sur un objet ecouteur de ActionListener
+     * This method is called when an event listener object ActionListener
      * 
      * @param ae l'evenement associe
      */
@@ -347,11 +347,11 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	{
 		Object source = ae.getSource();
 		
-		// quitter
+		// quit
 		if(source == itemQuitter)
 			System.exit(0); // Fermeture correcte du logiciel
 		
-		// a propos
+		// about
 		else if(source == itemAPropos)
 		    new View_HTML(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS), new File(Language.getTexte(Language.ID_ADRESSE_A_PROPOS)),parent);
 		
@@ -359,22 +359,22 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 		else if(source == boutonsTerrains[0])
 		{
 		    Game jeu = new Game_Single();
-		    lancerJeu(jeu, new ElementTD(jeu));
+		    launchGame(jeu, new ElementTD(jeu));
 		}
 		else if(source == boutonsTerrains[1])
 		{
 		    Game jeu = new Game_Single();
-            lancerJeu(jeu, new Spiral(jeu));
+            launchGame(jeu, new Spiral(jeu));
 		}
 		else if(source == boutonsTerrains[2])
 		{ 
 		    Game jeu = new Game_Single();
-		    lancerJeu(jeu, new Desert(jeu));
+		    launchGame(jeu, new Desert(jeu));
 		}
 		else if(source == boutonsTerrains[3])
 		{
 		    Game jeu = new Game_Single();
-		    lancerJeu(jeu, new WaterWorld(jeu));
+		    launchGame(jeu, new WaterWorld(jeu));
 		}
 		else if(source == itemMSElementTD)
 		    new View_TopScores(ElementTD.NOM, parent);
@@ -402,40 +402,40 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
 	}
 
 	/**
-	 * Permet de lancer un jeu.
+	 * Start a game.
 	 * 
-	 * Elle créer les équipes pour un jeu solo
+	 *  set up teams to play solo
 	 * 
-	 * @param jeu le jeu
-	 * @param terrain le terrain
+	 * @param game le jeu
+	 * @param field le terrain
 	 */
-    private void lancerJeu(Game jeu, Field terrain)
+    private void launchGame(Game game, Field field)
     {
         SoundManagement.arreterTousLesSons(View_MenuPrincipal.FICHIER_MUSIQUE_MENU);
         
-        actionnerBarreDeChargement();
+        activeLoadingBar();
         
-        terrain.initialiser();
-        jeu.setTerrain(terrain);
-        Team equipe = jeu.getEquipes().get(0); // les equipes sont créer par le terrain
-        Player joueur = new Player("Joueur");
+        field.initialize();
+        game.setTerrain(field);
+        Team equipe = game.getEquipes().get(0); // Teams are created by the field
+        Player player = new Player("Joueur");
         
         try{
-            equipe.ajouterJoueur(joueur);
+            equipe.ajouterJoueur(player);
         } 
         catch (NoPositionAvailableException e){
             e.printStackTrace();
         }
         
-        jeu.setJoueurPrincipal(joueur);
-        jeu.initialiser();
-        new View_JeuSolo(jeu);
+        game.setJoueurPrincipal(player);
+        game.initialiser();
+        new View_JeuSolo(game);
         
         chargementTermine = true;
         parent.dispose();
     }
 
-    synchronized private void actionnerBarreDeChargement()
+    synchronized private void activeLoadingBar()
     {  
         thread = new Thread(this);
         thread.start();   

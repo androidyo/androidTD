@@ -352,7 +352,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
             //---------------------
             
             Field terrain = terrains.get(tbTerrains.getSelectedRow());
-            terrain.initialiser();
+            terrain.initialize();
             
             if(terrain.getMode() == GameMode.MODE_SOLO)
             {
@@ -371,7 +371,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
                     jeu.getTerrain().setLargeurMaillage(jeu.getTerrain().getLargeur());
                     jeu.getTerrain().setHauteurMaillage(jeu.getTerrain().getHauteur());
                     
-                    jeu.getTerrain().initialiser();
+                    jeu.getTerrain().initialize();
                     jeu.initialiser();
                     
                     SoundManagement.arreterTousLesSons();
@@ -396,7 +396,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
             
             File fichierTerrain = fichiersTerrains.get(tbTerrains.getSelectedRow());
 
-            terrain.initialiser();
+            terrain.initialize();
             new View_CreationTerrain(terrain,fichierTerrain);
             
             SoundManagement.arreterTousLesSons();

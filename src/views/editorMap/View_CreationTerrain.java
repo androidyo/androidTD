@@ -489,7 +489,7 @@ public class View_CreationTerrain extends    JFrame
                 j.setJoueurPrincipal(joueur);
                 j.ajouterJoueur(joueur);
      
-                t.initialiser();
+                t.initialize();
                 j.initialiser();
                 
                 new View_JeuSolo(j)

@@ -132,7 +132,7 @@ public class View_DialogGameOver extends JDialog implements ActionListener
                 
                 // ajout du nouveau score
                 HighScores ms = new HighScores(nomTerrain);
-                ms.ajouterMeilleurScore(tfPseudo.getText(), score, dureePartie);
+                ms.addBestScore(tfPseudo.getText(), score, dureePartie);
                 
                 dispose(); // fermeture
                 

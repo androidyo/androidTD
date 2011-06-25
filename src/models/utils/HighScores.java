@@ -22,7 +22,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Fichier : MeilleursScores.java
+ * File : MeilleursScores.java
  * <p>
  * Encodage : UTF-8
  * <p>
@@ -61,7 +61,7 @@ public final class HighScores
    public HighScores (String nomTerrain)
    {
       FICHIER = new File("donnees/scores/"+nomTerrain+".ms");
-      lireDonneesFichier();
+      readDataFile();
    }
    
    /**
@@ -87,7 +87,7 @@ public final class HighScores
     * @param valeurScore
     *        La valeur du meilleur score que le joueur a atteint.
     */
-   public void ajouterMeilleurScore (String nomJoueur, int valeurScore, long dureePartie)
+   public void addBestScore (String nomJoueur, int valeurScore, long dureePartie)
    {
       scores.add(new Score(nomJoueur, valeurScore, dureePartie));
       Collections.sort(scores);
@@ -95,7 +95,7 @@ public final class HighScores
       {
          scores.remove(NOMBRE_MAX_SCORES);
       }
-      sauverDonneesFichier();
+      saveDataFile();
    }
    
    /**
@@ -118,7 +118,7 @@ public final class HighScores
     * pas, il est automatiquement cree.
     */
    @SuppressWarnings("unchecked")
-   private void lireDonneesFichier ()
+   private void readDataFile ()
    {
       try
       {
@@ -164,7 +164,7 @@ public final class HighScores
     * Cette methode permet de serialiser les donnees dans un fichier, c'est-a-dire de
     * sauver la liste des scores dans un fichier binaire.
     */
-   private void sauverDonneesFichier ()
+   private void saveDataFile ()
    {
       try
       {

@@ -33,32 +33,32 @@ import models.utils.SoundManagement;
 import models.utils.Son;
 
 /**
- * Classe de gestion d'un terrain de jeu.
+ * Management class for a playground
  * <p>
- * Cette classe contient tous les elements contenu sur le terrain, c'est a dire
+ * This class contains all the elements contained in the field, that is to say
  * :<br>
- * - Les tours
+ * - the towers
  * <p>
- * - Les creatures : la liste des creatures et les vagues de creatures
+ * - creatures : the list of creatures and the waves of creatures
  * <p>
- * - Les maillages : Il y a deux types de maillages, un pour les creatures
- * terrestres ou l'emplacement des tours a une influence sur le chemin des
- * creatures et un autre pour les creatures aerienne ou l'emplacement des tours
- * n'a aucune influence sur le chemin des creatures (elles passent par dessus
- * les tours)
+ * - meshes : There are two types of meshes, one for the creatures
+ * land or the location of the towers has an influence on the way to
+ * creatures and other creatures for air or the location of towers
+ * has no influence on the path of the creatures (they pass over
+ * towers)
  * <p>
- * - Les murs propres au terrain : simples zones inaccessibles
+ * - Walls specific field: simple inaccessible areas
  * <p>
- * - Les zones de depart et arrivee des creatures<br>
+ * - Zones start and finish of creatures<br>
  * <p>
- * - L'image de fond du terrain
+ * - The background image of the ground
  * <p>
  * <p>
- * Plusieurs methodes sont mises a disposition par cette classe pour gerer les
- * elements qu'elle contient.
+ * Several methods are provided by this class to manage the
+ * elements it contains.
  * <p>
- * De plus, cette classe est abstraite, elle ne peut pas etre instanciee en tant
- * que telle mais doit etre heritee.
+ * In addition, this class is abstract, it can not be instantiated as
+ * such, but must be inherited.
  * 
  * @author Aurelien Da Campo
  * @version 1.2 | juillet 2010
@@ -252,7 +252,7 @@ public class Field implements Serializable
      * 
      * Il s'agit de construire les maillages et d'activer les murs.
      */
-    public void initialiser()
+    public void initialize()
     {
         // creation des deux maillages
         // TODO Choix du maillage
@@ -283,7 +283,7 @@ public class Field implements Serializable
     
     public void reinitialiser()
     {
-        initialiser();
+        initialize();
     }
     
     

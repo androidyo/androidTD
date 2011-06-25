@@ -394,7 +394,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
             //---------------------
             
             Field terrain = terrains.get(tbTerrains.getSelectedRow());
-            terrain.initialiser();
+            terrain.initialize();
             
             if(terrain.getMode() == GameMode.MODE_SOLO)
             {
@@ -413,7 +413,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                     jeu.getTerrain().setLargeurMaillage(jeu.getTerrain().getLargeur());
                     jeu.getTerrain().setHauteurMaillage(jeu.getTerrain().getHauteur());
                     
-                    jeu.getTerrain().initialiser();
+                    jeu.getTerrain().initialize();
                     jeu.initialiser();
                     
                     SoundManagement.arreterTousLesSons();
