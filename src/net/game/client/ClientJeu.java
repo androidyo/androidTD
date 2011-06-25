@@ -617,7 +617,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
                 try 
                 {
                     terrain = Field.charger(new File(Field.EMPLACEMENT_TERRAINS_MULTI+nomFichierTerrain));
-                    jeu.setTerrain(terrain);
+                    jeu.setField(terrain);
                     terrain.setJeu(jeu);
                     
                     jeu.getJoueurPrincipal().setId(idJoueur);

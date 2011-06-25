@@ -127,7 +127,7 @@ public class Game_Client extends Game
             tour.mettreEnJeu();
             tour.setJeu(this);
             
-            gestionnaireTours.ajouterTour(tour);
+            managerTowers.ajouterTour(tour);
         }
     }
     
@@ -139,7 +139,7 @@ public class Game_Client extends Game
     public void supprimerTourDirect(Tower tour)
     {
         if(tour != null)
-            gestionnaireTours.supprimerTour(tour);
+            managerTowers.supprimerTour(tour);
     }
 
     /**
@@ -161,7 +161,7 @@ public class Game_Client extends Game
     public void ajouterCreatureDirect(Creature creature)
     {
         if(creature != null)
-            gestionnaireCreatures.addCreature(creature);
+            managerCreatures.addCreature(creature);
     }
 
     /**
@@ -172,7 +172,7 @@ public class Game_Client extends Game
     public void supprimerCreatureDirect(Creature creature)
     {
         if(creature != null)
-            gestionnaireCreatures.removeCreature(creature);
+            managerCreatures.removeCreature(creature);
     }
 
     /**
@@ -210,10 +210,10 @@ public class Game_Client extends Game
      */
     public void viderEquipes()
     {
-        synchronized (equipes)
+        synchronized (teams)
         {
             // vide toutes les equipes
-            for(Team e : equipes)
+            for(Team e : teams)
                 e.vider(); 
         }
     }

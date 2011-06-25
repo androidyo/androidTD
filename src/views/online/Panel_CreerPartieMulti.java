@@ -400,7 +400,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
             {
                 Game_Single jeu = new Game_Single();
 
-                jeu.setTerrain(terrain);
+                jeu.setField(terrain);
                 terrain.setJeu(jeu);
                 
                 Player j = new Player("sans nom");
@@ -436,7 +436,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
             else
             {
                 Game_Server jeuServeur = new Game_Server();
-                jeuServeur.setTerrain(terrain);
+                jeuServeur.setField(terrain);
                 
                 terrain.setJeu(jeuServeur);
                

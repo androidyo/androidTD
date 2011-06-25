@@ -416,7 +416,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
         activeLoadingBar();
         
         field.initialize();
-        game.setTerrain(field);
+        game.setField(field);
         Team equipe = game.getEquipes().get(0); // Teams are created by the field
         Player player = new Player("Joueur");
         

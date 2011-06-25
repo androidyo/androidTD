@@ -107,7 +107,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
         super(new BorderLayout());
         
         
-        jeu.setTerrain(new Field(jeu));
+        jeu.setField(new Field(jeu));
         pEmplacementTerrain = new Panel_Terrain(jeu,null);
         pEmplacementTerrain.setPreferredSize(new Dimension(300,300));
         pEmplacementTerrain.basculerAffichageFPS();
@@ -202,7 +202,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
                 {
                     int ligneSelectionnee = lsm.getMinSelectionIndex();
                     
-                    jeu.setTerrain(terrains.get(ligneSelectionnee));
+                    jeu.setField(terrains.get(ligneSelectionnee));
                     
                     pEmplacementTerrain.voirToutLeTerrain();
                     
@@ -358,7 +358,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
             {
                 Game_Single jeu = new Game_Single();
 
-                jeu.setTerrain(terrain);
+                jeu.setField(terrain);
                 terrain.setJeu(jeu);
                 
                 Player j = new Player("sans nom");

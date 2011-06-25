@@ -175,7 +175,7 @@ public class View_CreationTerrain extends    JFrame
         
         // creation du jeu
         jeu = new Game_Single();
-        jeu.setTerrain(new Field(jeu));
+        jeu.setField(new Field(jeu));
         
         // selectionneur de fichiers
         fcSauver.addChoosableFileFilter(filtreFichier);   
@@ -419,7 +419,7 @@ public class View_CreationTerrain extends    JFrame
     private void nouveauTerrain()
     {
         Field t = new Field(jeu);
-        jeu.setTerrain(t);
+        jeu.setField(t);
         
         // creation de la premiere equipe
         Team equipe = new Team(1, Language.getTexte(Language.ID_TXT_EQUIPE)+" 1", Color.BLACK);
@@ -482,7 +482,7 @@ public class View_CreationTerrain extends    JFrame
                 Field t = Field.charger(fichierCourant);
                 
                 Game j = new Game_Single();
-                j.setTerrain(t);
+                j.setField(t);
                 t.setJeu(j);
                 
                 Player joueur = new Player("Joueur Test");
@@ -593,7 +593,7 @@ public class View_CreationTerrain extends    JFrame
 
     private void changerTerrain(Field t)
     {
-        jeu.setTerrain(t);
+        jeu.setField(t);
         t.setJeu(jeu);
         
         panelCreationTerrain.deselectionnerRecEnTraitement();

@@ -49,53 +49,53 @@ public abstract class Game implements PlayerListener,
                                      EcouteurDeVague
 {
 	/**
-	 * version du jeu
+	 * version of the game
 	 */
     private static final String VERSION 
         = "ASD - Tower Defense v2.0 (beta 4) | nov 2010 | heig-vd";
     
     /**
-     * Mode de positionnement centré des créatures dans la zone de départ
+     * Positioning mode centered creatures in the starting area
      * 集中定位在起步区的生物
      */
     public static final int MODE_POSITIONNNEMENT_CENTRE = 0;
     
     /**
-     * Mode de positionnement aléatoire des créatures dans la zone de départ.
+     * Positioning mode random creatures in the starting area.
      * 起步区生物随机位置
      */
     public static final int MODE_POSITIONNNEMENT_ALETOIRE = 1;
     
     /**
-     * Mode de positionnement courant des créatures dans la zone de départ
+     * Positioning mode power creatures in the starting area
      * 起步区定位模式
      */
     private static final int MODE_DE_POSITIONNEMENT = MODE_POSITIONNNEMENT_ALETOIRE;
 
     /**
-     * Etape d'incrémentation du coefficient de vitesse du jeu.
+     * Step increment of the coefficient of speed of the game
      * 游戏速度
      */
     private static final double ETAPE_COEFF_VITESSE = 0.5;
 
     /**
-     * Coefficient maximal de la vitesse du jeu
+     * Maximum coefficient of the speed of the game
      * 最高游戏速度系数
      */
     private static final double MAX_COEFF_VITESSE = 5.0;
     
     /**
-     * Coefficient minimal de la vitesse du jeu
+     * Minimum coefficient of the speed of the game
      * 最低游戏速度系数
      */
     private static final double MIN_COEFF_VITESSE = 0.1; // /!\ >0 /!\
       
 	/**
-	 * Le terrain de jeu que contient tous les elements principaux :
+	 * The playing field that contains all the main elements:
 	 * - Les tours
 	 * - Les creatures
 	 * - Le maillage
-	 * 公平的竞争环境，包含所有的主要内容：
+	 * 游戏地图，包含所有的主要内容：
 	 * -塔
 	 * -生物
 	 *- 网络
@@ -103,29 +103,29 @@ public abstract class Game implements PlayerListener,
     protected Field terrain;
 	
 	/**
-	 * Collection des équipes en jeu
+	 * Collection teams in game
 	 */
-	protected ArrayList<Team> equipes = new ArrayList<Team>();
+	protected ArrayList<Team> teams= new ArrayList<Team>();
 	
     /**
-     * Les tours sont posees sur le terrain et permettent de tuer les creatures.
+     * The towers are placed on the ground and can kill the creatures.
      * 
      * @see Tower
      */
-	protected ManagerTowers gestionnaireTours;
+	protected ManagerTowers managerTowers;
 
     /**
-     * Les creatures de deplacent sur le terrain d'une zone de depart a une zone
-     * d'arrivee.
+     * The creatures move on the ground of an area of ​​a starting zone
+     * of arrival.
      * 
      * @see Creature
      */
-	protected ManagerCreatures gestionnaireCreatures;
+	protected ManagerCreatures managerCreatures;
 
     /**
-     * Outil de gestion des animations
+     * Management tool animations
      */
-	protected ManageAnimations gestionnaireAnimations;
+	protected ManageAnimations managerAnimations;
 
     /**
      * Variable d'etat de la pause
@@ -192,9 +192,9 @@ public abstract class Game implements PlayerListener,
      */
     public Game()
     {
-        gestionnaireTours      = new ManagerTowers(this);
-        gestionnaireCreatures  = new ManagerCreatures(this);
-        gestionnaireAnimations = new ManageAnimations(this);
+        managerTowers      = new ManagerTowers(this);
+        managerCreatures  = new ManagerCreatures(this);
+        managerAnimations = new ManageAnimations(this);
     }
     
     /**
@@ -207,7 +207,7 @@ public abstract class Game implements PlayerListener,
         if(terrain == null)
             throw new IllegalStateException("Terrain nul");
         
-        if(equipes.size() == 0)
+        if(teams.size() == 0)
             throw new IllegalStateException("Aucune équipe inscrite");
         
         // le joueur principal
@@ -224,7 +224,7 @@ public abstract class Game implements PlayerListener,
         coeffVitesse        = 1.0;
         
         // initialisation des valeurs par defaut
-        for(Team equipe : equipes)
+        for(Team equipe : teams)
         {
             // initialisation des vies restantes
             equipe.setNbViesRestantes(terrain.getNbViesInitiales());
@@ -257,18 +257,18 @@ public abstract class Game implements PlayerListener,
         
         
         // arret des gestionnaires
-        gestionnaireTours.arreterTours();
-        gestionnaireCreatures.arreterCreatures();
-        gestionnaireAnimations.stopAnimations();
+        managerTowers.arreterTours();
+        managerCreatures.arreterCreatures();
+        managerAnimations.stopAnimations();
         
-        gestionnaireTours = new ManagerTowers(this);
-        gestionnaireCreatures = new ManagerCreatures(this);
-        gestionnaireAnimations = new ManageAnimations(this);
+        managerTowers = new ManagerTowers(this);
+        managerCreatures = new ManagerCreatures(this);
+        managerAnimations = new ManageAnimations(this);
         
         
         
         // ajout de tous les joueurs
-        for(Team e : equipes)
+        for(Team e : teams)
         {
             e.setNbViesRestantes(terrain.getNbViesInitiales());
             
@@ -299,9 +299,9 @@ public abstract class Game implements PlayerListener,
             throw new IllegalStateException("Le jeu est déjà démarré");
         
         // demarrage des gestionnaires
-        gestionnaireTours.demarrer();
-        gestionnaireCreatures.demarrer();
-        gestionnaireAnimations.start();
+        managerTowers.demarrer();
+        managerCreatures.demarrer();
+        managerAnimations.start();
         
         timer.start();
         
@@ -320,7 +320,7 @@ public abstract class Game implements PlayerListener,
      */
     public void lancerVague(Player joueur, Team cible, WaveOfCreatures vague) throws MoneyLackException
     { 
-        gestionnaireCreatures.lancerVague(vague, joueur, cible, this, this);
+        managerCreatures.lancerVague(vague, joueur, cible, this, this);
     }
     
     /**
@@ -351,7 +351,7 @@ public abstract class Game implements PlayerListener,
         terrain.desactiverZone(tour, true);
 
         // ajout de la tour
-        gestionnaireTours.ajouterTour(tour);
+        managerTowers.ajouterTour(tour);
         
         // mise a jour du jeu de la tour
         tour.setJeu(this);
@@ -380,7 +380,7 @@ public abstract class Game implements PlayerListener,
     public void vendreTour(Tower tour) throws ActionUnauthorizedException
     {
         // supprime la tour
-        gestionnaireTours.supprimerTour(tour);
+        managerTowers.supprimerTour(tour);
         
         // debit des pieces d'or
         tour.getPrioprietaire().setNbPiecesDOr(
@@ -441,7 +441,7 @@ public abstract class Game implements PlayerListener,
         
 	    passerALaProchaineVague();
 	    
-	    gestionnaireCreatures.lancerVague(vagueCourante, joueur, cible, this, this);
+	    managerCreatures.lancerVague(vagueCourante, joueur, cible, this, this);
 	}
 	
 	/**
@@ -473,7 +473,7 @@ public abstract class Game implements PlayerListener,
 
             // selection des equipes en jeu
             ArrayList<Team> equipesEnJeu = new ArrayList<Team>();
-            for(Team equipe : equipes)
+            for(Team equipe : teams)
                 if(!equipe.aPerdu())
                 {
                     // selection de l'equipe gagnante
@@ -492,20 +492,20 @@ public abstract class Game implements PlayerListener,
     }
 
     /**
-     * Permet d'initialiser le terrain de jeu
+     * To initialize the playing field
      * 
-     * @param terrain le terrain
+     * @param field le terrain
      * @throws IllegalArgumentException si le terrain à déjà été initialisé.
      */
-    public void setTerrain(Field terrain) throws IllegalArgumentException
+    public void setField(Field field) throws IllegalArgumentException
     {
         // J'ai mis en commentaire! pour le chargement dans l'editeur de niveau
         //if(this.terrain != null) 
         //    throw new TerrainDejaInitialise("Terrain déjà initialisé");
 
-        equipes = terrain.getEquipesInitiales();
+        teams = field.getEquipesInitiales();
         
-        this.terrain  = terrain;  
+        this.terrain  = field;  
     }
 
     /**
@@ -529,7 +529,7 @@ public abstract class Game implements PlayerListener,
      */
     public Vector<Creature> getCreatures()
     {
-        return gestionnaireCreatures.getCreatures();
+        return managerCreatures.getCreatures();
     }
 
     /**
@@ -538,13 +538,13 @@ public abstract class Game implements PlayerListener,
     protected void arreterTout()
     {
         // arret de toutes les tours
-        gestionnaireTours.arreterTours();
+        managerTowers.arreterTours();
 
         // arret de toutes les creatures
-        gestionnaireCreatures.arreterCreatures();
+        managerCreatures.arreterCreatures();
 
         // arret de toutes les animations
-        gestionnaireAnimations.stopAnimations();
+        managerAnimations.stopAnimations();
         
         // arret du timer
         timer.stop();
@@ -559,16 +559,16 @@ public abstract class Game implements PlayerListener,
     {
         if(enPause)
         {
-            gestionnaireTours.sortirDeLaPause();
-            gestionnaireCreatures.sortirDeLaPause();
-            gestionnaireAnimations.sortirDeLaPause();
+            managerTowers.sortirDeLaPause();
+            managerCreatures.sortirDeLaPause();
+            managerAnimations.sortirDeLaPause();
             timer.play();
         }
         else
         {
-            gestionnaireTours.mettreEnPause();
-            gestionnaireCreatures.mettreEnPause();
-            gestionnaireAnimations.enablePause();
+            managerTowers.mettreEnPause();
+            managerCreatures.mettreEnPause();
+            managerAnimations.enablePause();
             timer.pause();
         }
         
@@ -592,7 +592,7 @@ public abstract class Game implements PlayerListener,
      */
     public ArrayList<Team> getEquipes()
     {
-        return equipes;
+        return teams;
     }
 
     /**
@@ -607,7 +607,7 @@ public abstract class Game implements PlayerListener,
         ArrayList<Player> joueurs = new ArrayList<Player>();
         
         // ajout de tous les joueurs
-        for(Team e : equipes)
+        for(Team e : teams)
             for(Player j : e.getJoueurs())
                 joueurs.add(j);
         
@@ -629,12 +629,12 @@ public abstract class Game implements PlayerListener,
             throw new CurrentGameException("La partie à déjà démarrée");
         
         // ajout du joueur dans le premier emplacement disponible
-        for(int i=0;i<equipes.size();i++)
+        for(int i=0;i<teams.size();i++)
         {
             try
             {              
                 // on tente l'ajout...
-                equipes.get(i).ajouterJoueur(joueur);
+                teams.get(i).ajouterJoueur(joueur);
                 
                 // ajout de l'ecouteur
                 joueur.setEcouteurDeJoueur(this);
@@ -749,7 +749,7 @@ public abstract class Game implements PlayerListener,
                 // s'il il reste au moins deux equipes en jeu
                 // la partie n'est pas terminée
                 int nbEquipesRestantes = 0;
-                for(Team tmpEquipe : equipes)
+                for(Team tmpEquipe : teams)
                     if(!tmpEquipe.aPerdu())
                         nbEquipesRestantes++;
              
@@ -786,7 +786,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean laTourPeutEtrePosee(Tower tour)
     {
-        return gestionnaireTours.laTourPeutEtrePosee(tour);
+        return managerTowers.laTourPeutEtrePosee(tour);
     }
     
     /**
@@ -797,7 +797,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean laTourPeutEtreAchetee(Tower tour)
     {  
-        return gestionnaireTours.laTourPeutEtreAchetee(tour);
+        return managerTowers.laTourPeutEtreAchetee(tour);
     }
 
     /**
@@ -805,7 +805,7 @@ public abstract class Game implements PlayerListener,
      */
     public Vector<Tower> getTours()
     {
-        return gestionnaireTours.getTours();
+        return managerTowers.getTours();
     }
 
     /**
@@ -819,7 +819,7 @@ public abstract class Game implements PlayerListener,
     public Vector<Creature> getCreaturesQuiIntersectent(int centerX, int centreY,
             int rayon)
     {
-        return gestionnaireCreatures.getCreaturesQuiIntersectent(centerX, centreY, rayon);
+        return managerCreatures.getCreaturesQuiIntersectent(centerX, centreY, rayon);
     }
 
     /**
@@ -839,7 +839,7 @@ public abstract class Game implements PlayerListener,
      */
     public void ajouterAnimation(Animation animation)
     {
-        gestionnaireAnimations.addAnimation(animation);
+        managerAnimations.addAnimation(animation);
         
         if(edj != null)
             edj.animationAjoutee(animation);
@@ -855,7 +855,7 @@ public abstract class Game implements PlayerListener,
      */
     public void dessinerAnimations(Graphics2D g2, int hauteur)
     {
-        gestionnaireAnimations.dessinerAnimations(g2,hauteur);
+        managerAnimations.dessinerAnimations(g2,hauteur);
     }
     
     /**
@@ -885,7 +885,7 @@ public abstract class Game implements PlayerListener,
      */
     public Team getEquipe(int idEquipe)
     {
-        for(Team equipe : equipes)
+        for(Team equipe : teams)
             if(equipe.getId() == idEquipe)
                 return equipe;
         
@@ -901,7 +901,7 @@ public abstract class Game implements PlayerListener,
      */
     public PlayerLocation getEmplacementJoueur(int idEmplacement)
     {
-        for(Team equipe : equipes)
+        for(Team equipe : teams)
             for(PlayerLocation ej : equipe.getEmplacementsJoueur())
                 if(ej.getId() == idEmplacement)
                     return ej;
@@ -933,7 +933,7 @@ public abstract class Game implements PlayerListener,
      */
     public Creature getCreature(int idCreature)
     {
-        return gestionnaireCreatures.getCreature(idCreature);
+        return managerCreatures.getCreature(idCreature);
     }
 
     /**
@@ -951,15 +951,15 @@ public abstract class Game implements PlayerListener,
     public Team getEquipeSuivanteNonVide(Team equipe)
     {
         // on trouve l'equipe directement suivante
-        int i = (equipes.indexOf(equipe)+1) % equipes.size();
+        int i = (teams.indexOf(equipe)+1) % teams.size();
         
         // tant qu'il n'y a pas de joueur ou que l'équipe a perdue
         // on prend la suivante...
         // au pire on retombera sur la même equipe qu'en argument
-        while(equipes.get(i).getJoueurs().size() == 0 || equipes.get(i).aPerdu())
-            i = ++i % equipes.size();
+        while(teams.get(i).getJoueurs().size() == 0 || teams.get(i).aPerdu())
+            i = ++i % teams.size();
         
-        return equipes.get(i);
+        return teams.get(i);
     }
 
     /**
@@ -1019,9 +1019,9 @@ public abstract class Game implements PlayerListener,
     {
         estDetruit = true;
         
-        gestionnaireCreatures.detruire();
-        gestionnaireTours.detruire();
-        gestionnaireAnimations.destroy();
+        managerCreatures.detruire();
+        managerTowers.detruire();
+        managerAnimations.destroy();
     }
     
     /**
@@ -1114,7 +1114,7 @@ public abstract class Game implements PlayerListener,
      */
     public void ajouterEquipe(Team equipe)
     {
-        equipes.add(equipe);
+        teams.add(equipe);
     }
  
     /**
@@ -1124,6 +1124,6 @@ public abstract class Game implements PlayerListener,
      */
     public void supprimerEquipe(Team equipe)
     {
-        equipes.remove(equipe);
+        teams.remove(equipe);
     }
 }
