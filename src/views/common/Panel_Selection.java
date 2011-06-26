@@ -51,8 +51,8 @@ public class Panel_Selection extends JPanel
 {
     private static final long serialVersionUID = 1L;
 	private Panel_InfoTour pInfoTour;
-	private Panel_InfoCreature pInfoCreature;
-	private Panel_InfoVagues pInfoVagues;
+	private Panel_CreatureInfo pInfoCreature;
+	private Panel_WaveInfo pInfoVagues;
 
     /**
 	 * Constructeur du panel
@@ -83,11 +83,11 @@ public class Panel_Selection extends JPanel
 		p.add(pInfoTour);
 		pInfoTour.setVisible(false);
 		
-	    pInfoCreature = new Panel_InfoCreature();
+	    pInfoCreature = new Panel_CreatureInfo();
         p.add(pInfoCreature);
         pInfoCreature.setVisible(false);
         
-        pInfoVagues = new Panel_InfoVagues(jeu);
+        pInfoVagues = new Panel_WaveInfo(jeu);
         p.add(pInfoVagues);
         pInfoVagues.setVisible(true);
         
@@ -164,7 +164,7 @@ public class Panel_Selection extends JPanel
      * 
      * @return le panel d'information d'une créature
      */
-    public Panel_InfoCreature getPanelInfoCreature()
+    public Panel_CreatureInfo getPanelInfoCreature()
     {
         return pInfoCreature;
     }

@@ -1,21 +1,3 @@
-/*
-  Copyright (C) 2010 Aurelien Da Campo
-  
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
-
 package views.single;
 
 import models.animations.*;
@@ -34,9 +16,9 @@ import views.ManageFonts;
 import views.LookInterface;
 import views.common.EcouteurDePanelTerrain;
 import views.common.View_HTML;
-import views.common.Panel_InfoCreature;
+import views.common.Panel_CreatureInfo;
 import views.common.Panel_InfoTour;
-import views.common.Panel_InfoVagues;
+import views.common.Panel_WaveInfo;
 import views.common.Panel_Terrain;
 import exceptions.*;
 import models.player.*;
@@ -57,13 +39,13 @@ import models.game.*;
  * @see JFrame
  * @see ActionListener
  */
-public class View_JeuSolo extends JFrame implements ActionListener, 
+public class View_GameSingle extends JFrame implements ActionListener, 
                                                     GameListener, 
                                                     EcouteurDePanelTerrain,
                                                     WindowListener,
                                                     KeyListener
 {
-	// constantes statiques
+	// static constants
     private final int MARGES_PANEL = 10;
     private static final long serialVersionUID = 1L;
     private static final ImageIcon I_REDEMARRER = new ImageIcon("img/icones/arrow_rotate_clockwise.png");
@@ -92,17 +74,18 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     private static final double VITESSE_JEU_MIN = 1.0;
     
 	//---------------------------
-	//-- declaration des menus --
+	//-- declaration menus --
+    // 菜单
 	//---------------------------
-	private final JMenuBar 	menuPrincipal 	= new JMenuBar();
-	private final JMenu 	menuFichier 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_FICHIER));
-	private final JMenu 	menuAffichage 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AFFICHAGE));
-	private final JMenu     menuJeu         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_JEU));
-	private final JMenu     menuSon         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_SON));
-	private final JMenu 	menuAide 		= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AIDE));
+	private final JMenuBar 	menu_Principal 	= new JMenuBar();
+	private final JMenu 	menu_File 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_FICHIER));
+	private final JMenu 	menu_dispaly 	= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AFFICHAGE));
+	private final JMenu     menu_game         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_JEU));
+	private final JMenu     menu_sound         = new JMenu(Language.getTexte(Language.ID_TXT_BTN_SON));
+	private final JMenu 	menu_help 		= new JMenu(Language.getTexte(Language.ID_TXT_BTN_AIDE));
 	private final JMenuItem itemRegles      = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_REGLES)+"...",I_REGLES);
 	private final JMenuItem itemAPropos	    = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_A_PROPOS)+"...",I_AIDE);
-
+	// 菜单项
 	private final JMenuItem itemPause
         = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_PAUSE)); 
 	private final JMenuItem itemActiverDesactiverSon 
@@ -123,62 +106,67 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     = new JMenuItem(Language.getTexte(Language.ID_TXT_BTN_OPTIONS)+"...",I_OPTIONS);
 	
 	//----------------------------
-	//-- declaration des panels --
+	//-- declaration panels --
 	//----------------------------
 	/**
-	 * panel contenant le terrain de jeu
+	 * panel containing the playing field
+	 * 游戏区
 	 */
 	private Panel_Terrain panelTerrain;
 	
 	/**
-	 * panel contenant le menu d'interaction
+	 * panel containing the interaction menu
+	 * 互动菜单
 	 */
 	private Panel_MenuInteraction_ModeSolo panelMenuInteraction;
 	
 	/**
-     * panel contenant les informations des vagues suivantes
+     * panel containing the following information from the waves
+     * 波数信息
      */
-	private Panel_InfoVagues panelInfoVagues;
+	private Panel_WaveInfo panelWaveInfo;
 	
 	/**
-	 * panel pour afficher les caracteristiques d'une tour 
-	 * et permet d'ameliorer ou de vendre la tour en question
+	 * panel to display the characteristics of a tower and can improve or sell the tower in question
+	 * 炮塔信息区
 	 */
 	private Panel_InfoTour panelInfoTour;
 	
 	/**
-	 * panel pour afficher les caracteristiques d'une creature
+	 * panel to display the characteristics of a creature
+	 * 生物信息区
 	 */
-	private Panel_InfoCreature panelInfoCreature;
+	private Panel_CreatureInfo panelCreatureInfo;
 
 	/**
-	 * bouton pour lancer la vagues suivante
+	 * button to launch the next wave
 	 */
-    private JButton bLancerVagueSuivante = new JButton(TXT_VAGUE_SUIVANTE 
+    private JButton bLaunchNextWave = new JButton(TXT_VAGUE_SUIVANTE 
                                                        + " ["+Language.getTexte(Language.ID_TXT_NIVEAU)+" 1]");
     /**
-     * Console d'affichages des vagues suivantes
+     * Console displays the following waves
+     * 波数信息
      */  
     private JEditorPane taConsole  = new JEditorPane("text/html","");
     
     /**
-     * Formulaire principale de la fenêtre
+     * Form the main window
      */
     private JPanel pFormulaire = new JPanel(new BorderLayout());
     
     /**
      * Lien vers le jeu
      */
-	private Game jeu;
+	private Game game;
 	
 	/**
-	 * Permet de savoir si la prochaine vague peut etre lancée
+	 * Indicates whether the next wave can be launched
 	 */
-    private boolean vaguePeutEtreLancee = true;
-    private boolean demandeDEnregistrementDuScoreEffectuee;
+    private boolean canLaunchNextWave = true;
+    private boolean requestRegistrationOfScoreEffected;
     
     /**
-     * Boutons du menu gaut dessus du terrain
+     * 地图调节菜单：放大，缩小，居中，全屏，游戏速度
      */
     private JButton bVitesseJeu = new JButton("x"+VITESSE_JEU_MIN);
     private JButton bPleinEcran = new JButton(I_PLEIN_ECRAN);
@@ -187,16 +175,16 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     private JButton bZoomArriere = new JButton(I_DEZOOM);
     
 	/**
-	 * Constructeur de la fenetre. Creer et affiche la fenetre.
+	 * Manufacturer of the window. Create and display the window.
 	 * 
-	 * @param jeu le jeu a gerer
+	 * @param game -Manage game
 	 */
-	public View_JeuSolo(Game jeu)
+	public View_GameSingle(Game game)
 	{
-	    this.jeu = jeu;
+	    this.game = game;
         
 	    //-------------------------------
-		//-- preferences de le fenetre --
+		//-- preferences in the window --
 		//-------------------------------
 		setTitle(FENETRE_TITRE);
 		setIconImage(I_FENETRE.getImage());
@@ -212,35 +200,35 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 		//--------------------
 		//-- menu principal --
 		//--------------------
-		// menu Fichier
-		menuFichier.add(itemRedemarrer);
-		menuFichier.add(itemRetourMenu);
-		menuFichier.addSeparator();
-		menuFichier.add(itemQuitter);
-		menuPrincipal.add(menuFichier);
+		// File menu 文件菜单
+		menu_File.add(itemRedemarrer);
+		menu_File.add(itemRetourMenu);
+		menu_File.addSeparator();
+		menu_File.add(itemQuitter);
+		menu_Principal.add(menu_File);
 
-		// menu Edition
+		// menu view
 		itemPause.setAccelerator(KeyStroke.getKeyStroke('P'));
-		menuAffichage.add(itemModeDebug);
-		menuAffichage.add(itemAfficherMaillage);
-		menuAffichage.add(itemAfficherRayonsPortee);
-		menuPrincipal.add(menuAffichage);
+		menu_dispaly.add(itemModeDebug);
+		menu_dispaly.add(itemAfficherMaillage);
+		menu_dispaly.add(itemAfficherRayonsPortee);
+		menu_Principal.add(menu_dispaly);
 		
-		// menu Jeu
-		menuJeu.add(itemOptions);
-		menuJeu.add(itemPause);
-		menuPrincipal.add(menuJeu);
+		// menu game
+		menu_game.add(itemOptions);
+		menu_game.add(itemPause);
+		menu_Principal.add(menu_game);
 		
-		// menu Son
-		menuSon.add(itemActiverDesactiverSon);
-		menuPrincipal.add(menuSon);
+		// menu sound
+		menu_sound.add(itemActiverDesactiverSon);
+		menu_Principal.add(menu_sound);
 
-		// menu Aide
-		menuAide.add(itemRegles);
-		menuAide.add(itemAPropos);
-		menuPrincipal.add(menuAide);
+		// menu help
+		menu_help.add(itemRegles);
+		menu_help.add(itemAPropos);
+		menu_Principal.add(menu_help);
 		
-		// ajout des ecouteurs
+		// add listeners
 		itemRedemarrer.addActionListener(this);
 		itemRetourMenu.addActionListener(this);
 		itemQuitter.addActionListener(this);
@@ -255,7 +243,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 		
 		
 		// ajout du menu
-		setJMenuBar(menuPrincipal); 
+		setJMenuBar(menu_Principal); 
 		
 		JPanel pGauche = new JPanel(new BorderLayout());
 		pGauche.setOpaque(false);
@@ -298,7 +286,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         // vitesse de jeu
         //boutonsHaut.add(new JLabel(I_VITESSE_JEU));
         bVitesseJeu.setIcon(I_VITESSE_JEU);
-        bVitesseJeu.setText("x"+jeu.getCoeffVitesse());
+        bVitesseJeu.setText("x"+game.getCoeffVitesse());
         bVitesseJeu.setToolTipText(Language.getTexte(Language.ID_TXT_VITESSE_DU_JEU));
         ManageFonts.setStyle(bVitesseJeu);
         
@@ -316,7 +304,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
          
 		JPanel pConteneurTerrain = new JPanel(new BorderLayout());
 		pConteneurTerrain.setBorder(new LineBorder(Color.BLACK,4));
-		panelTerrain = new Panel_Terrain(jeu, this);
+		panelTerrain = new Panel_Terrain(game, this);
 		panelTerrain.addKeyListener(this);
 		//conteneurTerrain.setBorder(new EmptyBorder(new Insets(10, 10,10, 10)));
 		pConteneurTerrain.setOpaque(false);
@@ -339,7 +327,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 
         taConsole.setEditable(false);
         JScrollPane scrollConsole = new JScrollPane(taConsole);
-        scrollConsole.setPreferredSize(new Dimension(jeu.getTerrain().getLargeur(),50));
+        scrollConsole.setPreferredSize(new Dimension(game.getTerrain().getLargeur(),50));
 
         pGauche.add(scrollConsole,BorderLayout.SOUTH);
 		
@@ -350,16 +338,16 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         //-- menu de droite --
         //--------------------
 
-		panelMenuInteraction = new Panel_MenuInteraction_ModeSolo(this,jeu);
-		panelInfoVagues   = panelMenuInteraction.getPanelInfoVagues();
+		panelMenuInteraction = new Panel_MenuInteraction_ModeSolo(this,game);
+		panelWaveInfo   = panelMenuInteraction.getPanelInfoVagues();
 		panelInfoTour     = panelMenuInteraction.getPanelInfoTour();
-		panelInfoCreature = panelMenuInteraction.getPanelInfoCreature();
+		panelCreatureInfo = panelMenuInteraction.getPanelInfoCreature();
 		
 	    // bouton de lancement de vague
-        ManageFonts.setStyle(bLancerVagueSuivante);
-        bLancerVagueSuivante.addActionListener(this);
-        panelMenuInteraction.add(bLancerVagueSuivante,BorderLayout.SOUTH);
-        bLancerVagueSuivante.setPreferredSize(new Dimension(300,50));
+        ManageFonts.setStyle(bLaunchNextWave);
+        bLaunchNextWave.addActionListener(this);
+        panelMenuInteraction.add(bLaunchNextWave,BorderLayout.SOUTH);
+        bLaunchNextWave.setPreferredSize(new Dimension(300,50));
         
 		pFormulaire.add(panelMenuInteraction,BorderLayout.EAST);
 		
@@ -370,10 +358,10 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         //-- demarrage du jeu --
         //----------------------
 		// on demarre la musique au dernier moment
-        jeu.getTerrain().demarrerMusiqueDAmbiance();
+        game.getTerrain().demarrerMusiqueDAmbiance();
 		
-		jeu.setEcouteurDeJeu(this);
-        jeu.demarrer();
+		game.setEcouteurDeJeu(this);
+        game.demarrer();
         
 		//---------------------------------------
 		//-- dernieres propietes de la fenetre --
@@ -452,12 +440,12 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 		    else
 		        itemAfficherRayonsPortee.setIcon(I_RAYON);
 		
-		else if(source == bLancerVagueSuivante)
+		else if(source == bLaunchNextWave)
 		{
-		    if(!jeu.getJoueurPrincipal().aPerdu())
+		    if(!game.getKeyPlayer().aPerdu())
 		    {
     		    lancerVagueSuivante();
-    		    bLancerVagueSuivante.setEnabled(false);
+    		    bLaunchNextWave.setEnabled(false);
 		    }
 		    else
 		        retourAuMenuPrincipal();
@@ -465,10 +453,10 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 		
 		else if(source == bVitesseJeu)
         {
-		    if(jeu.getCoeffVitesse() >= VITESSE_JEU_MAX)
-		        jeu.setCoeffVitesse(VITESSE_JEU_MIN);
+		    if(game.getCoeffVitesse() >= VITESSE_JEU_MAX)
+		        game.setCoeffVitesse(VITESSE_JEU_MIN);
 		    else    
-		        jeu.augmenterCoeffVitesse();
+		        game.augmenterCoeffVitesse();
         }
 		else if(source == bPleinEcran)
         {
@@ -516,9 +504,9 @@ public class View_JeuSolo extends JFrame implements ActionListener,
             //jeu.terminer();
             //jeu.detruire();
             
-            jeu.reinitialiser();
+            game.reInitialize();
 
-            new View_JeuSolo(jeu);
+            new View_GameSingle(game);
             
             dispose();
         }
@@ -541,8 +529,8 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     {
 	    //demanderEnregistrementDuScore();
         
-        jeu.terminer();
-        jeu.detruire();
+        game.terminer();
+        game.detruire();
         System.exit(0); // Fermeture correcte du logiciel
     }
 
@@ -557,8 +545,8 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         {
 	        //demanderEnregistrementDuScore();
 	        
-	        jeu.terminer();
-	        jeu.detruire();
+	        game.terminer();
+	        game.detruire();
 	        
 	        retourAuMenuPrincipal();
         }
@@ -570,15 +558,15 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	private void demanderEnregistrementDuScore()
 	{
 	    // si le joueur a un score > 0 et que le score n'a pas été déjà sauvé
-	    if(jeu.getJoueurPrincipal().getScore() > 0 && !demandeDEnregistrementDuScoreEffectuee)
+	    if(game.getKeyPlayer().getScore() > 0 && !requestRegistrationOfScoreEffected)
         {
-	        demandeDEnregistrementDuScoreEffectuee = true;
+	        requestRegistrationOfScoreEffected = true;
 	        
 	        if(JOptionPane.showConfirmDialog(this, 
 	                Language.getTexte(Language.ID_TXT_DIALOG_SAUVER), 
                     "", JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION)
             {
-	            new View_DialogGameOver(this, jeu.getJoueurPrincipal().getScore(), jeu.getTimer().getTime() / 1000, jeu.getTerrain().getBreveDescription()); 
+	            new View_DialogGameOver(this, game.getKeyPlayer().getScore(), game.getTimer().getTime() / 1000, game.getTerrain().getBreveDescription()); 
             }
         }
 	}
@@ -604,7 +592,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	{
 	    try
 	    {
-	        jeu.poserTour(tour);
+	        game.poserTour(tour);
 	        
 	        panelTerrain.toutDeselectionner();
             
@@ -629,7 +617,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	{
 	    try
         {
-	        jeu.ameliorerTour(tour);
+	        game.ameliorerTour(tour);
 	         
             panelInfoTour.setTour(tour, Panel_InfoTour.MODE_SELECTION);
         }
@@ -649,13 +637,13 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     {
         try
         {
-            jeu.vendreTour(tour);
+            game.vendreTour(tour);
             
             panelInfoTour.effacerTour();
             
             panelTerrain.setTourSelectionnee(null);
             
-            jeu.ajouterAnimation(
+            game.ajouterAnimation(
                     new GetGold((int)tour.getCenterX(),(int)tour.getCenterY(), 
                             tour.getPrixDeVente())
                     );
@@ -733,9 +721,9 @@ public class View_JeuSolo extends JFrame implements ActionListener,
      * 
      * @param panelInfoCreature le panel
      */
-    public void setPanelInfoCreature(Panel_InfoCreature panelInfoCreature)
+    public void setPanelInfoCreature(Panel_CreatureInfo panelInfoCreature)
     {
-        this.panelInfoCreature = panelInfoCreature;
+        this.panelCreatureInfo = panelInfoCreature;
     }
 	
 	/**
@@ -744,12 +732,12 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	 */
 	public void lancerVagueSuivante()
 	{ 
-	    if(vaguePeutEtreLancee)
+	    if(canLaunchNextWave)
 	    {
-	        jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getTeam());
+	        game.lancerVagueSuivante(game.getKeyPlayer(), game.getKeyPlayer().getTeam());
 	        ajouterInfoVagueSuivanteDansConsole();
-	        bLancerVagueSuivante.setEnabled(false);
-	        vaguePeutEtreLancee = false;
+	        bLaunchNextWave.setEnabled(false);
+	        canLaunchNextWave = false;
 	    }
 	}
 	
@@ -758,15 +746,15 @@ public class View_JeuSolo extends JFrame implements ActionListener,
      */
     public void ajouterInfoVagueSuivanteDansConsole()
     {
-        ajouterTexteHTMLDansConsole("["+(jeu.getNumVagueCourante())+"] "+Language.getTexte(Language.ID_TXT_VAGUE_SUIVANTE)+" : "+jeu.getTerrain().getDescriptionVague(jeu.getNumVagueCourante())+"<br />");
+        ajouterTexteHTMLDansConsole("["+(game.getNumVagueCourante())+"] "+Language.getTexte(Language.ID_TXT_VAGUE_SUIVANTE)+" : "+game.getTerrain().getDescriptionVague(game.getNumVagueCourante())+"<br />");
         
-        bLancerVagueSuivante.setText(TXT_VAGUE_SUIVANTE + " ["+Language.getTexte(Language.ID_TXT_NIVEAU)+" "+(jeu.getNumVagueCourante())+"]");
+        bLaunchNextWave.setText(TXT_VAGUE_SUIVANTE + " ["+Language.getTexte(Language.ID_TXT_NIVEAU)+" "+(game.getNumVagueCourante())+"]");
     }
 	
     @Override
 	public void creatureInjured(Creature creature)
 	{
-	    panelInfoCreature.miseAJourInfosVariables();
+	    panelCreatureInfo.miseAJourInfosVariables();
 	}
 
 	@Override
@@ -775,14 +763,14 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	    // on efface la creature des panels d'information
         if(creature == panelTerrain.getCreatureSelectionnee())
         {
-            panelInfoCreature.effacerCreature();
+            panelCreatureInfo.effacerCreature();
             panelTerrain.setCreatureSelectionnee(null);
         }
 
         // TODO A METTRE OU PAS
         //jeu.ajouterAnimation(new Disparition((int) creature.getCenterX(), (int) creature.getCenterY(), creature.getImage(), 400));
         
-        jeu.ajouterAnimation(new GetGold((int)creature.getCenterX(),
+        game.ajouterAnimation(new GetGold((int)creature.getCenterX(),
                 (int)creature.getCenterY() - 2,
                 creature.getNbPiecesDOr()));	
 	}
@@ -791,12 +779,12 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	public void creatureArriveEndZone(Creature creature)
 	{
 	    // creation de l'animation de blessure du joueur
-        jeu.ajouterAnimation(new RedWarn(jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())) ;
+        game.ajouterAnimation(new RedWarn(game.getTerrain().getLargeur(),game.getTerrain().getHauteur())) ;
 
         // si c'est la creature selectionnee
         if(panelTerrain.getCreatureSelectionnee() == creature)
         {
-            panelInfoCreature.setCreature(null);
+            panelCreatureInfo.setCreature(null);
             panelTerrain.setCreatureSelectionnee(null);
         }
 	}
@@ -804,8 +792,8 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     @Override
     public void waveAttackFinish(WaveOfCreatures vagueDeCreatures)
     {
-        bLancerVagueSuivante.setEnabled(true);
-        vaguePeutEtreLancee = true;
+        bLaunchNextWave.setEnabled(true);
+        canLaunchNextWave = true;
     }
  
     /**
@@ -850,10 +838,10 @@ public class View_JeuSolo extends JFrame implements ActionListener,
      */
     public void ajouterPiecesDOr(int nbPiecesDOr)
     {
-        jeu.getJoueurPrincipal().setNbPiecesDOr(jeu.getJoueurPrincipal().getNbPiecesDOr() + nbPiecesDOr); 
+        game.getKeyPlayer().setGoldNumber(game.getKeyPlayer().getNbPiecesDOr() + nbPiecesDOr); 
         
         for(int i=0;i<5;i++)
-            jeu.ajouterAnimation(new Cloud(jeu));
+            game.ajouterAnimation(new Cloud(game));
         
         miseAJourInfoJeu(); 
     }
@@ -874,16 +862,16 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         // raccourci de gain d'argent (debug)
         else if(keyChar == 'L')
         {
-            jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getTeam());
+            game.lancerVagueSuivante(game.getKeyPlayer(), game.getKeyPlayer().getTeam());
             ajouterInfoVagueSuivanteDansConsole();
         }
         else if(keyCode == Configuration.getKeyCode(Configuration.AUG_VIT_JEU))
         {
-            jeu.augmenterCoeffVitesse();
+            game.augmenterCoeffVitesse();
         }
         else if(keyCode == Configuration.getKeyCode(Configuration.DIM_VIT_JEU))
         {
-            jeu.diminuerCoeffVitesse();
+            game.diminuerCoeffVitesse();
         }
     }
 
@@ -897,7 +885,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
             activerDesactiverLaPause();  
         // raccourci lancer vague suivante
         else if(keyCode == Configuration.getKeyCode(Configuration.LANCER_VAGUE))
-            if(!jeu.estEnPause())
+            if(!game.estEnPause())
                 lancerVagueSuivante();
     }
 
@@ -906,12 +894,12 @@ public class View_JeuSolo extends JFrame implements ActionListener,
      */
     private void activerDesactiverLaPause()
     {
-        boolean enPause = jeu.togglePause();
+        boolean enPause = game.togglePause();
         
         // inhibation
         panelMenuInteraction.setPause(enPause);
         
-        bLancerVagueSuivante.setEnabled(!enPause);
+        bLaunchNextWave.setEnabled(!enPause);
     }
 
     @Override
@@ -924,10 +912,10 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         panelMenuInteraction.partieTerminee();
         
         // le bouton lancer vague suivante devient un retour au menu
-        bLancerVagueSuivante.setEnabled(true);
-        vaguePeutEtreLancee = false;
-        bLancerVagueSuivante.setText(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P));
-        bLancerVagueSuivante.setIcon(I_RETOUR);
+        bLaunchNextWave.setEnabled(true);
+        canLaunchNextWave = false;
+        bLaunchNextWave.setText(Language.getTexte(Language.ID_TXT_BTN_RETOUR_MENU_P));
+        bLaunchNextWave.setIcon(I_RETOUR);
 
         
         demanderEnregistrementDuScore();
@@ -943,7 +931,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     @Override
     public void winStar()
     {
-        jeu.ajouterAnimation(new GetStar(jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())) ;   
+        game.ajouterAnimation(new GetStar(game.getTerrain().getLargeur(),game.getTerrain().getHauteur())) ;   
     }
 
     @Override
@@ -982,7 +970,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
     @Override
     public void deselection()
     {
-        panelInfoCreature.setCreature(null);
+        panelCreatureInfo.setCreature(null);
         panelInfoTour.setTour(null, 0);
     }
 

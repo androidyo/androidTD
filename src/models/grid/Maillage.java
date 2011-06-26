@@ -61,14 +61,14 @@ public interface Maillage
             throws IllegalArgumentException;
 
     /**
-     * Désactive une zone dans le champs
+     * Disable a zone in the fields
      * 
      * @param rectangle
      *            la zone a désactiver.
      * @throws IllegalArgumentException
      *             Levé si le rectangle est hors champs.
      */
-    public abstract void desactiverZone(Rectangle rectangle, boolean miseAJour)
+    public abstract void disableZone(Rectangle rectangle, boolean miseAJour)
             throws IllegalArgumentException;
 
     /**
@@ -117,12 +117,12 @@ public interface Maillage
     public abstract int getNbNoeuds();
     
     /**
-     * Permet d'ajouter un point de sortie
+     * Adds an exit point
      * 
      * @param x le point en x
      * @param y le point en y
      */
-    public void ajouterPointdeSortie(int x, int y);
+    public void addPointOfExit(int x, int y);
     
     /**
      * Permet de forcer la mise a jour du TDA

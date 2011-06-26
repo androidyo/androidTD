@@ -88,31 +88,31 @@ public class SimpleFiveVersus extends Field
         e1.addZoneDepartCreatures(new Rectangle(20, 0, 80, 20));
         e1.setZoneArrivalCreatures(new Rectangle(20, 480, 80, 20));
         e1.addPlayerLocation(new PlayerLocation(1,new Rectangle(20,0,80,500),Color.RED));
-        equipes.add(e1);
+        teams.add(e1);
         
         Team e2 = new Team(2,"Les Bleus",Color.BLUE);
         e2.addZoneDepartCreatures(new Rectangle(120, 0, 80, 20));
         e2.setZoneArrivalCreatures(new Rectangle(120, 480, 80, 20));
         e2.addPlayerLocation(new PlayerLocation(2,new Rectangle(120,0,80,500),Color.BLUE));
-        equipes.add(e2);
+        teams.add(e2);
         
         Team e3 = new Team(3,"Les Verts",Color.GREEN);
         e3.addZoneDepartCreatures(new Rectangle(220, 0, 80, 20));
         e3.setZoneArrivalCreatures(new Rectangle(220, 480, 80, 20));
         e3.addPlayerLocation(new PlayerLocation(3,new Rectangle(220,0,80,500),Color.GREEN));
-        equipes.add(e3);
+        teams.add(e3);
         
         Team e4 = new Team(4,"Les Jaunes",Color.YELLOW);
         e4.addZoneDepartCreatures(new Rectangle(320, 0, 80, 20));
         e4.setZoneArrivalCreatures(new Rectangle(320, 480, 80, 20));
         e4.addPlayerLocation(new PlayerLocation(4,new Rectangle(320,0,80,500),Color.YELLOW));
-        equipes.add(e4);
+        teams.add(e4);
         
         Team e5 = new Team(5,"Les Noirs",Color.BLACK);
         e5.addZoneDepartCreatures(new Rectangle(420, 0, 80, 20));
         e5.setZoneArrivalCreatures(new Rectangle(420, 480, 80, 20));
         e5.addPlayerLocation(new PlayerLocation(5,new Rectangle(420,0,80,500),Color.BLACK));
-        equipes.add(e5);
+        teams.add(e5);
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;
         

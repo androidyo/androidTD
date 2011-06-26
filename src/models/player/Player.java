@@ -42,7 +42,7 @@ public class Player
      * 
      * Elle est en double pour gérer les revenus flottant (voir gestionnaireDeRevenus)
      */
-    private double nbPiecesDOr = 0;
+    private double goldNumber = 0;
     
     /**
      * Equipe du joueur
@@ -130,13 +130,13 @@ public class Player
     }
     
     /**
-     * Permet de modifier le nombre de pieces d'or.
+     * Changes the number of pieces of gold.
      * 
      * @param nbPiecesDOr le nouveau nombre de pieces d'or
      */
-    public void setNbPiecesDOr(double nbPiecesDOr)
+    public void setGoldNumber(double nbPiecesDOr)
     {
-        this.nbPiecesDOr = nbPiecesDOr;
+        this.goldNumber = nbPiecesDOr;
         
         if(edj != null)
             edj.joueurMisAJour(this);
@@ -149,7 +149,7 @@ public class Player
      */
     public double getNbPiecesDOr()
     {
-        return nbPiecesDOr;
+        return goldNumber;
     }
 
     /**
@@ -310,7 +310,7 @@ public class Player
      */
     public synchronized void donnerRevenu(long temps)
     {
-        setNbPiecesDOr(getNbPiecesDOr() + revenu * (temps / 1000.0));
+        setGoldNumber(getNbPiecesDOr() + revenu * (temps / 1000.0));
     }
 
     

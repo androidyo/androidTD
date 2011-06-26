@@ -158,7 +158,7 @@ public class Maillage_v2 implements Maillage
 	}
 
     @Override
-	synchronized public void ajouterPointdeSortie(int x, int y)
+	synchronized public void addPointOfExit(int x, int y)
 	{
 	    int tmp = getIndiceNoeud(x, y);
 	   
@@ -370,7 +370,7 @@ public class Maillage_v2 implements Maillage
 	}
 	
 	@Override
-	synchronized public void desactiverZone(Rectangle rectangle, boolean miseAJour)
+	synchronized public void disableZone(Rectangle rectangle, boolean miseAJour)
 			throws IllegalArgumentException
 	{ 
 	    Node n;

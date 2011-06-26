@@ -81,7 +81,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
      * 
      * @param parent la fenetre parent
      * @param jeu le jeu
-     * @param joueur le joueur
+     * @param keyPlayer le joueur
      */
     public Panel_AttendreJoueurs(JFrame parent, Game_Server jeuServeur, Game_Client jeuClient)
     {
@@ -100,7 +100,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
      * 
      * @param parent la fenetre parent
      * @param jeu le jeu du client
-     * @param joueur le joueur
+     * @param keyPlayer le joueur
      */
     public Panel_AttendreJoueurs(JFrame parent, Game_Client jeu)
     {
@@ -401,7 +401,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
 
         ArrayList<Team> equipes = jeuClient.getTeams();
         
-        if(ADMIN || jeuClient.getJoueurPrincipal() == joueur)
+        if(ADMIN || jeuClient.getKeyPlayer() == joueur)
         {
             // Liste des équipes
 

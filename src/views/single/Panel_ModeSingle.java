@@ -408,7 +408,7 @@ public class Panel_ModeSingle extends JPanel implements ActionListener, Runnable
         
         game.setKeyPlayer(player);
         game.initialize();
-        new View_JeuSolo(game);
+        new View_GameSingle(game);
         
         chargementTermine = true;
         parent.dispose();

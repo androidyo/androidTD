@@ -86,7 +86,7 @@ public class Window_RepresentationGrid extends JFrame
             
             if(source == bCalculerDijsktra)
             {
-                m.desactiverZone(new Rectangle(Tools.tirerNombrePseudoAleatoire(0, m.getLargeurPixels()),
+                m.disableZone(new Rectangle(Tools.tirerNombrePseudoAleatoire(0, m.getLargeurPixels()),
                         Tools.tirerNombrePseudoAleatoire(0, m.getHauteurPixels()),
                         Tools.tirerNombrePseudoAleatoire(20, 200),
                         Tools.tirerNombrePseudoAleatoire(20, 200)),true);
@@ -159,14 +159,14 @@ public class Window_RepresentationGrid extends JFrame
         Maillage m = new Maillage_v2(largeur, hauteur, 10, 0, 0);
         
         // desactivation de zone
-        m.desactiverZone(new Rectangle(largeur / 2 - 20,0,20,hauteur),false);
-        m.desactiverZone(new Rectangle(0,largeur / 2 - 20,largeur,20),false);
+        m.disableZone(new Rectangle(largeur / 2 - 20,0,20,hauteur),false);
+        m.disableZone(new Rectangle(0,largeur / 2 - 20,largeur,20),false);
         
         // ajout des points de sorties
-        m.ajouterPointdeSortie(largeur / 4, hauteur / 4);
-        m.ajouterPointdeSortie(largeur / 4 * 3, hauteur / 4);
-        m.ajouterPointdeSortie(largeur / 4, hauteur / 4 * 3);
-        m.ajouterPointdeSortie(largeur / 4 * 3, hauteur / 4 * 3);
+        m.addPointOfExit(largeur / 4, hauteur / 4);
+        m.addPointOfExit(largeur / 4 * 3, hauteur / 4);
+        m.addPointOfExit(largeur / 4, hauteur / 4 * 3);
+        m.addPointOfExit(largeur / 4 * 3, hauteur / 4 * 3);
 
         new Window_RepresentationGrid(m);
     }

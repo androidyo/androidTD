@@ -87,7 +87,7 @@ public class ElementTD extends Field
         e.addZoneDepartCreatures(new Rectangle(110, -40, 80, 20));
         e.setZoneArrivalCreatures(new Rectangle(250, 0, 40, 40));
         e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,480,500)));
-        equipes.add(e);
+        teams.add(e);
         
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;

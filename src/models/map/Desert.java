@@ -87,7 +87,7 @@ public class Desert extends Field
         e.addZoneDepartCreatures(new Rectangle(510,40,20,60));
         e.setZoneArrivalCreatures(new Rectangle(0,410,40,40));
         e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,500,500)));
-        equipes.add(e);
+        teams.add(e);
 
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;

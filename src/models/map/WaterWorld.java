@@ -86,7 +86,7 @@ public class WaterWorld extends Field
         e.addZoneDepartCreatures(new Rectangle(-30, 30, 20, 80));
         e.setZoneArrivalCreatures(new Rectangle(460, 410, 40, 40));
         e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,500,500)));
-        equipes.add(e);
+        teams.add(e);
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;
         

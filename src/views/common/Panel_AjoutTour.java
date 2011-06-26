@@ -139,7 +139,7 @@ public class Panel_AjoutTour extends JPanel implements ActionListener
         else
             return;
         
-        tour.setProprietaire(jeu.getJoueurPrincipal());
+        tour.setProprietaire(jeu.getKeyPlayer());
         
         edpt.tourSelectionnee(tour, Panel_InfoTour.MODE_ACHAT);
         edpt.setTourAAcheter(tour);
@@ -154,7 +154,7 @@ public class Panel_AjoutTour extends JPanel implements ActionListener
     
     public void miseAJour()
     {
-        double nbPiecesOr = jeu.getJoueurPrincipal().getNbPiecesDOr();
+        double nbPiecesOr = jeu.getKeyPlayer().getNbPiecesDOr();
         
         bTourArcher.setEnabled(nbPiecesOr >= Tower_Archer.PRIX_ACHAT);
         bTourCanon.setEnabled(nbPiecesOr >= Tower_Canon.PRIX_ACHAT);

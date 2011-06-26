@@ -18,9 +18,6 @@ import models.towers.*;
  * 
  * 它封装了游戏所有的元素并且进行管理.
  * 
- * @author Aurelien Da Campo
- * @version 2.1 | mai 2010
- * @since jdk1.6.0_16
  * @see Field
  * @see ManagerTowers
  * @see ManagerCreatures
@@ -82,7 +79,7 @@ public abstract class Game implements PlayerListener,
 	 * -生物
 	 *- 网络
 	 */
-    protected Field terrain;
+    protected Field field;
 	
 	/**
 	 * Collection teams in game
@@ -110,52 +107,52 @@ public abstract class Game implements PlayerListener,
 	protected ManageAnimations managerAnimations;
 
     /**
-     * Variable d'etat de la pause
+     * State variable of the pause
      */
-	protected boolean enPause;
+	protected boolean isPause;
   
     /**
-     * Gestion des vagues de creatures. C'est le joueur que decident le moment
-     * ou il veut lancer une vague de creatures. Une fois que toutes les vagues
-     * de creatures ont ete detruites, le jeu est considere comme termine.
+     * Management waves of creatures. The player that decide the time
+  	 * or he wants to launch a wave of creatures. Once all the waves
+     * the creatures were destroyed, the game is considered complete.
      */
-    protected int indiceVagueCourante = 1;
+    protected int currentIndexWaves = 1;
 	
     /**
-     * Stockage de la vagues courante
+     * Storage of the current wave
      */
-    WaveOfCreatures vagueCourante;
+    WaveOfCreatures currentWave;
     
     
     /**
-     * Permet de savoir si la partie est initialisée
+     * Indicates whether the part is initialized
      */
-    protected boolean estInitialise;
+    protected boolean isInitialized;
     
     /**
-     * Permet de savoir si la partie est à été démarrée
+     * Indicates whether the part is was started
      */
-    private boolean estDemarre;
+    private boolean isStarted;
     
     /**
-     * Permet de savoir si la partie est terminée
+     * Indicates whether the game is over
      */
-    protected boolean estTermine;
+    protected boolean isFinished;
     
     /**
-     * Permet de savoir si la partie est détruite
+     * Indicates whether the part is destroyed
      */
-    protected boolean estDetruit;
+    protected boolean isDestroyed;
     
     /**
-     * Pour notifications (observable)
+     * For notifications (observable)
      */
-    protected GameListener edj;
+    protected GameListener gameListener;
     
     /**
      * Joueur principal  
      */
-    protected Player joueur;
+    protected Player keyPlayer;
 
     /**
      * Timer pour gérer le temps de jeu
@@ -165,9 +162,10 @@ public abstract class Game implements PlayerListener,
     /**
      * Coefficient de vitesse de déroulement de la partie.
      * 
-     * Permet de résoudre les problèmes de lenteur du jeu.
+     * Solves the problem of slowness of the game
+     * 速度系数
      */
-    private double coeffVitesse;
+    private double speedCoefficient;
 
     /**
      * Constructeur
@@ -182,11 +180,11 @@ public abstract class Game implements PlayerListener,
     /**
      * To initialize the game before the start
      * 
-     * @param joueur 
+     * @param keyPlayer 
      */
     synchronized public void initialize()
     {
-        if(terrain == null)
+        if(field == null)
             throw new IllegalStateException("Terrain nul");
         
         if(teams.size() == 0)
@@ -197,43 +195,45 @@ public abstract class Game implements PlayerListener,
         //    setJoueurPrincipal(joueur);
         
         // attributs
-        indiceVagueCourante = 1;
-        enPause             = false;
-        estDemarre          = false;
-        estTermine          = false;
-        estDetruit          = false;
-        vagueCourante       = null;
-        coeffVitesse        = 1.0;
+        currentIndexWaves = 1;
+        isPause             = false;
+        isStarted          = false;
+        isFinished          = false;
+        isDestroyed          = false;
+        currentWave       = null;
+        speedCoefficient        = 1.0;
         
-        // initialisation des valeurs par defaut
-        for(Team equipe : teams)
+        // initialization of default values
+        for(Team team : teams)
         {
-            // initialisation des vies restantes
-            equipe.setLifeRemainingNumber(terrain.getNbViesInitiales());
+            // initialization lives remaining
+        	// 初始化生命
+            team.setLifeRemainingNumber(field.getInitialLsifeNumber());
             
-            // initialisation des pieces d'or des joueurs
-            for(Player j : equipe.getPlayers())
+            // initialization of gold pieces of players
+            // 初始化金钱
+            for(Player player : team.getPlayers())
             {
-                j.setScore(0);
-                j.setNbPiecesDOr(terrain.getNbPiecesOrInitiales());
+                player.setScore(0);
+                player.setGoldNumber(field.getInitialsGlod());
             }
         }  
         
-        estInitialise = true;
+        isInitialized = true;
         
-        if(edj != null)
-            edj.initializationPart();
+        if(gameListener != null)
+            gameListener.initializationPart();
     }
     
-    public void reinitialiser()
+    public void reInitialize()
     {
-        terrain.arreterMusiqueDAmbiance();
+        field.arreterMusiqueDAmbiance();
         
         // réinitialisation du terrain
-        terrain.reinitialiser();
+        field.reinitialiser();
         
-        estInitialise = false;
-        estDemarre = false;
+        isInitialized = false;
+        isStarted = false;
         
         initialize();
         
@@ -252,11 +252,11 @@ public abstract class Game implements PlayerListener,
         // ajout de tous les joueurs
         for(Team e : teams)
         {
-            e.setLifeRemainingNumber(terrain.getNbViesInitiales());
+            e.setLifeRemainingNumber(field.getInitialLsifeNumber());
             
             for(Player j : e.getPlayers())    
             {
-                j.setNbPiecesDOr(terrain.getNbPiecesOrInitiales());
+                j.setGoldNumber(field.getInitialsGlod());
                 j.setScore(0);
             }
         }
@@ -271,13 +271,13 @@ public abstract class Game implements PlayerListener,
      */
     public void demarrer()
     {
-        if(terrain == null)
+        if(field == null)
             throw new IllegalStateException("Terrain nul");
         
-        if(!estInitialise)
+        if(!isInitialized)
             throw new IllegalStateException("Le jeu n'est pas initialisé");
             
-        if(estDemarre)
+        if(isStarted)
             throw new IllegalStateException("Le jeu est déjà démarré");
         
         // demarrage des gestionnaires
@@ -287,11 +287,11 @@ public abstract class Game implements PlayerListener,
         
         timer.start();
         
-        estDemarre = true;
+        isStarted = true;
         
         // notification
-        if(edj != null)
-            edj.startPart();
+        if(gameListener != null)
+            gameListener.startPart();
     }
     
     /**
@@ -326,11 +326,11 @@ public abstract class Game implements PlayerListener,
             throw new ZoneInaccessibleException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_ZONE_INACCESSIBLE));
 
         // si elle bloque le chemin de A vers B
-        if (terrain.laTourBloqueraLeChemin(tour))
+        if (field.laTourBloqueraLeChemin(tour))
             throw new BarrierException(Language.getTexte(Language.ID_ERROR_POSE_IMPOSSIBLE_CHEMIN_BLOQUE));
         
         // desactive la zone dans le maillage qui correspond a la tour
-        terrain.desactiverZone(tour, true);
+        field.desactiverZone(tour, true);
 
         // ajout de la tour
         managerTowers.ajouterTour(tour);
@@ -342,14 +342,14 @@ public abstract class Game implements PlayerListener,
         tour.mettreEnJeu();
         
         // debit des pieces d'or
-        tour.getPrioprietaire().setNbPiecesDOr(
+        tour.getPrioprietaire().setGoldNumber(
                 tour.getPrioprietaire().getNbPiecesDOr() - tour.getPrixAchat());
     
        
         //ajouterAnimation(new Fumee((int)tour.getCenterX(),(int)tour.getCenterY()));
         
-        if(edj != null)
-            edj.towerPlaced(tour);
+        if(gameListener != null)
+            gameListener.towerPlaced(tour);
     }
     
     
@@ -365,13 +365,13 @@ public abstract class Game implements PlayerListener,
         managerTowers.supprimerTour(tour);
         
         // debit des pieces d'or
-        tour.getPrioprietaire().setNbPiecesDOr(
+        tour.getPrioprietaire().setGoldNumber(
                 tour.getPrioprietaire().getNbPiecesDOr() + tour.getPrixDeVente());
     
         ajouterAnimation(new Smoke((int)tour.getCenterX(),(int)tour.getCenterY()));
         
-        if(edj != null)
-            edj.towerSold(tour);
+        if(gameListener != null)
+            gameListener.towerSold(tour);
     }
  
     
@@ -394,13 +394,13 @@ public abstract class Game implements PlayerListener,
             throw new MoneyLackException(Language.getTexte(Language.ID_ERROR_AMELIORATON_IMPOSSIBLE_PAS_ASSEZ_D_ARGENT));
 
         // debit des pieces d'or
-        tour.getPrioprietaire().setNbPiecesDOr(tour.getPrioprietaire().getNbPiecesDOr() - tour.getPrixAchat());
+        tour.getPrioprietaire().setGoldNumber(tour.getPrioprietaire().getNbPiecesDOr() - tour.getPrixAchat());
      
         // amelioration de la tour
         tour.ameliorer();
         
-        if(edj != null)
-            edj.towerUpgrade(tour);
+        if(gameListener != null)
+            gameListener.towerUpgrade(tour);
     }
     
     /**
@@ -419,7 +419,7 @@ public abstract class Game implements PlayerListener,
 	public void lancerVagueSuivante(Player joueur, Team cible)
 	{
 	    // lancement de la vague
-	    WaveOfCreatures vagueCourante = terrain.getVagueDeCreatures(indiceVagueCourante);
+	    WaveOfCreatures vagueCourante = field.getVagueDeCreatures(currentIndexWaves);
         
 	    passerALaProchaineVague();
 	    
@@ -433,7 +433,7 @@ public abstract class Game implements PlayerListener,
      */
 	public boolean estTermine()
 	{
-	    return estTermine;
+	    return isFinished;
 	}
 	
 
@@ -442,9 +442,9 @@ public abstract class Game implements PlayerListener,
      */
     public void terminer()
     {
-        if(!estTermine)
+        if(!isFinished)
         {
-            estTermine = true;
+            isFinished = true;
             
             arreterTout();
               
@@ -468,8 +468,8 @@ public abstract class Game implements PlayerListener,
                     equipesEnJeu.add(equipe);
                 }
             
-            if(edj != null)
-                edj.terminatePart(new GameResult(equipeGagnante)); // TODO check
+            if(gameListener != null)
+                gameListener.terminatePart(new GameResult(equipeGagnante)); // TODO check
         }
     }
 
@@ -485,9 +485,9 @@ public abstract class Game implements PlayerListener,
         //if(this.terrain != null) 
         //    throw new TerrainDejaInitialise("Terrain déjà initialisé");
 
-        teams = field.getEquipesInitiales();
+        teams = field.getTeamsInitials();
         
-        this.terrain  = field;  
+        this.field  = field;  
     }
 
     /**
@@ -498,10 +498,10 @@ public abstract class Game implements PlayerListener,
      */
     public Field getTerrain()
     {
-        if(terrain == null)
+        if(field == null)
             throw new NullPointerException("Le terrain ne doit jamais etre nul !");
         
-        return terrain;
+        return field;
     }
     
     /**
@@ -539,7 +539,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean togglePause()
     {
-        if(enPause)
+        if(isPause)
         {
             managerTowers.sortirDeLaPause();
             managerCreatures.sortirDeLaPause();
@@ -554,7 +554,7 @@ public abstract class Game implements PlayerListener,
             timer.pause();
         }
         
-        return enPause = !enPause;  
+        return isPause = !isPause;  
     }
 
     /**
@@ -564,7 +564,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean estEnPause()
     {
-        return enPause;
+        return isPause;
     }
 
     /**
@@ -607,7 +607,7 @@ public abstract class Game implements PlayerListener,
     public void ajouterJoueur(Player joueur) throws CurrentGameException, NoPositionAvailableException
     {
         // si la partie est en court
-        if(estDemarre)
+        if(isStarted)
             throw new CurrentGameException("La partie à déjà démarrée");
         
         // ajout du joueur dans le premier emplacement disponible
@@ -622,8 +622,8 @@ public abstract class Game implements PlayerListener,
                 joueur.setEcouteurDeJoueur(this);
                 
                 // notification
-                if(edj != null)
-                    edj.playerJoin(joueur);
+                if(gameListener != null)
+                    gameListener.playerJoin(joueur);
   
                 return; // équipe trouvée
             }
@@ -643,17 +643,17 @@ public abstract class Game implements PlayerListener,
      */
     public void setEcouteurDeJeu(GameListener edj)
     {
-        this.edj = edj;
+        this.gameListener = edj;
     }
     
     /**
-     * Permet de recuperer le joueur principal du jeu
+     * Used to retrieve the key player of the game
      * 
-     * @param joueur le joueur principal du jeu
+     * @param keyPlayer le joueur principal du jeu
      */
-    public Player getJoueurPrincipal()
+    public Player getKeyPlayer()
     { 
-        return joueur;
+        return keyPlayer;
     }
     
     /**
@@ -663,7 +663,7 @@ public abstract class Game implements PlayerListener,
      */
     public void setKeyPlayer(Player joueur)
     {
-        this.joueur = joueur;
+        this.keyPlayer = joueur;
         
         // mis à jour de l'écouteur
         joueur.setEcouteurDeJoueur(this);
@@ -672,8 +672,8 @@ public abstract class Game implements PlayerListener,
     @Override
     public void creatureDead(Creature creature)
     {
-        if(edj != null)
-            edj.creatureInjured(creature);
+        if(gameListener != null)
+            gameListener.creatureInjured(creature);
         
         ajouterAnimation(new HitInjured((int)creature.getCenterX(),(int) creature.getCenterY()));
     }
@@ -682,7 +682,7 @@ public abstract class Game implements PlayerListener,
     synchronized public void creatureHurt(Creature creature, Player tueur)
     {
         // gain de pieces d'or
-        tueur.setNbPiecesDOr(tueur.getNbPiecesDOr() + creature.getNbPiecesDOr());
+        tueur.setGoldNumber(tueur.getNbPiecesDOr() + creature.getNbPiecesDOr());
         
         // nombre d'etoile avant l'ajout du score
         int nbEtoilesAvantAjoutScore = tueur.getNbEtoiles();
@@ -692,12 +692,12 @@ public abstract class Game implements PlayerListener,
 
         // nouvelle étoile ?
         if(nbEtoilesAvantAjoutScore < tueur.getNbEtoiles())
-            if(edj != null)  
-                edj.winStar();
+            if(gameListener != null)  
+                gameListener.winStar();
  
         // notification de la mort de la créature
-        if(edj != null)
-            edj.creatureKilled(creature,tueur);
+        if(gameListener != null)
+            gameListener.creatureKilled(creature,tueur);
     }
 
     @Override
@@ -710,23 +710,23 @@ public abstract class Game implements PlayerListener,
         {
             equipe.losingALife();
             
-            if(edj != null)
+            if(gameListener != null)
             {
-                edj.creatureArriveEndZone(creature);
+                gameListener.creatureArriveEndZone(creature);
                 
                 // FIXME IMPORTANT faire plutot une mise a jour des donnees de l'equipe 
                 // -> ajout au protocole EQUIPE_ETAT
                 // et appeler plutot edj.equipeMiseAJour(equipe) 
                 // pour tous les joueurs de l'equipe
                 for(Player joueur : equipe.getPlayers())
-                    edj.joueurMisAJour(joueur);
+                    gameListener.joueurMisAJour(joueur);
             }
             
             // controle de la terminaison du jeu.
             if(equipe.isLost())
             {
-                if(edj != null)
-                    edj.teamLost(equipe);
+                if(gameListener != null)
+                    gameListener.teamLost(equipe);
                 
                 // s'il il reste au moins deux equipes en jeu
                 // la partie n'est pas terminée
@@ -745,15 +745,15 @@ public abstract class Game implements PlayerListener,
     @Override
     public void vagueEntierementLancee(WaveOfCreatures vagueDeCreatures)
     {
-        if(edj != null)
-            edj.waveAttackFinish(vagueDeCreatures); 
+        if(gameListener != null)
+            gameListener.waveAttackFinish(vagueDeCreatures); 
     }
     
     @Override
     public void joueurMisAJour(Player joueur)
     {
-        if(edj != null)
-            edj.joueurMisAJour(joueur);
+        if(gameListener != null)
+            gameListener.joueurMisAJour(joueur);
     }
 
     /**
@@ -810,8 +810,8 @@ public abstract class Game implements PlayerListener,
      */
     public void creatureAjoutee(Creature creature)
     {
-        if(edj != null)
-            edj.creatureAjoutee(creature);
+        if(gameListener != null)
+            gameListener.creatureAjoutee(creature);
     }
 
     /**
@@ -823,8 +823,8 @@ public abstract class Game implements PlayerListener,
     {
         managerAnimations.addAnimation(animation);
         
-        if(edj != null)
-            edj.animationAjoutee(animation);
+        if(gameListener != null)
+            gameListener.animationAjoutee(animation);
     }
 
     /**
@@ -951,7 +951,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean estInitialise()
     {
-        return estInitialise;
+        return isInitialized;
     }
     
     /**
@@ -961,7 +961,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean estDemarre()
     {
-        return estDemarre;
+        return isStarted;
     }
 
     /**
@@ -971,7 +971,7 @@ public abstract class Game implements PlayerListener,
      */
     public int getNumVagueCourante()
     {
-        return indiceVagueCourante;
+        return currentIndexWaves;
     }
     
     /**
@@ -979,7 +979,7 @@ public abstract class Game implements PlayerListener,
      */
     public void passerALaProchaineVague()
     {
-        ++indiceVagueCourante;
+        ++currentIndexWaves;
     }
 
     /**
@@ -999,7 +999,7 @@ public abstract class Game implements PlayerListener,
      */
     public void detruire()
     {
-        estDetruit = true;
+        isDestroyed = true;
         
         managerCreatures.detruire();
         managerTowers.detruire();
@@ -1013,7 +1013,7 @@ public abstract class Game implements PlayerListener,
      */
     public boolean estDetruit()
     {
-        return estDetruit;
+        return isDestroyed;
     }
 
     /**
@@ -1023,7 +1023,7 @@ public abstract class Game implements PlayerListener,
      */
     public double getCoeffVitesse()
     {
-        return coeffVitesse;
+        return speedCoefficient;
     }
 
     /**
@@ -1033,15 +1033,15 @@ public abstract class Game implements PlayerListener,
      */
     public synchronized double augmenterCoeffVitesse()
     {
-        if(coeffVitesse + ETAPE_COEFF_VITESSE <= MAX_COEFF_VITESSE)
+        if(speedCoefficient + ETAPE_COEFF_VITESSE <= MAX_COEFF_VITESSE)
         {    
-            coeffVitesse += ETAPE_COEFF_VITESSE;
+            speedCoefficient += ETAPE_COEFF_VITESSE;
             
-            if(edj != null)
-                edj.velocityChanged(coeffVitesse);
+            if(gameListener != null)
+                gameListener.velocityChanged(speedCoefficient);
         }
         
-        return coeffVitesse;
+        return speedCoefficient;
     }
 
     /**
@@ -1051,14 +1051,14 @@ public abstract class Game implements PlayerListener,
      */
     synchronized public double diminuerCoeffVitesse()
     {
-        if(coeffVitesse - ETAPE_COEFF_VITESSE >= MIN_COEFF_VITESSE)
+        if(speedCoefficient - ETAPE_COEFF_VITESSE >= MIN_COEFF_VITESSE)
         { 
-            coeffVitesse -= ETAPE_COEFF_VITESSE;
+            speedCoefficient -= ETAPE_COEFF_VITESSE;
          
-            if(edj != null)
-                edj.velocityChanged(coeffVitesse);
+            if(gameListener != null)
+                gameListener.velocityChanged(speedCoefficient);
         }    
-        return coeffVitesse;
+        return speedCoefficient;
     }
     
     /**
@@ -1067,15 +1067,15 @@ public abstract class Game implements PlayerListener,
      */
     public void setCoeffVitesse(double value)
     {
-        if(coeffVitesse - ETAPE_COEFF_VITESSE < MIN_COEFF_VITESSE
-        && coeffVitesse + ETAPE_COEFF_VITESSE > MAX_COEFF_VITESSE)
+        if(speedCoefficient - ETAPE_COEFF_VITESSE < MIN_COEFF_VITESSE
+        && speedCoefficient + ETAPE_COEFF_VITESSE > MAX_COEFF_VITESSE)
             throw new IllegalArgumentException(
                     "Le coefficient de vitesse non authorisé");
             
-        coeffVitesse = value;
+        speedCoefficient = value;
         
-        if(edj != null)
-            edj.velocityChanged(coeffVitesse);
+        if(gameListener != null)
+            gameListener.velocityChanged(speedCoefficient);
     }
     
     /**

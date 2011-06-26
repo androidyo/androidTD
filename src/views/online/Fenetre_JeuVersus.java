@@ -309,7 +309,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
         panelSelectionEtVague.add(Language.getTexte(Language.ID_TITRE_INFO_SELECTION), panelSelection);
            
         // panel de création de vagues
-        panelCreationVague = new Panel_CreationVague(jeu,jeu.getJoueurPrincipal(),this);
+        panelCreationVague = new Panel_CreationVague(jeu,jeu.getKeyPlayer(),this);
         JScrollPane jsCreationVague = new JScrollPane(panelCreationVague);
         jsCreationVague.setOpaque(false);
         jsCreationVague.setPreferredSize(new Dimension(LARGEUR_MENU_DROITE,300));
@@ -732,7 +732,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void lancerVague(WaveOfCreatures vague) throws MoneyLackException
     {
-        jeu.lancerVague(jeu.getJoueurPrincipal(), jeu.getEquipeSuivanteNonVide(jeu.getJoueurPrincipal().getTeam()),vague);
+        jeu.lancerVague(jeu.getKeyPlayer(), jeu.getEquipeSuivanteNonVide(jeu.getKeyPlayer().getTeam()),vague);
     }
 
     @Override
@@ -752,7 +752,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
         // FIXME continuer...
         if(equipeGagnante == null)
             new Dialog_Message (this, "Draw!", "Nobody won !");         
-        else if(equipeGagnante == jeu.getJoueurPrincipal().getTeam())
+        else if(equipeGagnante == jeu.getKeyPlayer().getTeam())
         {
             new Dialog_Message (this, "Won!", "You win :) Nice!");
             ajouterTexteHTMLDansConsole("<b>You win !</b><br/>"); 
@@ -798,7 +798,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void joueurMisAJour(Player joueur)
     {
-        if(jeu.getJoueurPrincipal() == joueur)
+        if(jeu.getKeyPlayer() == joueur)
         {
             panelCreationVague.miseAJour();
             panelAjoutTour.miseAJour();
@@ -850,7 +850,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void receptionEquipeAPerdue(Team equipe)
     {
-        if(equipe == jeu.getJoueurPrincipal().getTeam())
+        if(equipe == jeu.getKeyPlayer().getTeam())
         {
             new Dialog_Message (this, "Lost!", "You lose :(");
             ajouterTexteHTMLDansConsole("<b>You lose!</b><br />");

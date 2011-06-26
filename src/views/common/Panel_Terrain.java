@@ -340,11 +340,11 @@ public class Panel_Terrain extends JPanel implements Runnable,
         setFocusable(true);
         
         // Centrage sur la zone de construction du joueur
-        if(jeu.getJoueurPrincipal() != null)
+        if(jeu.getKeyPlayer() != null)
         {
-            if(jeu.getJoueurPrincipal().getEmplacement() != null)
+            if(jeu.getKeyPlayer().getEmplacement() != null)
             {
-                Rectangle zoneConstruction = jeu.getJoueurPrincipal().getEmplacement().getZoneDeConstruction();
+                Rectangle zoneConstruction = jeu.getKeyPlayer().getEmplacement().getZoneDeConstruction();
                 centrerSur((int)zoneConstruction.getCenterX(),(int)zoneConstruction.getCenterY());
             }
         }

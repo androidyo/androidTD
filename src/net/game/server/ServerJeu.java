@@ -377,7 +377,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 		    {
 		        WaveOfCreatures vague = new WaveOfCreatures(nbCreatures, creature, WaveOfCreatures.getTempsLancement(creature.getVitesseNormale()));
 
-		        joueur.setNbPiecesDOr(argentApresAchat);
+		        joueur.setGoldNumber(argentApresAchat);
 	            try
                 {
                     jeuServeur.lancerVague(joueur, jeuServeur.getEquipeSuivanteNonVide(joueur.getTeam()),vague);

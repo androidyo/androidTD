@@ -72,7 +72,7 @@ public class Field implements Serializable
      * number of gold pieces at the beginning of the game
      * 初始金钱
      */
-    private int initialsMoney;
+    private int initialsGold;
 
     /**
      * field size
@@ -86,19 +86,18 @@ public class Field implements Serializable
     private final int PRECISION_MAILLAGE = 10; // pixels
 
     /**
-     * Le maillage permet de definir les chemins des creatures sur le terrain.
-     * Ici, pour les creatures terriennes avec prise en compte de la position
-     * des tours.
+     * The mesh used to define the paths of the creatures on the ground.
+     * Here for earth creatures taking into account the position of the towers.
      * 
      * @see Maillage
      */
-    transient private Maillage MAILLAGE_TERRESTRE;
-    transient private Maillage MAILLAGE_AERIEN;
+    transient private Maillage MAILLAGE_LAND;
+    transient private Maillage MAILLAGE_AIR;
     
     /**
-     * Dimention du maillage
+     * Dimension of the mesh
      */
-    private int largeurMaillage, hauteurMaillage;
+    private int widthMaillage, heightMaillage;
     
     /**
      * Offset du maillage
@@ -128,13 +127,13 @@ public class Field implements Serializable
     private Color couleurDeFond = new Color(0, 100, 0);
     
     /**
-     * Les murs sont utilises pour empecher le joueur de construire des tours
-     * dans certaines zones. Les creatures ne peuvent egalement pas si rendre.
-     * En fait, les murs reflettent les zones de la carte non accessible. Les
-     * murs ne sont pas affiches. Ils sont simplement utilises pour les controls
-     * d'acces de la carte.
+     * The walls are used to prevent the player to build towers
+     * in some areas. The creatures can also make it not so.
+     * In fact, the walls reflettent areas of the map is not available. the
+     * walls are not posters. They are simply used for checks
+     * to access the card.
      */
-    protected ArrayList<Rectangle> murs = new ArrayList<Rectangle>();
+    protected ArrayList<Rectangle> walls = new ArrayList<Rectangle>();
   
     /**
      * Permet de spécifier l'affichage des murs par défaut
@@ -157,7 +156,7 @@ public class Field implements Serializable
      * C'est le terrain qui fourni les équipes, on doit pouvoir
      * les sérialiser.
      */
-    protected ArrayList<Team> equipes = new ArrayList<Team>();
+    protected ArrayList<Team> teams = new ArrayList<Team>();
     
     /**
      * Mode de jeu du terrain, utilisé pour construire les bons formulaires 
@@ -193,13 +192,13 @@ public class Field implements Serializable
         this.jeu = jeu; 
         this.field_width = largeur;
         this.field_height = hauteur;
-        this.initialsMoney = nbPiecesOrInitiales;
+        this.initialsGold = nbPiecesOrInitiales;
         this.initialsLifeNumber    = nbViesInitiales;
         this.imageDeFond        = imageDeFond;
         this.iconImageDeFond    = new ImageIcon(imageDeFond);
         
-        this.largeurMaillage    = largeurMaillage;
-        this.hauteurMaillage    = hauteurMaillage;
+        this.widthMaillage    = largeurMaillage;
+        this.heightMaillage    = hauteurMaillage;
         this.positionMaillageX  = positionMaillageX;
         this.positionMaillageY  = positionMaillageY;
         
@@ -222,43 +221,43 @@ public class Field implements Serializable
         
         field_width                 = 500;
         field_height                 = 500;
-        initialsMoney     = 100;
+        initialsGold     = 100;
         initialsLifeNumber         = 20;
         breveDescription         = "";
         modeDeJeu               = GameMode.MODE_SOLO;   
     }
 
     /**
-     * Permet d'initialiser le terrain.
+     * To initialize the field.
      * 
-     * Il s'agit de construire les maillages et d'activer les murs.
+     * This is to build linkages and activate the walls.
      */
     public void initialize()
     {
-        // creation des deux maillages
+        // creation of the two meshes
         // TODO Choice of mesh
-        MAILLAGE_TERRESTRE = new Maillage_v1(largeurMaillage, hauteurMaillage,
+        MAILLAGE_LAND = new Maillage_v1(widthMaillage, heightMaillage,
                 PRECISION_MAILLAGE, positionMaillageX, positionMaillageY);
         
-        MAILLAGE_AERIEN = new Maillage_v1(largeurMaillage, hauteurMaillage,
+        MAILLAGE_AIR = new Maillage_v1(widthMaillage, heightMaillage,
                 PRECISION_MAILLAGE, positionMaillageX, positionMaillageY);  
         
         
-        // activation des murs for(Rectangle mur : murs)
-        for(Rectangle mur : murs)
+        // activation of the walls for(Rectangle wall : walls)
+        for(Rectangle wall : walls)
         {
-            MAILLAGE_TERRESTRE.desactiverZone(mur,false);
-            MAILLAGE_AERIEN.desactiverZone(mur,false);
+            MAILLAGE_LAND.disableZone(wall,false);
+            MAILLAGE_AIR.disableZone(wall,false);
         }
         
-        // ajout des points des sorties
-        Rectangle zoneArrivee;
-        for(Team equipe : equipes)
+        // add of output points
+        Rectangle zoneArrival;
+        for(Team team : teams)
         {
-            zoneArrivee = equipe.getZoneArrivalCreatures();
+            zoneArrival = team.getZoneArrivalCreatures();
 
-            MAILLAGE_TERRESTRE.ajouterPointdeSortie((int) zoneArrivee.getCenterX(), (int) zoneArrivee.getCenterY());
-            MAILLAGE_AERIEN.ajouterPointdeSortie((int) zoneArrivee.getCenterX(), (int) zoneArrivee.getCenterY());
+            MAILLAGE_LAND.addPointOfExit((int) zoneArrival.getCenterX(), (int) zoneArrival.getCenterY());
+            MAILLAGE_AIR.addPointOfExit((int) zoneArrival.getCenterX(), (int) zoneArrival.getCenterY());
         }
     }
     
@@ -322,21 +321,21 @@ public class Field implements Serializable
     }
     
     /**
-     * Permet de recuperer le nombre de pieces initial
+     * Used to retrieve the number of original pieces
      * 
      * @return le nombre de pieces initiales
      */
-    public int getNbPiecesOrInitiales()
+    public int getInitialsGlod()
     {
-        return initialsMoney;
+        return initialsGold;
     }
 
     /**
-     * Permet de recuperer le nombre de vie du joueur en debut de partie
+     * Used to retrieve the number of player's life early in the game
      * 
      * @return le nombre de vie du joueur en debut de partie
      */
-    public int getNbViesInitiales()
+    public int getInitialLsifeNumber()
     {
         return initialsLifeNumber;
     }
@@ -390,14 +389,14 @@ public class Field implements Serializable
             throw new IllegalArgumentException("Mur nul");
 
         // desactive la zone dans le maillage qui correspond au mur
-        if(MAILLAGE_TERRESTRE != null)
-            MAILLAGE_TERRESTRE.desactiverZone(wall,false);
+        if(MAILLAGE_LAND != null)
+            MAILLAGE_LAND.disableZone(wall,false);
         
-        if(MAILLAGE_AERIEN != null)
-            MAILLAGE_AERIEN.desactiverZone(wall,false);
+        if(MAILLAGE_AIR != null)
+            MAILLAGE_AIR.disableZone(wall,false);
 
         // ajout du mur
-        murs.add(wall);
+        walls.add(wall);
 
         /*
          * Recalculation du chemin des créatures volantes
@@ -425,7 +424,7 @@ public class Field implements Serializable
      */
     public ArrayList<Rectangle> getMurs()
     {
-        return murs;
+        return walls;
     }
 
     /**
@@ -447,13 +446,13 @@ public class Field implements Serializable
     }
     
     /**
-     * Permet de recuperer les équipes initiales du terrain
+     * Enable to recover the initial field teams
      * 
      * @return les équipes initiales
      */
-    public ArrayList<Team> getEquipesInitiales()
+    public ArrayList<Team> getTeamsInitials()
     {
-        return equipes;
+        return teams;
     }
     
     /**
@@ -465,7 +464,7 @@ public class Field implements Serializable
     {
         int somme = 0;
            
-        for(Team e : equipes)
+        for(Team e : teams)
             somme += e.getNumberOfAvailablePlayerLocations();
         
         return somme;
@@ -494,9 +493,9 @@ public class Field implements Serializable
             return false;
             
         // il n'y a pas un mur
-        synchronized (murs)
+        synchronized (walls)
         {
-            for (Rectangle mur : murs)
+            for (Rectangle mur : walls)
                 if (tour.intersects(mur))
                     return false;
         }
@@ -552,7 +551,7 @@ public class Field implements Serializable
                             .getCenterX(), (int) zoneArrivee.getCenterY(),
                     Creature.TYPE_TERRIENNE);
 
-            double longueur = MAILLAGE_TERRESTRE.getLongueurChemin(chemin);
+            double longueur = MAILLAGE_LAND.getLongueurChemin(chemin);
             
             
             // mise a jour du chemin
@@ -622,11 +621,11 @@ public class Field implements Serializable
             boolean miseAJourDesCheminsDesCreatures)
     {
         // activation de la zone
-        if(MAILLAGE_TERRESTRE != null)
+        if(MAILLAGE_LAND != null)
         {
             try
             {
-                MAILLAGE_TERRESTRE.activerZone(zone, true);
+                MAILLAGE_LAND.activerZone(zone, true);
             }
             catch(IllegalArgumentException e)
             {}
@@ -648,8 +647,8 @@ public class Field implements Serializable
             boolean miseAJourDesCheminsDesCreatures)
     {
         // desactivation de la zone
-        if(MAILLAGE_TERRESTRE != null)
-            MAILLAGE_TERRESTRE.desactiverZone(zone, true);
+        if(MAILLAGE_LAND != null)
+            MAILLAGE_LAND.disableZone(zone, true);
         
         // mise a jour des chemins si necessaire
         if (miseAJourDesCheminsDesCreatures)
@@ -743,10 +742,10 @@ public class Field implements Serializable
     {
         // TODO adapter pour chemin aérien
         if (typeCreature == Creature.TYPE_TERRIENNE)
-            return MAILLAGE_TERRESTRE.plusCourtChemin(xDepart, yDepart,
+            return MAILLAGE_LAND.plusCourtChemin(xDepart, yDepart,
                     xArrivee, yArrivee);
         else
-            return MAILLAGE_AERIEN.plusCourtChemin(xDepart, yDepart,
+            return MAILLAGE_AIR.plusCourtChemin(xDepart, yDepart,
                     xArrivee, yArrivee);
     }
 
@@ -758,7 +757,7 @@ public class Field implements Serializable
      */
     public Line2D[] getArcsActifs()
     {
-        return MAILLAGE_TERRESTRE.getArcs();
+        return MAILLAGE_LAND.getArcs();
     }
 
     /**
@@ -768,7 +767,7 @@ public class Field implements Serializable
      */
     public Node[] getNoeuds()
     {
-        return MAILLAGE_TERRESTRE.getNoeuds();
+        return MAILLAGE_LAND.getNoeuds();
     }
 
     // -------------
@@ -894,7 +893,7 @@ public class Field implements Serializable
         if(largeurMaillage <= 0)
             throw new IllegalArgumentException("la largeur doit être > 0");
         
-        this.largeurMaillage = largeurMaillage;
+        this.widthMaillage = largeurMaillage;
     }
 
     public void setHauteurMaillage(int hauteurMaillage)
@@ -902,12 +901,12 @@ public class Field implements Serializable
         if(hauteurMaillage <= 0)
             throw new IllegalArgumentException("la hauteur doit être > 0");
         
-        this.hauteurMaillage = hauteurMaillage;
+        this.heightMaillage = hauteurMaillage;
     }
 
     public void supprimerMur(Rectangle mur)
     {
-        murs.remove(mur);
+        walls.remove(mur);
     }
 
     public String getNomFichier()
@@ -952,7 +951,7 @@ public class Field implements Serializable
         if(nbPiecesOrInitiales < 0)
             throw new IllegalArgumentException("la nombre de pieces d'or doit être >= 0");
         
-        this.initialsMoney = nbPiecesOrInitiales;
+        this.initialsGold = nbPiecesOrInitiales;
     }
 
     public void setNbViesInitiales(int nbViesInitiales)

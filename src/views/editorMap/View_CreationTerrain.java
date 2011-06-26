@@ -33,7 +33,7 @@ import views.View_MenuPrincipal;
 import views.LookInterface;
 import views.common.EcouteurDePanelTerrain;
 import views.common.View_HTML;
-import views.single.View_JeuSolo;
+import views.single.View_GameSingle;
 import exceptions.*;
 import models.creatures.Creature;
 import models.game.Game;
@@ -492,7 +492,7 @@ public class View_CreationTerrain extends    JFrame
                 t.initialize();
                 j.initialize();
                 
-                new View_JeuSolo(j)
+                new View_GameSingle(j)
                 {
                     private static final long serialVersionUID = 35425L;
 

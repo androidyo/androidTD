@@ -44,7 +44,7 @@ import views.LookInterface;
 import views.Panel_MenuPrincipal;
 import views.common.Panel_EmplacementsTerrain;
 import views.common.TableCellRenderer_Image;
-import views.single.View_JeuSolo;
+import views.single.View_GameSingle;
 
 /**
  * Panel de création d'une partie réseau.
@@ -256,7 +256,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                     terrains.add(t);
                     
                     Object[] obj = new Object[] { t.getBreveDescription(), GameMode.getNomMode(t.getMode()), t.getNbJoueursMax(), 
-                            t.getEquipesInitiales().size()+"", t };
+                            t.getTeamsInitials().size()+"", t };
                     
                     model.addRow(obj);
                     
@@ -418,7 +418,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                     
                     SoundManagement.arreterTousLesSons();
                     
-                    new View_JeuSolo(jeu);
+                    new View_GameSingle(jeu);
                     
                     parent.dispose();
                 } 

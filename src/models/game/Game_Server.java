@@ -110,14 +110,14 @@ public class Game_Server extends Game
     synchronized public void creatureHurt(Creature creature, Player tueur)
     {
         // gain de pieces d'or
-        tueur.setNbPiecesDOr(tueur.getNbPiecesDOr() + creature.getNbPiecesDOr() / 5.0);
+        tueur.setGoldNumber(tueur.getNbPiecesDOr() + creature.getNbPiecesDOr() / 5.0);
         
         // augmentation du score
         tueur.setScore(tueur.getScore() + creature.getNbPiecesDOr());
 
         // notification de la mort de la créature
-        if(edj != null)
-            edj.creatureKilled(creature,tueur);
+        if(gameListener != null)
+            gameListener.creatureKilled(creature,tueur);
     }
 
     /**
@@ -239,7 +239,7 @@ public class Game_Server extends Game
         if(enregistrementReussie)
         {
             // Création de la requete d'enregistrement
-            String requete = RegistrationQuery.getRequeteMiseAJour(terrain.getNbJoueursMax() - getJoueurs().size());
+            String requete = RegistrationQuery.getRequeteMiseAJour(field.getNbJoueursMax() - getJoueurs().size());
     
             try
             {
@@ -258,14 +258,14 @@ public class Game_Server extends Game
     
     public void terminer(GameResult resultatJeu)
     {
-        if(!estTermine)
+        if(!isFinished)
         {
-            estTermine = true;
+            isFinished = true;
             
             arreterTout();
             
-            if(edj != null)
-                edj.terminatePart(resultatJeu);
+            if(gameListener != null)
+                gameListener.terminatePart(resultatJeu);
         }
     }
 }

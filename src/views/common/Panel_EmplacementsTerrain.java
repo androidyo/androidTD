@@ -113,7 +113,7 @@ public class Panel_EmplacementsTerrain extends JPanel
             //---------------------------------------
             Rectangle zone;
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-            for (Team e : terrain.getEquipesInitiales())
+            for (Team e : terrain.getTeamsInitials())
                 for (PlayerLocation ej : e.getPlayerLocations())
                 {
                     zone = ej.getZoneDeConstruction();
@@ -126,7 +126,7 @@ public class Panel_EmplacementsTerrain extends JPanel
             
             int oldy = -1000;
             int lastOffset = 1;
-            for (Team e : terrain.getEquipesInitiales())
+            for (Team e : terrain.getTeamsInitials())
                 for (PlayerLocation ej : e.getPlayerLocations())
                 {
                     zone = ej.getZoneDeConstruction();

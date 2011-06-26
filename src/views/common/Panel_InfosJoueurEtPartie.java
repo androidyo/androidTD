@@ -171,7 +171,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourNbViesRestantes()
     {
-        lVies.setText(String.format("%02d",jeu.getJoueurPrincipal().getTeam().getLifeRemainingNumber()));
+        lVies.setText(String.format("%02d",jeu.getKeyPlayer().getTeam().getLifeRemainingNumber()));
     }
     
     /**
@@ -179,7 +179,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourRevenu()
     {
-        lRevenu.setText(String.format("%02.2f",jeu.getJoueurPrincipal().getRevenu()));
+        lRevenu.setText(String.format("%02.2f",jeu.getKeyPlayer().getRevenu()));
     }
 
     /**
@@ -187,7 +187,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourNbEtoiles()
     {
-        lEtoiles.setText(String.format("%02d",jeu.getJoueurPrincipal().getNbEtoiles()));
+        lEtoiles.setText(String.format("%02d",jeu.getKeyPlayer().getNbEtoiles()));
     }
     
     /**
@@ -195,7 +195,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourScore()
     {
-        lScore.setText(String.format("%05d",jeu.getJoueurPrincipal().getScore()));
+        lScore.setText(String.format("%05d",jeu.getKeyPlayer().getScore()));
         miseAJourNbEtoiles();
     }
     
@@ -204,7 +204,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourNbPiecesOr()
     {
-        double nbPiecesOr = jeu.getJoueurPrincipal().getNbPiecesDOr();
+        double nbPiecesOr = jeu.getKeyPlayer().getNbPiecesDOr();
         lNbPiecesOr.setText(String.format("%05d",  (int) nbPiecesOr)); // tronc
     }
     

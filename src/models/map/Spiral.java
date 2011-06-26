@@ -87,7 +87,7 @@ public class Spiral extends Field
         e.addZoneDepartCreatures(new Rectangle(500,40,20,80));
         e.setZoneArrivalCreatures(new Rectangle(300,290,40,40));
         e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,480,500)));
-        equipes.add(e);
+        teams.add(e);
 		
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;
         

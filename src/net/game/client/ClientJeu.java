@@ -100,7 +100,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
         canalEnvoi = new ChannelTCP(IP, port);
         
         // demande de connexion au serveur (canal 1)
-        canalEnvoi.envoyerString(jeu.getJoueurPrincipal().getPseudo());
+        canalEnvoi.envoyerString(jeu.getKeyPlayer().getPseudo());
         
         // le serveur nous retourne notre identificateur
         JSONObject msg;
@@ -502,7 +502,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
             
             // le joueur avec le meme id que l'ancien joueur principal
             // devient le joueur principal
-            if(jeu.getJoueurPrincipal().getId() == idJoueur)
+            if(jeu.getKeyPlayer().getId() == idJoueur)
                 jeu.setKeyPlayer(joueur);
                
             // ajout dans l'equipe
@@ -620,14 +620,14 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
                     jeu.setField(terrain);
                     terrain.setJeu(jeu);
                     
-                    jeu.getJoueurPrincipal().setId(idJoueur);
+                    jeu.getKeyPlayer().setId(idJoueur);
                     
                     Team equipe = jeu.getEquipe(idEquipe);
                     PlayerLocation emplacementJoueur = jeu.getEmplacementJoueur(idEmplacement);
 
                     if(equipe != null && emplacementJoueur != null)
                     {
-                        equipe.addPlayer(jeu.getJoueurPrincipal(),emplacementJoueur);  
+                        equipe.addPlayer(jeu.getKeyPlayer(),emplacementJoueur);  
                         
                         if(edcj != null)
                             edcj.joueurInitialise();  
@@ -680,7 +680,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
         
         if(joueur != null)
         { 
-            joueur.setNbPiecesDOr(nbPiecesDOr);
+            joueur.setGoldNumber(nbPiecesDOr);
             joueur.setScore(score);
             joueur.getTeam().setLifeRemainingNumber(nbViesRestantes);
             joueur.setRevenu(revenu);
@@ -832,7 +832,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
     public void log(String msg)
     {
         if(verbeux)
-            System.out.println("[CLIENT][JOUEUR "+jeu.getJoueurPrincipal().getId()+"] "+msg);
+            System.out.println("[CLIENT][JOUEUR "+jeu.getKeyPlayer().getId()+"] "+msg);
     }
     
     /**
@@ -842,7 +842,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
      */
     private void logErreur(String msg)
     {
-        System.err.println("[CLIENT][ERREUR][JOUEUR "+jeu.getJoueurPrincipal().getId()+"] "+msg);
+        System.err.println("[CLIENT][ERREUR][JOUEUR "+jeu.getKeyPlayer().getId()+"] "+msg);
     }
 
     /**
@@ -852,7 +852,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
      */
     private void logErreur(String msg, Exception e)
     {
-        System.err.println("[CLIENT][ERREUR][JOUEUR "+jeu.getJoueurPrincipal().getId()+"] "+msg);
+        System.err.println("[CLIENT][ERREUR][JOUEUR "+jeu.getKeyPlayer().getId()+"] "+msg);
     
         //e.printStackTrace();
     }

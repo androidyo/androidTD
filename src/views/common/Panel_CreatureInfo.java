@@ -41,7 +41,7 @@ import models.creatures.*;
  * @since jdk1.6.0_16
  * @see Creature
  */
-public class Panel_InfoCreature extends JPanel
+public class Panel_CreatureInfo extends JPanel
 {
     // constante statiques
     private static final long serialVersionUID = 1L;
@@ -69,7 +69,7 @@ public class Panel_InfoCreature extends JPanel
 	/**
 	 * Constructeur du panel
 	 */
-	public Panel_InfoCreature()
+	public Panel_CreatureInfo()
 	{
 		// construction du panel
 		super(new BorderLayout());

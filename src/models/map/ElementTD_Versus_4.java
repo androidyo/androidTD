@@ -91,25 +91,25 @@ public class ElementTD_Versus_4 extends Field
         e1.addZoneDepartCreatures(new Rectangle(110, 0, 80, 20));
         e1.setZoneArrivalCreatures(new Rectangle(230, 0, 80, 20));
         e1.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,480,500),Color.GREEN));
-        equipes.add(e1);
+        teams.add(e1);
         
         Team e2 = new Team(2,"Les rouges",Color.RED);
         e2.addZoneDepartCreatures(new Rectangle(590, 0, 80, 20));
         e2.setZoneArrivalCreatures(new Rectangle(710, 0, 80, 20));
         e2.addPlayerLocation(new PlayerLocation(2,new Rectangle(480,0,480,500),Color.RED));
-        equipes.add(e2);
+        teams.add(e2);
         
         Team e3 = new Team(3,"Les bleus",Color.BLUE);
         e3.addZoneDepartCreatures(new Rectangle(110, 500, 80, 20));
         e3.setZoneArrivalCreatures(new Rectangle(230, 500, 80, 20));
         e3.addPlayerLocation(new PlayerLocation(3,new Rectangle(0,500,480,500),Color.BLUE));
-        equipes.add(e3);
+        teams.add(e3);
         
         Team e4 = new Team(4,"Les jaunes",Color.YELLOW);
         e4.addZoneDepartCreatures(new Rectangle(590,500, 80, 20));
         e4.setZoneArrivalCreatures(new Rectangle(710, 500, 80, 20));
         e4.addPlayerLocation(new PlayerLocation(4,new Rectangle(480,500,480,500),Color.YELLOW));
-        equipes.add(e4);
+        teams.add(e4);
         
         
         // musique

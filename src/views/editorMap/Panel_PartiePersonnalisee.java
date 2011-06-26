@@ -57,7 +57,7 @@ import views.LookInterface;
 import views.Panel_MenuPrincipal;
 import views.common.Panel_Terrain;
 import views.common.TableCellRenderer_Image;
-import views.single.View_JeuSolo;
+import views.single.View_GameSingle;
 import exceptions.*;
 
 /**
@@ -376,7 +376,7 @@ public class Panel_PartiePersonnalisee extends JPanel implements ActionListener
                     
                     SoundManagement.arreterTousLesSons();
                     
-                    new View_JeuSolo(jeu);
+                    new View_GameSingle(jeu);
                     
                     parent.dispose();
                 } 

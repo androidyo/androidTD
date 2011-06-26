@@ -91,7 +91,7 @@ public class ElementTD_Coop extends Field
         e1.addPlayerLocation(new PlayerLocation(3,new Rectangle(20,260,180,220),Color.GREEN));
         e1.addPlayerLocation(new PlayerLocation(4,new Rectangle(200,380,260,100),Color.ORANGE));
         e1.addPlayerLocation(new PlayerLocation(5,new Rectangle(360,20,100,360),Color.CYAN));
-        equipes.add(e1);
+        teams.add(e1);
         
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;

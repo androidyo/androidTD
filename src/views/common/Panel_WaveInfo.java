@@ -11,12 +11,12 @@ import models.creatures.Creature;
 import models.creatures.WaveOfCreatures;
 import models.game.Game;
 
-public class Panel_InfoVagues extends JPanel 
+public class Panel_WaveInfo extends JPanel 
 {
     private static final long serialVersionUID = 1L;
     private Game jeu;
      
-    public Panel_InfoVagues(Game jeu)
+    public Panel_WaveInfo(Game jeu)
     {
         setOpaque(false);
         

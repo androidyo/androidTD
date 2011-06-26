@@ -171,7 +171,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
         pForm.add(lNbPiecesOrInit, 0, ligne);
         tfNbPiecesOrInit.setPreferredSize(dim);
         tfNbPiecesOrInit
-                .setText(jeu.getTerrain().getNbPiecesOrInitiales() + "");
+                .setText(jeu.getTerrain().getInitialsGlod() + "");
 
         tfNbPiecesOrInit.addActionListener(this);
         tfNbPiecesOrInit.getDocument().addDocumentListener(this);
@@ -184,7 +184,7 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
         lNbViesInit.setFont(ManageFonts.POLICE_TITRE_CHAMP);
         pForm.add(lNbViesInit, 0, ligne);
         tfNbViesInit.setPreferredSize(dim);
-        tfNbViesInit.setText(jeu.getTerrain().getNbViesInitiales() + "");
+        tfNbViesInit.setText(jeu.getTerrain().getInitialLsifeNumber() + "");
 
         tfNbViesInit.addActionListener(this);
         tfNbViesInit.getDocument().addDocumentListener(this);
@@ -374,8 +374,8 @@ public class Panel_OptionsTerrain extends JPanel implements ActionListener,
         cbModeDeJeu.setSelectedIndex(t.getMode());
 
         tfBreveDescription.setText(t.getBreveDescription());
-        tfNbPiecesOrInit.setText(t.getNbPiecesOrInitiales() + "");
-        tfNbViesInit.setText(t.getNbViesInitiales() + "");
+        tfNbPiecesOrInit.setText(t.getInitialsGlod() + "");
+        tfNbViesInit.setText(t.getInitialLsifeNumber() + "");
 
         bCouleurDeFond.setBackground(t.getCouleurDeFond());
         bCouleurDesMurs.setBackground(t.getCouleurMurs());

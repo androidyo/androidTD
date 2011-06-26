@@ -227,7 +227,7 @@ public class Maillage_v1 implements Maillage
 	/* (non-Javadoc)
      * @see models.maillage.MaillageI#desactiverZone(java.awt.Rectangle)
      */
-	synchronized public void desactiverZone(Rectangle rectangle, boolean miseAJour)
+	synchronized public void disableZone(Rectangle rectangle, boolean miseAJour)
 			throws IllegalArgumentException
 	{
 		zoneActive(rectangle, false);
@@ -535,7 +535,7 @@ public class Maillage_v1 implements Maillage
     }
 
     @Override
-    public void ajouterPointdeSortie(int x, int y)
+    public void addPointOfExit(int x, int y)
     {
         // pas utilisé
     }

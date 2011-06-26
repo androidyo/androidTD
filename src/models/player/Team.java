@@ -153,7 +153,7 @@ public class Team implements Serializable
           
        PlayerLocation pl = findLocationAvailable();
        
-       // emplacement non trouvé
+       // location not found
        if(pl == null) 
            throw new NoPositionAvailableException("Aucune place disponible.");
        // location found

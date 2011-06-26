@@ -25,9 +25,9 @@ import javax.swing.*;
 import views.LookInterface;
 import views.common.EcouteurDePanelTerrain;
 import views.common.Panel_AjoutTour;
-import views.common.Panel_InfoCreature;
+import views.common.Panel_CreatureInfo;
 import views.common.Panel_InfoTour;
-import views.common.Panel_InfoVagues;
+import views.common.Panel_WaveInfo;
 import views.common.Panel_InfosJoueurEtPartie;
 import views.common.Panel_Selection;
 import models.creatures.*;
@@ -58,7 +58,7 @@ public class Panel_MenuInteraction_ModeSolo extends JPanel
 	private Panel_InfosJoueurEtPartie pInfosJoueurEtPartie;
 	private Panel_AjoutTour pAjoutTour;
 	private Panel_Selection pSelection;
-    private Panel_InfoVagues panelInfoVagues;
+    private Panel_WaveInfo panelInfoVagues;
 
 	/**
 	 * Constructeur du panel d'interaction
@@ -136,7 +136,7 @@ public class Panel_MenuInteraction_ModeSolo extends JPanel
      * Permet de recuperer le panel d'info créature
      * @return le panel d'info créature
      */
-    public Panel_InfoCreature getPanelInfoCreature()
+    public Panel_CreatureInfo getPanelInfoCreature()
     {
         return pSelection.getPanelInfoCreature();
     }
@@ -159,7 +159,7 @@ public class Panel_MenuInteraction_ModeSolo extends JPanel
         pAjoutTour.miseAJour();
     }
 
-    public Panel_InfoVagues getPanelInfoVagues() {
+    public Panel_WaveInfo getPanelInfoVagues() {
         return panelInfoVagues;
     }
 }

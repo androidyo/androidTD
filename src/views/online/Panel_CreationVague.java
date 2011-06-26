@@ -156,7 +156,7 @@ public class Panel_CreationVague extends JPanel
     
     public void miseAJour()
     {
-       double nbPiecesDOr = jeu.getJoueurPrincipal().getNbPiecesDOr();
+       double nbPiecesDOr = jeu.getKeyPlayer().getNbPiecesDOr();
        JButton bouton;
        for(int i=0; i < bLancers.length; i++)
        {
