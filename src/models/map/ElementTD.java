@@ -84,9 +84,9 @@ public class ElementTD extends Field
         
         // Création des équipes
         Team e = new Team(1,"Equipe par defaut",Color.BLACK);
-        e.ajouterZoneDepartCreatures(new Rectangle(110, -40, 80, 20));
-        e.setZoneArriveeCreatures(new Rectangle(250, 0, 40, 40));
-        e.ajouterEmplacementJoueur(new PlayerLocation(1,new Rectangle(0,0,480,500)));
+        e.addZoneDepartCreatures(new Rectangle(110, -40, 80, 20));
+        e.setZoneArrivalCreatures(new Rectangle(250, 0, 40, 40));
+        e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,480,500)));
         equipes.add(e);
         
         

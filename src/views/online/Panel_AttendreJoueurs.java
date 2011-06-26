@@ -302,10 +302,10 @@ public class Panel_AttendreJoueurs extends JPanel implements
             cbEmplacements.removeAllItems();
 
             // Emplacements de l'equipe
-            Team equipe = joueur.getEquipe();
-            for (int j = 0; j < equipe.getEmplacementsJoueur().size(); j++)
+            Team equipe = joueur.getTeam();
+            for (int j = 0; j < equipe.getPlayerLocations().size(); j++)
             {
-                PlayerLocation ej = equipe.getEmplacementsJoueur().get(j);
+                PlayerLocation ej = equipe.getPlayerLocations().get(j);
     
                 cbEmplacements.addItem(ej.toString());
    
@@ -331,7 +331,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
                 jeuServeur.desenregistrerSurSE();
  
                 // reférence différente entre client et serveur
-                jeuServeur.initialiser();
+                jeuServeur.initialize();
                 jeuServeur.demarrer();  
             }
         }
@@ -397,9 +397,9 @@ public class Panel_AttendreJoueurs extends JPanel implements
         final JLabel lPseudo = new JLabel(joueur.getPseudo());
         lPseudo.setFont(ManageFonts.POLICE_SOUS_TITRE);
         pJoueurs.add(lPseudo, 1, pos, 1);
-        lPseudo.setForeground(joueur.getEquipe().getCouleur());
+        lPseudo.setForeground(joueur.getTeam().getColor());
 
-        ArrayList<Team> equipes = jeuClient.getEquipes();
+        ArrayList<Team> equipes = jeuClient.getTeams();
         
         if(ADMIN || jeuClient.getJoueurPrincipal() == joueur)
         {
@@ -413,7 +413,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
                 // ajout de l'equipe
                 cbEquipes.addItem(tmpEquipe);
 
-                if (joueur.getEquipe() == tmpEquipe)
+                if (joueur.getTeam() == tmpEquipe)
                     cbEquipes.setSelectedIndex(j);
             }
 
@@ -434,12 +434,12 @@ public class Panel_AttendreJoueurs extends JPanel implements
                         // mise a jour de la liste des emplacements
                         remplirCombo(cbEmplacements,joueur);
 
-                        lPseudo.setForeground(joueur.getEquipe().getCouleur());
+                        lPseudo.setForeground(joueur.getTeam().getColor());
                     } 
                     catch (Exception iae)
                     {
                         // on reselectionne l'ancienne sélection
-                        cbEquipes.setSelectedItem(joueur.getEquipe());
+                        cbEquipes.setSelectedItem(joueur.getTeam());
 
                         lEtat.setForeground(LookInterface.COULEUR_ERREUR);
                         lEtat.setText(iae.getMessage());
@@ -466,9 +466,9 @@ public class Panel_AttendreJoueurs extends JPanel implements
                         
                         if(cbEmplacements.getSelectedIndex() != -1)
                         {
-                            PlayerLocation ej = joueur.getEquipe().getEmplacementsJoueur().get(cbEmplacements.getSelectedIndex());
+                            PlayerLocation ej = joueur.getTeam().getPlayerLocations().get(cbEmplacements.getSelectedIndex());
                             
-                            joueur.setEmplacementJoueur(ej);
+                            joueur.setPlayerLocation(ej);
                             pEmplacementsTerrain.repaint();
                         }
                     } 
@@ -615,7 +615,7 @@ public class Panel_AttendreJoueurs extends JPanel implements
     @Override
     public void messageRecu(String message, Player auteur)
     {
-        String couleurHexa = Tools.ColorToHexa(auteur.getEquipe().getCouleur());
+        String couleurHexa = Tools.ColorToHexa(auteur.getTeam().getColor());
         
         console.ajouterTexteHTMLDansConsole(String.format(Language.getTexte(Language.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
     }

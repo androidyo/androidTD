@@ -53,7 +53,7 @@ public class Protocol implements ConstantsServerJeu
             msg.put("STATUS", OK);
             msg.put("ID_JOUEUR", joueur.getId());
             msg.put("ID_EMPLACEMENT", joueur.getEmplacement().getId());
-            msg.put("ID_EQUIPE", joueur.getEquipe().getId());
+            msg.put("ID_EQUIPE", joueur.getTeam().getId());
             msg.put("NOM_FICHIER_TERRAIN", terrain.getNomFichier());
         }
         catch (JSONException e)
@@ -86,7 +86,7 @@ public class Protocol implements ConstantsServerJeu
                 JSONjoueur.put("ID_JOUEUR", joueur.getId());
                 JSONjoueur.put("NOM_JOUEUR", joueur.getPseudo());
                 JSONjoueur.put("ID_EMPLACEMENT", joueur.getEmplacement().getId());
-                JSONjoueur.put("ID_EQUIPE", joueur.getEquipe().getId());
+                JSONjoueur.put("ID_EQUIPE", joueur.getTeam().getId());
                 
                 // ajout à la liste des joueurs
                 JSONjoueurs.put(JSONjoueur);
@@ -151,7 +151,7 @@ public class Protocol implements ConstantsServerJeu
             msg.put("TYPE", JOUEUR_ETAT);
             msg.put("ID_JOUEUR", joueur.getId());
             msg.put("NB_PIECES_OR", joueur.getNbPiecesDOr());
-            msg.put("NB_VIES_RESTANTES_EQUIPE", joueur.getEquipe().getNbViesRestantes());
+            msg.put("NB_VIES_RESTANTES_EQUIPE", joueur.getTeam().getLifeRemainingNumber());
             msg.put("REVENU", joueur.getRevenu());
             msg.put("SCORE", joueur.getScore());
         }
@@ -334,7 +334,7 @@ public class Protocol implements ConstantsServerJeu
             
             // construction des états des équipes
             JSONArray JSONequipes = new JSONArray();  
-            for(Team e : jeu.getEquipes())
+            for(Team e : jeu.getTeams())
             {
                 JSONObject JSONequipe = new JSONObject();
                 
@@ -343,7 +343,7 @@ public class Protocol implements ConstantsServerJeu
                 if(e.estHorsJeu())
                     JSONequipe.put("NB_VIES_RESTANTES", 0); 
                 else
-                    JSONequipe.put("NB_VIES_RESTANTES", e.getNbViesRestantes()); 
+                    JSONequipe.put("NB_VIES_RESTANTES", e.getLifeRemainingNumber()); 
                 
                 
                 JSONequipes.put(JSONequipe);

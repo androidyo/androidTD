@@ -404,7 +404,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                 terrain.setJeu(jeu);
                 
                 Player j = new Player("sans nom");
-                jeu.setJoueurPrincipal(j);
+                jeu.setKeyPlayer(j);
                 
                 try
                 {
@@ -414,7 +414,7 @@ public class Panel_CreerPartieMulti extends JPanel implements ActionListener
                     jeu.getTerrain().setHauteurMaillage(jeu.getTerrain().getHauteur());
                     
                     jeu.getTerrain().initialize();
-                    jeu.initialiser();
+                    jeu.initialize();
                     
                     SoundManagement.arreterTousLesSons();
                     

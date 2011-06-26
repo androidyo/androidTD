@@ -114,7 +114,7 @@ public class Panel_EmplacementsTerrain extends JPanel
             Rectangle zone;
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
             for (Team e : terrain.getEquipesInitiales())
-                for (PlayerLocation ej : e.getEmplacementsJoueur())
+                for (PlayerLocation ej : e.getPlayerLocations())
                 {
                     zone = ej.getZoneDeConstruction();
     
@@ -127,11 +127,11 @@ public class Panel_EmplacementsTerrain extends JPanel
             int oldy = -1000;
             int lastOffset = 1;
             for (Team e : terrain.getEquipesInitiales())
-                for (PlayerLocation ej : e.getEmplacementsJoueur())
+                for (PlayerLocation ej : e.getPlayerLocations())
                 {
                     zone = ej.getZoneDeConstruction();
                     
-                    if(ej.getJoueur() != null)
+                    if(ej.getPlayer() != null)
                     {
                         g2.setFont(ManageFonts.POLICE_TITRE);
                         
@@ -146,11 +146,11 @@ public class Panel_EmplacementsTerrain extends JPanel
                         
                         oldy = y;
                         
-                        g2.setColor(e.getCouleur());
-                        g2.drawString(ej.getJoueur().getPseudo(), x, y);
+                        g2.setColor(e.getColor());
+                        g2.drawString(ej.getPlayer().getPseudo(), x, y);
                         
                         g2.setColor(Color.BLACK);
-                        g2.drawString(ej.getJoueur().getPseudo(), x+2, y+2);
+                        g2.drawString(ej.getPlayer().getPseudo(), x+2, y+2);
                     }
                 }
         }

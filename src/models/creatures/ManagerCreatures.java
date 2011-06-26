@@ -318,7 +318,7 @@ public class ManagerCreatures implements Runnable
                     
                     // Actuellement c'est un random sur le nombre de zone
                     final Rectangle ZONE_DEPART = equipeCiblee.getZoneDepartCreatures(Tools.tirerNombrePseudoAleatoire(0, equipeCiblee.getNbZonesDepart()-1));
-                    final Rectangle ZONE_ARRIVEE = equipeCiblee.getZoneArriveeCreatures();
+                    final Rectangle ZONE_ARRIVEE = equipeCiblee.getZoneArrivalCreatures();
                     
                     int xDepart = (int) ZONE_DEPART.getCenterX();
                     int yDepart = (int) ZONE_DEPART.getCenterY();

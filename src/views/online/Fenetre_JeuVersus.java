@@ -732,7 +732,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void lancerVague(WaveOfCreatures vague) throws MoneyLackException
     {
-        jeu.lancerVague(jeu.getJoueurPrincipal(), jeu.getEquipeSuivanteNonVide(jeu.getJoueurPrincipal().getEquipe()),vague);
+        jeu.lancerVague(jeu.getJoueurPrincipal(), jeu.getEquipeSuivanteNonVide(jeu.getJoueurPrincipal().getTeam()),vague);
     }
 
     @Override
@@ -752,7 +752,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
         // FIXME continuer...
         if(equipeGagnante == null)
             new Dialog_Message (this, "Draw!", "Nobody won !");         
-        else if(equipeGagnante == jeu.getJoueurPrincipal().getEquipe())
+        else if(equipeGagnante == jeu.getJoueurPrincipal().getTeam())
         {
             new Dialog_Message (this, "Won!", "You win :) Nice!");
             ajouterTexteHTMLDansConsole("<b>You win !</b><br/>"); 
@@ -760,11 +760,11 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
         else
         {
             new Dialog_Message (this, "Results", 
-                    " Team \""+equipeGagnante.getNom()+"\" " +
+                    " Team \""+equipeGagnante.getName()+"\" " +
                     " win!");  
             
-            String couleurHexa = Tools.ColorToHexa(equipeGagnante.getCouleur());
-            ajouterTexteHTMLDansConsole("Team \"<b><font color='#"+couleurHexa+"'>"+equipeGagnante.getNom()+"</font></b>\" wins!<br/>"); 
+            String couleurHexa = Tools.ColorToHexa(equipeGagnante.getColor());
+            ajouterTexteHTMLDansConsole("Team \"<b><font color='#"+couleurHexa+"'>"+equipeGagnante.getName()+"</font></b>\" wins!<br/>"); 
         }
     }
 
@@ -828,7 +828,7 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void messageRecu(String message, Player auteur)
     {
-        String couleurHexa = Tools.ColorToHexa(auteur.getEquipe().getCouleur());
+        String couleurHexa = Tools.ColorToHexa(auteur.getTeam().getColor());
         
         ajouterTexteHTMLDansConsole(String.format(Language.getTexte(Language.ID_TXT_PSEUDO_DIT_MESSAGE), "<b><font color='#"+couleurHexa+"'>"+auteur.getPseudo()+"</font></b>",message)+"<br />");
     }
@@ -850,15 +850,15 @@ public class Fenetre_JeuVersus extends JFrame implements ActionListener,
     @Override
     public void receptionEquipeAPerdue(Team equipe)
     {
-        if(equipe == jeu.getJoueurPrincipal().getEquipe())
+        if(equipe == jeu.getJoueurPrincipal().getTeam())
         {
             new Dialog_Message (this, "Lost!", "You lose :(");
             ajouterTexteHTMLDansConsole("<b>You lose!</b><br />");
         }
         else
         {   
-            String couleurHexa = Tools.ColorToHexa(equipe.getCouleur());
-            ajouterTexteHTMLDansConsole("Team \"<b><font color='#"+couleurHexa+"'>"+equipe.getNom()+"</font></b>\" loses!<br />");
+            String couleurHexa = Tools.ColorToHexa(equipe.getColor());
+            ajouterTexteHTMLDansConsole("Team \"<b><font color='#"+couleurHexa+"'>"+equipe.getName()+"</font></b>\" loses!<br />");
         }
     }
 

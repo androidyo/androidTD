@@ -1,21 +1,3 @@
-/*
-  Copyright (C) 2010 Aurelien Da Campo
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
-
 package models.map;
 
 import java.awt.*;
@@ -60,9 +42,6 @@ import models.utils.Son;
  * In addition, this class is abstract, it can not be instantiated as
  * such, but must be inherited.
  * 
- * @author Aurelien Da Campo
- * @version 1.2 | juillet 2010
- * @since jdk1.6.0_16
  * @see Tower
  * @see Creature
  * @see Maillage
@@ -84,23 +63,25 @@ public class Field implements Serializable
     private String breveDescription;
 
     /**
-     * nombre de vies au debut de la partie
+     * number of lives at the beginning of the game
+     * 初始生命
      */
-    private int nbViesInitiales;
+    private int initialsLifeNumber;
 
     /**
-     * nombre de pieces d'or au debut de la partie
+     * number of gold pieces at the beginning of the game
+     * 初始金钱
      */
-    private int nbPiecesOrInitiales;
+    private int initialsMoney;
 
     /**
-     * Taille du terrain
+     * field size
      */
-    private int largeur, // en pixels
-                hauteur; // en pixels
+    private int field_width, // en pixels
+                field_height; // en pixels
 
     /**
-     * precision du maillage, espace entre deux noeuds
+     * precision of the grid, space between two nodes
      */
     private final int PRECISION_MAILLAGE = 10; // pixels
 
@@ -210,10 +191,10 @@ public class Field implements Serializable
             Color couleurMurs, Image imageDeFond, String description)
     {
         this.jeu = jeu; 
-        this.largeur = largeur;
-        this.hauteur = hauteur;
-        this.nbPiecesOrInitiales = nbPiecesOrInitiales;
-        this.nbViesInitiales    = nbViesInitiales;
+        this.field_width = largeur;
+        this.field_height = hauteur;
+        this.initialsMoney = nbPiecesOrInitiales;
+        this.initialsLifeNumber    = nbViesInitiales;
         this.imageDeFond        = imageDeFond;
         this.iconImageDeFond    = new ImageIcon(imageDeFond);
         
@@ -239,10 +220,10 @@ public class Field implements Serializable
     {
         this.jeu = jeu;
         
-        largeur                 = 500;
-        hauteur                 = 500;
-        nbPiecesOrInitiales     = 100;
-        nbViesInitiales         = 20;
+        field_width                 = 500;
+        field_height                 = 500;
+        initialsMoney     = 100;
+        initialsLifeNumber         = 20;
         breveDescription         = "";
         modeDeJeu               = GameMode.MODE_SOLO;   
     }
@@ -255,7 +236,7 @@ public class Field implements Serializable
     public void initialize()
     {
         // creation des deux maillages
-        // TODO Choix du maillage
+        // TODO Choice of mesh
         MAILLAGE_TERRESTRE = new Maillage_v1(largeurMaillage, hauteurMaillage,
                 PRECISION_MAILLAGE, positionMaillageX, positionMaillageY);
         
@@ -274,7 +255,7 @@ public class Field implements Serializable
         Rectangle zoneArrivee;
         for(Team equipe : equipes)
         {
-            zoneArrivee = equipe.getZoneArriveeCreatures();
+            zoneArrivee = equipe.getZoneArrivalCreatures();
 
             MAILLAGE_TERRESTRE.ajouterPointdeSortie((int) zoneArrivee.getCenterX(), (int) zoneArrivee.getCenterY());
             MAILLAGE_AERIEN.ajouterPointdeSortie((int) zoneArrivee.getCenterX(), (int) zoneArrivee.getCenterY());
@@ -298,7 +279,7 @@ public class Field implements Serializable
      */
     public int getLargeur()
     {
-        return largeur;
+        return field_width;
     }
 
     /**
@@ -308,7 +289,7 @@ public class Field implements Serializable
      */
     public int getHauteur()
     {
-        return hauteur;
+        return field_height;
     }
 
     /**
@@ -347,7 +328,7 @@ public class Field implements Serializable
      */
     public int getNbPiecesOrInitiales()
     {
-        return nbPiecesOrInitiales;
+        return initialsMoney;
     }
 
     /**
@@ -357,7 +338,7 @@ public class Field implements Serializable
      */
     public int getNbViesInitiales()
     {
-        return nbViesInitiales;
+        return initialsLifeNumber;
     }
 
     /**
@@ -390,7 +371,7 @@ public class Field implements Serializable
         if(taillePanelTerrain != null)
             return taillePanelTerrain;
         else  
-            return new Dimension(largeur,hauteur);
+            return new Dimension(field_width,field_height);
     }
     
     // ----------------------
@@ -485,7 +466,7 @@ public class Field implements Serializable
         int somme = 0;
            
         for(Team e : equipes)
-            somme += e.getNbEmplacements();
+            somme += e.getNumberOfAvailablePlayerLocations();
         
         return somme;
     }
@@ -508,8 +489,8 @@ public class Field implements Serializable
             return false;
 
         // elle est bien dans le terrain
-        if (tour.getX() < 0 || tour.getX() > largeur-tour.width
-         || tour.getY() < 0 || tour.getY() > hauteur-tour.height)
+        if (tour.getX() < 0 || tour.getX() > field_width-tour.width
+         || tour.getY() < 0 || tour.getY() > field_height-tour.height)
             return false;
             
         // il n'y a pas un mur
@@ -521,7 +502,7 @@ public class Field implements Serializable
         }
 
         // il n'y a pas les zones de depart ou d'arrivee
-        for(Team e : jeu.getEquipes())
+        for(Team e : jeu.getTeams())
         {
             // zones de départ
             for(int i=0;i<e.getNbZonesDepart();i++)
@@ -529,7 +510,7 @@ public class Field implements Serializable
                     return false;
             
             // zone d'arrivee
-            if (tour.intersects(e.getZoneArriveeCreatures()))
+            if (tour.intersects(e.getZoneArrivalCreatures()))
                 return false;
         }
 
@@ -555,14 +536,14 @@ public class Field implements Serializable
 
         try {
             
-            Team equipe = tour.getPrioprietaire().getEquipe();
+            Team equipe = tour.getPrioprietaire().getTeam();
 
             // FIXME on part du principe que le joueur ne peu blocker que son chemin
             // car il construit sur son troncon... A VOIR!
             
             // TODO gérer plusieurs zone de depart
             Rectangle zoneDepart = equipe.getZoneDepartCreatures(0);
-            Rectangle zoneArrivee = equipe.getZoneArriveeCreatures();
+            Rectangle zoneArrivee = equipe.getZoneArrivalCreatures();
             
             // calcul du chemin et attente une exception
             // PathNotFoundException s'il y a un probleme
@@ -575,7 +556,7 @@ public class Field implements Serializable
             
             
             // mise a jour du chemin
-            equipe.setLongueurChemin(longueur);
+            equipe.setPathLength(longueur);
             
             
             // il existe un chemin, donc elle ne bloque pas.
@@ -692,7 +673,7 @@ public class Field implements Serializable
             // les tours n'affecte que le chemin des creatures terriennes
             if (creature.getType() == Creature.TYPE_TERRIENNE)   
             {
-                Rectangle zoneArrivee = creature.getEquipeCiblee().getZoneArriveeCreatures();
+                Rectangle zoneArrivee = creature.getEquipeCiblee().getZoneArrivalCreatures();
                 
                 try
                 { 
@@ -955,7 +936,7 @@ public class Field implements Serializable
         if(largeur <= 0)
             throw new IllegalArgumentException("la largeur doit être > 0");
 
-        this.largeur = largeur;
+        this.field_width = largeur;
     }
 
     public void setHauteur(int hauteur)
@@ -963,7 +944,7 @@ public class Field implements Serializable
         if(hauteur <= 0)
             throw new IllegalArgumentException("la hauteur doit être > 0");
         
-        this.hauteur = hauteur;
+        this.field_height = hauteur;
     }
 
     public void setNbPiecesOrInitiales(int nbPiecesOrInitiales)
@@ -971,7 +952,7 @@ public class Field implements Serializable
         if(nbPiecesOrInitiales < 0)
             throw new IllegalArgumentException("la nombre de pieces d'or doit être >= 0");
         
-        this.nbPiecesOrInitiales = nbPiecesOrInitiales;
+        this.initialsMoney = nbPiecesOrInitiales;
     }
 
     public void setNbViesInitiales(int nbViesInitiales)
@@ -979,7 +960,7 @@ public class Field implements Serializable
         if(nbViesInitiales <= 0)
             throw new IllegalArgumentException("la nombre de vies doit être > 0");
  
-        this.nbViesInitiales = nbViesInitiales;
+        this.initialsLifeNumber = nbViesInitiales;
     }
     
     public float getOpaciteMurs()

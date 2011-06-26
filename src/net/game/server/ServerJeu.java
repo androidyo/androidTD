@@ -338,7 +338,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 		{ 
 		    envoyerATous(Protocol.construireMsgJoueurDeconnecte(joueur.getId()));
 		    
-		    joueur.getEquipe().retirerJoueur(joueur);
+		    joueur.getTeam().removePlayer(joueur);
 		    
 		    envoyerATous(Protocol.construireMsgJoueursEtat(jeuServeur.getJoueurs()));
 		}
@@ -366,7 +366,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
                 + creature.getNom());
         
 	    // si le joueur n'a pas perdu
-        if(joueur.getEquipe().aPerdu())
+        if(joueur.getTeam().isLost())
             return JOUEUR_HORS_JEU; 
 	    
 	    synchronized (joueur)
@@ -380,7 +380,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 		        joueur.setNbPiecesDOr(argentApresAchat);
 	            try
                 {
-                    jeuServeur.lancerVague(joueur, jeuServeur.getEquipeSuivanteNonVide(joueur.getEquipe()),vague);
+                    jeuServeur.lancerVague(joueur, jeuServeur.getEquipeSuivanteNonVide(joueur.getTeam()),vague);
                 } 
 	            catch (MoneyLackException e)
                 {
@@ -416,7 +416,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 				+ typeTour);
 		
         // si le joueur n'a pas perdu
-        if(joueur.getEquipe().aPerdu())
+        if(joueur.getTeam().isLost())
             return JOUEUR_HORS_JEU;
 		
 		// Selection de la tour cible
@@ -469,7 +469,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 		log("Le joueur " + joueur.getPseudo() + " désire améliorer la tour " + idTour);
 		
 		// si le joueur n'a pas perdu
-        if(joueur.getEquipe().aPerdu())
+        if(joueur.getTeam().isLost())
             return JOUEUR_HORS_JEU; 
 		
 		// Récupération de la tour à améliorer
@@ -513,7 +513,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
 		log("Le joueur " + joueur.getPseudo() + " désire supprimer la tour " + tourCible);
 		
         // si le joueur n'a pas perdu
-        if(joueur.getEquipe().aPerdu())
+        if(joueur.getTeam().isLost())
             return JOUEUR_HORS_JEU;
 		
 		
@@ -638,7 +638,7 @@ public class ServerJeu implements ConstantsServerJeu, GameListener, Runnable
         
         try {
             
-            equipe.ajouterJoueur(joueur);
+            equipe.addPlayer(joueur);
 
             // SUCCES
             message = Protocol.construireMsgChangerEquipe(OK); 

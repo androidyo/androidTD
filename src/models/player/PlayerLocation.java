@@ -97,7 +97,7 @@ public class PlayerLocation implements Serializable
             // seulement s'il y avait un joueur avant
             if(this.joueur != null)
             {
-                this.joueur.setEmplacementJoueur(null);
+                this.joueur.setPlayerLocation(null);
                 this.joueur = null;
             }
         }
@@ -116,7 +116,7 @@ public class PlayerLocation implements Serializable
                 
                 // mise a jour
                 this.joueur = joueur;
-                joueur.setEmplacementJoueur(this);
+                joueur.setPlayerLocation(this);
             }
         }   
     }
@@ -141,11 +141,11 @@ public class PlayerLocation implements Serializable
     }
 
     /**
-     * Permet de recuperer le joueur
+     * Used to retrieve the player
      * 
      * @return le joueur
      */
-    public Player getJoueur()
+    public Player getPlayer()
     {
         return joueur;
     }

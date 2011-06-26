@@ -83,9 +83,9 @@ public class WaterWorld extends Field
         
         // Création des équipes
         Team e = new Team(1,"Equipe par defaut",Color.BLACK);
-        e.ajouterZoneDepartCreatures(new Rectangle(-30, 30, 20, 80));
-        e.setZoneArriveeCreatures(new Rectangle(460, 410, 40, 40));
-        e.ajouterEmplacementJoueur(new PlayerLocation(1,new Rectangle(0,0,500,500)));
+        e.addZoneDepartCreatures(new Rectangle(-30, 30, 20, 80));
+        e.setZoneArrivalCreatures(new Rectangle(460, 410, 40, 40));
+        e.addPlayerLocation(new PlayerLocation(1,new Rectangle(0,0,500,500)));
         equipes.add(e);
         
         fichierMusiqueDAmbiance = FICHIER_MUSIQUE_DE_FOND;

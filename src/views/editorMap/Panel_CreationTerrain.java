@@ -187,7 +187,7 @@ public class Panel_CreationTerrain extends Panel_Terrain {
             }
 
             // si il y une zone de départ ou d'arrivee
-            for (Team e : jeu.getEquipes()) {
+            for (Team e : jeu.getTeams()) {
 
                 // zone de départ
                 for (int i = 0; i < e.getNbZonesDepart(); i++) {
@@ -200,8 +200,8 @@ public class Panel_CreationTerrain extends Panel_Terrain {
                 }
 
                 // zone d'arrive
-                if (e.getZoneArriveeCreatures().contains(p)) {
-                    setRecEnTraitement(e.getZoneArriveeCreatures());
+                if (e.getZoneArrivalCreatures().contains(p)) {
+                    setRecEnTraitement(e.getZoneArrivalCreatures());
                     return;
                 }
             }

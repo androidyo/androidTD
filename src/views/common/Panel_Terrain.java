@@ -553,7 +553,7 @@ public class Panel_Terrain extends JPanel implements Runnable,
 		//-------------------------------------------------
 		
 		// affichages des zones de départ et arrivée
-	    for(Team equipe : jeu.getEquipes())
+	    for(Team equipe : jeu.getTeams())
 	    {
 	        Rectangle r;
 	        
@@ -571,7 +571,7 @@ public class Panel_Terrain extends JPanel implements Runnable,
                     
                     // numero
                     setTransparence(1.f, g2);
-                    g2.setColor(equipe.getCouleur());
+                    g2.setColor(equipe.getColor());
                     g2.drawString(i+"", r.x+r.width/2-5, r.y+r.height/2-5);
                     
                     // tour de couleur
@@ -583,9 +583,9 @@ public class Panel_Terrain extends JPanel implements Runnable,
 	        }
 	        
 	        // dessin de la zone d'arrivee
-	        if(equipe.getZoneArriveeCreatures() != null)
+	        if(equipe.getZoneArrivalCreatures() != null)
 	        {
-	            r = equipe.getZoneArriveeCreatures();
+	            r = equipe.getZoneArrivalCreatures();
 	           
 	            if(modeDebug)
 	            {
@@ -594,13 +594,13 @@ public class Panel_Terrain extends JPanel implements Runnable,
 	                
 	                // tour de couleur
 	                setTransparence(1.f, g2);
-	                g2.setColor(equipe.getCouleur());
+	                g2.setColor(equipe.getColor());
 	                g2.drawRect(r.x, r.y, r.width, r.height); 
 	            }
 	            else
 	            {
 	                // sol de couleur
-                    g2.setColor(equipe.getCouleur());
+                    g2.setColor(equipe.getColor());
                     g2.fillRect(r.x+MARGES_CHATEAU, r.y+MARGES_CHATEAU, r.width-(2*MARGES_CHATEAU), r.height-(2*MARGES_CHATEAU)); 
 	                g2.drawImage(I_CHATEAU, r.x, r.y, r.width, r.height, null);
 	            }
@@ -643,7 +643,7 @@ public class Panel_Terrain extends JPanel implements Runnable,
                 g2.setColor(joueur.getEmplacement().getCouleur());
                 g2.drawRect(zoneC.x , zoneC.y, zoneC.width, zoneC.height);
             
-                if(joueur.getEquipe().aPerdu())
+                if(joueur.getTeam().isLost())
                 {
                     g2.drawLine(zoneC.x , zoneC.y, zoneC.x + zoneC.width, zoneC.y + zoneC.height);
                     g2.drawLine(zoneC.x , zoneC.y + zoneC.height, zoneC.x + zoneC.width, zoneC.y);
@@ -965,7 +965,7 @@ public class Panel_Terrain extends JPanel implements Runnable,
         int positionYBarre  = (int)(creature.getY()+creature.getHeight());
         
         // affichage du conteneur
-        g2.setColor(creature.getProprietaire().getEquipe().getCouleur());
+        g2.setColor(creature.getProprietaire().getTeam().getColor());
         
         g2.fillRect(positionXBarre,positionYBarre, 
                     largeurBarre, HAUTEUR_BARRE_VIE);
@@ -1037,7 +1037,7 @@ public class Panel_Terrain extends JPanel implements Runnable,
 
 	        
 	        setTransparence(.5f, g2);
-	        g2.setColor(tour.getPrioprietaire().getEquipe().getCouleur());
+	        g2.setColor(tour.getPrioprietaire().getTeam().getColor());
 	        g2.fillOval(tour.x-1, tour.y-1, (int) tour.getWidth()+2, (int) tour.getHeight()+2);
 	        setTransparence(1.f, g2);
 	        

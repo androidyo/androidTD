@@ -439,7 +439,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
 
         if(equipe != null)
         {
-            equipe.setNbViesRestantes(0);
+            equipe.setLifeRemainingNumber(0);
             
             if(edcj != null)
                 edcj.receptionEquipeAPerdue(equipe);
@@ -503,12 +503,12 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
             // le joueur avec le meme id que l'ancien joueur principal
             // devient le joueur principal
             if(jeu.getJoueurPrincipal().getId() == idJoueur)
-                jeu.setJoueurPrincipal(joueur);
+                jeu.setKeyPlayer(joueur);
                
             // ajout dans l'equipe
             try
             {
-                jeu.getEquipe(idEquipe).ajouterJoueur(joueur,jeu.getEmplacementJoueur(idEmplacement));
+                jeu.getEquipe(idEquipe).addPlayer(joueur,jeu.getEmplacementJoueur(idEmplacement));
             } 
             catch (PositionOccupationException e)
             {
@@ -528,7 +528,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
             case PARTIE_INITIALISEE :
                 
                 log("Partie initialisée");
-                jeu.initialiser();
+                jeu.initialize();
                 
                 // envoye de la requete d'ajout
                 JSONObject json = new JSONObject();
@@ -560,7 +560,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
                     equipe = jeu.getEquipe(idEquipe);
                     
                     if(equipe != null)
-                        equipe.setNbViesRestantes(JSONequipe.getInt("NB_VIES_RESTANTES"));
+                        equipe.setLifeRemainingNumber(JSONequipe.getInt("NB_VIES_RESTANTES"));
                     else
                         logErreur("Partie terminée : Equipe inconnue");      
                 }
@@ -627,7 +627,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
 
                     if(equipe != null && emplacementJoueur != null)
                     {
-                        equipe.ajouterJoueur(jeu.getJoueurPrincipal(),emplacementJoueur);  
+                        equipe.addPlayer(jeu.getJoueurPrincipal(),emplacementJoueur);  
                         
                         if(edcj != null)
                             edcj.joueurInitialise();  
@@ -682,7 +682,7 @@ public class ClientJeu implements ConstantsServerJeu, Runnable{
         { 
             joueur.setNbPiecesDOr(nbPiecesDOr);
             joueur.setScore(score);
-            joueur.getEquipe().setNbViesRestantes(nbViesRestantes);
+            joueur.getTeam().setLifeRemainingNumber(nbViesRestantes);
             joueur.setRevenu(revenu);
         }
         else

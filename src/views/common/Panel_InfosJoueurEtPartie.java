@@ -171,7 +171,7 @@ public class Panel_InfosJoueurEtPartie extends JPanel
      */
     private void miseAJourNbViesRestantes()
     {
-        lVies.setText(String.format("%02d",jeu.getJoueurPrincipal().getEquipe().getNbViesRestantes()));
+        lVies.setText(String.format("%02d",jeu.getJoueurPrincipal().getTeam().getLifeRemainingNumber()));
     }
     
     /**

@@ -1,21 +1,3 @@
-/*
-  Copyright (C) 2010 Aurelien Da Campo
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
-
 package models.player;
 
 import models.utils.Score;
@@ -65,7 +47,7 @@ public class Player
     /**
      * Equipe du joueur
      */
-    private Team equipe;
+    private Team team;
    
     /**
      * score courant du joueur. Cette valeur equivaux a la somme 
@@ -194,13 +176,13 @@ public class Player
     }
     
     /**
-     * Permet de récupérer l'équipe du joueur
+     * Used to retrieve the player's team
      * 
      * @return l'équipe du joueur
      */
-    public Team getEquipe()
+    public Team getTeam()
     {
-        return equipe;
+        return team;
     }
     
     /**
@@ -220,7 +202,7 @@ public class Player
      */
     public boolean aPerdu()
     {
-        return equipe.getNbViesRestantes() <= 0;
+        return team.getLifeRemainingNumber() <= 0;
     }
 
     /**
@@ -234,31 +216,31 @@ public class Player
     }
     
     /**
-     * Permet de modifier l'équipe du joueur
+     * Allows you to change the player's team
      * 
-     * @param equipe la nouvelle équipe du joueur
+     * @param team la nouvelle équipe du joueur
      */
-    public void setEquipe(Team equipe)
+    public void setTeam(Team team)
     {
         // si le joueur avait une equipe qui le contenait
-        if(this.equipe != null && this.equipe.contient(this))
-            this.equipe.retirerJoueur(this);
+        if(this.team != null && this.team.contains(this))
+            this.team.removePlayer(this);
         
-        this.equipe = equipe;
+        this.team = team;
         
         // FIXME Décommenter et voir les conscéquences !
         //equipe.ajouterJoueur(this);
     }
     
     /**
-     * Permet de modifier l'emplacement du joueur
+     * Allows you to change the location of the player
      * 
      * @param emplacementJoueur l'emplacement du joueur
      */
-    public void setEmplacementJoueur(PlayerLocation emplacementJoueur)
+    public void setPlayerLocation(PlayerLocation emplacementJoueur)
     {
         if(emplacementJoueur != null 
-        && emplacementJoueur.getJoueur() != this) // fin de récursion de maj
+        && emplacementJoueur.getPlayer() != this) // fin de récursion de maj
             emplacementJoueur.setJoueur(this);
         
         this.emplacement = emplacementJoueur;
@@ -270,7 +252,7 @@ public class Player
     public void quitterEmplacementJoueur()
     {
         // fin de récursion de maj
-        if(emplacement != null && emplacement.getJoueur() != this) 
+        if(emplacement != null && emplacement.getPlayer() != this) 
             emplacement.retirerJoueur();
         
         emplacement = null;

@@ -142,7 +142,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
         idAutoIncrEJ = 1;
         
         // Pour chaque equipe du jeu...
-        for(final Team equipe : jeu.getEquipes())
+        for(final Team equipe : jeu.getTeams())
         {
             // Separateur
             JPanel lTrait = new JPanel();
@@ -151,9 +151,9 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
             pTabEquipes.add(lTrait,0,ligne++,5,1);
             
             // Nom de l'équipe
-            final JLabel lNomEquipe = new JLabel(equipe.getNom());
+            final JLabel lNomEquipe = new JLabel(equipe.getName());
             lNomEquipe.setFont(ManageFonts.POLICE_TITRE);
-            lNomEquipe.setForeground(equipe.getCouleur());
+            lNomEquipe.setForeground(equipe.getColor());
             pTabEquipes.add(lNomEquipe,0,ligne);
             
             // Edition de l'equipe
@@ -175,7 +175,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
             ManageFonts.setStyle(bSupprimerEquipe);
             pTabEquipes.add(bSupprimerEquipe,3,ligne);
             
-            if(jeu.getEquipes().size() < 2) // Minimum 1 equipe
+            if(jeu.getTeams().size() < 2) // Minimum 1 equipe
                 bSupprimerEquipe.setEnabled(false);
             else
             {
@@ -206,7 +206,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    equipe.ajouterZoneDepartCreatures(new Rectangle(0,0,40,40));
+                    equipe.addZoneDepartCreatures(new Rectangle(0,0,40,40));
                     
                     construirePanelEquipes();
                 }
@@ -231,7 +231,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    panelCreationTerrain.setRecEnTraitement(equipe.getZoneArriveeCreatures());
+                    panelCreationTerrain.setRecEnTraitement(equipe.getZoneArrivalCreatures());
                 }
             });
 
@@ -302,14 +302,14 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
-                    equipe.ajouterEmplacementJoueur(new PlayerLocation(idAutoIncrEJ++, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
+                    equipe.addPlayerLocation(new PlayerLocation(idAutoIncrEJ++, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
                 
                     construirePanelEquipes();
                 }
             });
             ligne++;
 
-            for(final PlayerLocation ej : equipe.getEmplacementsJoueur())
+            for(final PlayerLocation ej : equipe.getPlayerLocations())
             { 
                 
                 JLabel lNomEmplacement = new JLabel(Language.getTexte(Language.ID_TXT_ZONE_JOUEUR)+ej.getId());
@@ -358,7 +358,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
                 ManageFonts.setStyle(bSupprimerEmplacement);
                 pTabEquipes.add(bSupprimerEmplacement,3,ligne);
                 
-                if(equipe.getNbEmplacements() == 1)
+                if(equipe.getNumberOfAvailablePlayerLocations() == 1)
                     bSupprimerEmplacement.setEnabled(false);
                 
                 bSupprimerEmplacement.addActionListener(new ActionListener()
@@ -394,9 +394,9 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
             
             // TODO positionner au milieu du viewport
             equipe.ajouterZoneDepart(new Rectangle(40,40,40,40));
-            equipe.setZoneArriveeCreatures(new Rectangle(140,140,40,40));
+            equipe.setZoneArrivalCreatures(new Rectangle(140,140,40,40));
             
-            equipe.ajouterEmplacementJoueur(new PlayerLocation(idAutoIncrEJ++, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
+            equipe.addPlayerLocation(new PlayerLocation(idAutoIncrEJ++, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
 
             idAutoIncrEquipe++;
             
@@ -420,7 +420,7 @@ public class Panel_CreationEquipes extends JPanel implements ActionListener
         
         // initialisation de l'id courant -> recupere l'id le plus grand + 1
         idAutoIncrEquipe = 0;
-        for(Team e : jeu.getEquipes())
+        for(Team e : jeu.getTeams())
             if(e.getId() > idAutoIncrEquipe)
                 idAutoIncrEquipe = e.getId();
         idAutoIncrEquipe++;

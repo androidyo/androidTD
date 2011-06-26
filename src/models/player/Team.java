@@ -1,21 +1,3 @@
-/*
-  Copyright (C) 2010 Aurelien Da Campo
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
-
 package models.player;
 
 import java.awt.Color;
@@ -28,79 +10,75 @@ import exceptions.NoPositionAvailableException;
 import exceptions.PositionOccupationException;
 
 /**
- * Classe de gestion d'une equipe.
+ * Management class to a team.
  * 
- * @author Aurelien Da Campo
- * @version 1.2 | juillet 2010
- * @since jdk1.6.0_16
  */
 public class Team implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Identificateur
+     * identifier
      */
     private int id;
     
    /**
-    * Nom de l'equipe
+    * Team name
     */
-   private String nom;
+   private String name;
    
    /**
-    * Couleur
+    * color
     */
-   private Color couleur;
+   private Color color;
    
    /**
-    * Liste des joueurs
+    * List of players
     */
-   private Vector<Player> joueurs = new Vector<Player>();
+   private Vector<Player> players = new Vector<Player>();
    
    /**
-    * nombre de vies restantes. 
+    * number of lives remaining. 
     * <br>
-    * Note : Lorsque un ennemi atteint la zone d'arrive, le nombre de vies est
-    * decremente.
+    * Note: When an enemy reaches the area occurs, the number of lives is decremented.
     */
-   private int nbViesRestantes;
+   private int lifeRemainingNumber;
    
    /**
-    * Zone de départ des créatures ennemies
+    * Starting area of enemy creatures
     */
    private ArrayList<Rectangle> zonesDepartCreatures = new ArrayList<Rectangle>();
    
    /**
-    * Zone d'arrivée des créatures ennemies
+    * Finish area of enemy creatures
     */
-   private Rectangle zoneArriveeCreatures;
+   private Rectangle zoneArrivalCreatures;
 
    /**
-    * Stockage des emplacements de joueurs
+    * storage locations of players
     */
-   private ArrayList<PlayerLocation> emplacementsJoueur = new ArrayList<PlayerLocation>();
+   private ArrayList<PlayerLocation> playerLocations = new ArrayList<PlayerLocation>();
    
    /**
-    * Permet de connaitre la longueur du chemin de l'equipe
+    * Allows to know the length of the path of the team
     */
-   private double longueurChemin = 0.0;
+   private double pathLength = 0.0;
    
    /**
     * Constucteur
     * 
-    * @param nom
-    * @param couleur
+    * @param name
+    * @param color
     */
-   public Team(int id, String nom, Color couleur)
+   public Team(int id, String name, Color color)
    {
        this.id = id;
-       this.nom = nom;
-       this.couleur = couleur;
+       this.name = name;
+       this.color = color;
    }
    
    /**
-    * Permet de récupérer l'identificateur de l'équipe
+    * Retrieves the identifier of the team
     * 
     * @return l'identificateur de l'équipe
     */
@@ -110,79 +88,78 @@ public class Team implements Serializable
    }
    
    /**
-    * Permet de récupérer le nom
+    * Retrieves the name
     * 
     * @return le nom
     */
-   public String getNom()
+   public String getName()
    {
-       return nom;
+       return name;
    }
    
    /**
-    * Permet de récupérer la couleur
+    * Retrieves the color
     * 
     * @return la couleur
     */
-   public Color getCouleur()
+   public Color getColor()
    {
-       return couleur;
+       return color;
    }
 
    /**
-    * Permet d'ajouter un joueur dans l'équipe à un emplacement particulier.
+    * Adds a player on the team at a particular location.
     * 
-    * @param joueur le joueur
-    * @param ej l'emplacement
+    * @param player le joueur
+    * @param pl l'emplacement
     * @throws PositionOccupationException 
     */
-   public void ajouterJoueur(Player joueur, PlayerLocation ej) 
+   public void addPlayer(Player player, PlayerLocation pl) 
        throws PositionOccupationException
    {
-       if(joueur == null)
+       if(player == null)
            throw new IllegalArgumentException();
        
-       if(ej == null)
+       if(pl == null)
            throw new IllegalArgumentException();
        
-       if(ej.getJoueur() != null)
+       if(pl.getPlayer() != null)
            throw new PositionOccupationException("EmplacementJoueur occupé");
        
-       // on retire le joueur de son ancienne equipe
-       if(joueur.getEquipe() != null)
-           joueur.getEquipe().retirerJoueur(joueur);
+       // we remove the player from his old team
+       if(player.getTeam() != null)
+           player.getTeam().removePlayer(player);
        
-       // on l'ajout dans la nouvelle equipe
-       joueurs.add(joueur);
+       // on the addition to the new team
+       players.add(player);
 
-       // on modifier sont equipe
-       joueur.setEquipe(this);
+       // change team
+       player.setTeam(this);
        
-       // on lui attribut le nouvel emplacement
-       joueur.setEmplacementJoueur(ej);
+       player.setPlayerLocation(pl);
    }
    
    /**
-    * Permet d'ajouter un joueur sans connaitre l'emplacement
+    * To add a player without knowing the location
     * 
-    * @param joueur le joueur a ajouter
+    * @param player le joueur a ajouter
     * @throws IllegalArgumentException si le joueur est nul  
     * @throws NoPositionAvailableException 
     */
-   public void ajouterJoueur(Player joueur) throws NoPositionAvailableException
+   public void addPlayer(Player player) throws NoPositionAvailableException
    {
-       if(joueur == null)
+       if(player == null)
            throw new IllegalArgumentException();
           
-       PlayerLocation ej = trouverEmplacementDiponible();
+       PlayerLocation pl = findLocationAvailable();
        
        // emplacement non trouvé
-       if(ej == null) 
+       if(pl == null) 
            throw new NoPositionAvailableException("Aucune place disponible.");
-       // emplacement trouvé
+       // location found
        else
            try{
-               ajouterJoueur(joueur, ej);
+               addPlayer(player, pl);
            } 
            catch (PositionOccupationException e){
                e.printStackTrace();
@@ -194,113 +171,112 @@ public class Team implements Serializable
     * 
     * @return l'emplacement ou null
     */
-   public PlayerLocation trouverEmplacementDiponible()
+   public PlayerLocation findLocationAvailable()
    {
-       // cherche un emplacement disponible
-       for(PlayerLocation ej : emplacementsJoueur)
-           if(ej.getJoueur() == null)
-               return ej;
+       // seek location available
+       for(PlayerLocation pl : playerLocations)
+           if(pl.getPlayer() == null)
+               return pl;
   
        return null;
    }
    
    /**
-    * Permet de retirer un joueur de l'equipe. 
-    * Corollaire : Le joueur quittera egalement son emplacement.
+    * Removes a player from the team. 
+    * Corollary: The player will also leave its location.
     * 
-    * @param joueur le joueur
+    * @param player le joueur
     */
-   public void retirerJoueur(Player joueur)
+   public void removePlayer(Player player)
    {
        // effacement
-       joueurs.remove(joueur);
+       players.remove(player);
        
        // quitte l'emplacement
-       if(joueur.getEmplacement() != null)
-           joueur.getEmplacement().retirerJoueur();
+       if(player.getEmplacement() != null)
+           player.getEmplacement().retirerJoueur();
        
        // quitte l'equipe
-       joueur.setEquipe(null);
+       player.setTeam(null);
    }
 
    /**
-    * Permet de savoir si l'équip contient un certain joueur
+    * Indicates whether the equipment contains a certain player
     * 
-    * @param joueur le joueur
+    * @param player le joueur
     * @return true si elle le contient, false sinon
     */
-   public boolean contient(Player joueur)
+   public boolean contains(Player player)
    {
-       return joueurs.contains(joueur);
+       return players.contains(player);
    }
    
    
    /**
-    * Permet de recuperer la collection des joueurs
+    * Retrieves a collection of players
     * 
     * @return la collection des joueurs
     */
-   public Vector<Player> getJoueurs()
+   public Vector<Player> getPlayers()
    {
-       return joueurs;
+       return players;
    }
    
    /**
-    * Permet de recuperer le score de l'equipe qui correspond à la somme des scores
-    * de joueurs de l'équipe.
+    * Used to retrieve the score of the team which is the sum of the scores of players on the team.
     * 
     * @return le score
     */
    public int getScore()
    {
-       int somme = 0;
+       int sum = 0;
        
-       for(Player joueur : joueurs)
-           somme += joueur.getScore();
+       for(Player player : players)
+           sum += player.getScore();
        
-       return somme;
+       return sum;
    }
    
    /**
-    * Permet de recuperer le nombre de vies restantes de l'equipe
+    * Used to retrieve the number of lives remaining Team
     * 
     * @return le nombre de vies restantes de l'equipe
     */
-   public int getNbViesRestantes()
+   public int getLifeRemainingNumber()
    {
-       return nbViesRestantes;
+       return lifeRemainingNumber;
    }
 
    /**
-    * Permet de faire perdre une vie a l'equipe
+    * Allows you to lose a life Team
     */
-    synchronized public void perdreUneVie()
+    synchronized public void losingALife()
     {
-        nbViesRestantes--;
+        lifeRemainingNumber--;
     }
 
     /**
-     * Permet de modifier le nombre de vies restantes de l'equipe
+     * Changes the number of lives remaining Team
      * 
      * @param nbViesRestantes le nouveau nombre de vies restantes
      */
-    public void setNbViesRestantes(int nbViesRestantes)
+    public void setLifeRemainingNumber(int nbViesRestantes)
     {
-        this.nbViesRestantes = nbViesRestantes;
+        this.lifeRemainingNumber = nbViesRestantes;
     }
 
     /**
-     * Permet d'ajouter une zone de départ des créatures ennemies
+     * Adds a starting area of enemy creatures
      * 
      * @param zone la zone
      */
-    public void ajouterZoneDepartCreatures(Rectangle zone)
+    public void addZoneDepartCreatures(Rectangle zone)
     {
         zonesDepartCreatures.add(zone);
     }
     
     /**
-     * Permet de récupérer la zone de départ des créatures
+     * Retrieves the starting area of the creatures
      * 
      * @return la zone de départ des créatures
      */
@@ -310,43 +286,43 @@ public class Team implements Serializable
     }
     
     /**
-     * Permet d'ajouter une zone d'arrivée des créatures ennemies
+     * Adds a zone of arrival of enemy creatures
      * 
      * @param zone la zone
      */
-    public void setZoneArriveeCreatures(Rectangle zone)
+    public void setZoneArrivalCreatures(Rectangle zone)
     {
-        zoneArriveeCreatures = zone;
+        zoneArrivalCreatures = zone;
     }
     
     /**
-     * Permet de récupérer la zone d'arrivee des créatures
+     * Retrieves the finish area of the creatures
      * 
      * @return la zone d'arrivee des créatures
      */
-    public Rectangle getZoneArriveeCreatures()
+    public Rectangle getZoneArrivalCreatures()
     {
-        return zoneArriveeCreatures;
+        return zoneArrivalCreatures;
     }
   
     /**
-     * Permet d'ajouter un emplacement de joueur
+     * Adds a player's location
      * 
-     * @param emplacementJoueur l'emlacement
+     * @param playerLocation l'emlacement
      */
-    public void ajouterEmplacementJoueur(PlayerLocation emplacementJoueur)
+    public void addPlayerLocation(PlayerLocation playerLocation)
     {
-        emplacementsJoueur.add(emplacementJoueur);
+        playerLocations.add(playerLocation);
     }
 
     /**
-     * Permet de savoir le nombre d'emplacements disponibles de joueur
+     * Lets you know the number of slots available to players
      * 
-     * @return le nombre d'emplacements disponibles de joueur 
+     * @return the number of slots available to players 
      */
-    public int getNbEmplacements()
+    public int getNumberOfAvailablePlayerLocations()
     {
-        return emplacementsJoueur.size();
+        return playerLocations.size();
     }
 
     /**
@@ -354,45 +330,45 @@ public class Team implements Serializable
      * 
      * @return les emplacements de joueur
      */
-    public ArrayList<PlayerLocation> getEmplacementsJoueur()
+    public ArrayList<PlayerLocation> getPlayerLocations()
     {
-        return emplacementsJoueur;
+        return playerLocations;
     }
     
     @Override
     public String toString()
     {
-        return nom;
+        return name;
     }
 
     /**
-     * Permet de récupérer la longueur du chemin
+     * Retrieves the path length
      *
      * @return la longueur du chemin
      */
-    public double getLongueurChemin()
+    public double getPathLength()
     {
-        return longueurChemin;
+        return pathLength;
     }
     
     /**
-     * Permet de modifier la longueur du chemin
+     * Changes the path length
      * 
      * @param longueur la longueur du chemin
      */
-    public void setLongueurChemin(double longueur)
+    public void setPathLength(double longueur)
     {
-        this.longueurChemin = longueur;
+        this.pathLength = longueur;
     }
 
     /**
-     * Permet de savoir si l'equipe a perdue
+     * Indicates whether the team lost
      * 
      * @return true si elle a perdue, false sinon
      */
-    public boolean aPerdu()
+    public boolean isLost()
     {
-        return nbViesRestantes <= 0 || estHorsJeu();
+        return lifeRemainingNumber <= 0 || estHorsJeu();
     }
 
     /**
@@ -406,7 +382,7 @@ public class Team implements Serializable
     public boolean estHorsJeu()
     {
         Player joueur;
-        Enumeration<Player> e = joueurs.elements(); 
+        Enumeration<Player> e = players.elements(); 
         while(e.hasMoreElements())
         {
             joueur = e.nextElement();
@@ -428,15 +404,15 @@ public class Team implements Serializable
     {
         // retire tous les joueurs de leur emplacement
         Player joueur;
-        Enumeration<Player> e = joueurs.elements(); 
+        Enumeration<Player> e = players.elements(); 
         while(e.hasMoreElements())
         {
             joueur = e.nextElement();
-            retirerJoueur(joueur);
+            removePlayer(joueur);
         }
                       
         // vide la liste des joueurs
-        joueurs.clear();
+        players.clear();
     }
     
     /**
@@ -446,7 +422,7 @@ public class Team implements Serializable
      */
     public void setCouleur(Color couleur)
     {
-        this.couleur = couleur;
+        this.color = couleur;
     }
 
     /**
@@ -476,11 +452,11 @@ public class Team implements Serializable
      */
     public void supprimerEmplacement(PlayerLocation ej)
     {
-        emplacementsJoueur.remove(ej);
+        playerLocations.remove(ej);
     }
 
     /**
-     * Permet de récupérer la liste des zones de départ
+     * Retrieves the list of areas starting
      * 
      * @return une copie de la liste des zones de départ
      */
@@ -492,13 +468,13 @@ public class Team implements Serializable
     }
 
     /**
-     * Permet de modifier le nom de l'équipe
+     * Changes the name of the team
      * 
-     * @param nom le nom de l'équipe
+     * @param name le nom de l'équipe
      */
-    public void setNom(String nom)
+    public void setName(String name)
     {
-        this.nom = nom;
+        this.name = name;
     }
 
     public void suppimerZoneDepart(Rectangle z)

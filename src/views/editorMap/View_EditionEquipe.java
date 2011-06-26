@@ -73,13 +73,13 @@ public class View_EditionEquipe extends JFrame implements ActionListener
         
         // Nom
         p.addFieldTitle(lNomEquipe,ln);
-        tfNomEquipe.setText(equipe.getNom());
+        tfNomEquipe.setText(equipe.getName());
         tfNomEquipe.setPreferredSize(new Dimension(90,30));
         p.addField(tfNomEquipe,ln++);
         
         // Couleur
         p.addFieldTitle(lCouleurEquipe,ln);
-        bCouleurEquipe.setBackground(equipe.getCouleur());
+        bCouleurEquipe.setBackground(equipe.getColor());
         bCouleurEquipe.addActionListener(this);
         bCouleurEquipe.setPreferredSize(new Dimension(90,30));
         p.addField(bCouleurEquipe,ln++);
@@ -114,7 +114,7 @@ public class View_EditionEquipe extends JFrame implements ActionListener
         if(obj == bCouleurEquipe)
         {
             Color couleur = JColorChooser.showDialog(
-                    null,"",equipe.getCouleur());
+                    null,"",equipe.getColor());
               
             if(couleur != null)
             {
@@ -126,7 +126,7 @@ public class View_EditionEquipe extends JFrame implements ActionListener
         {
             if(!tfNomEquipe.getText().trim().isEmpty())
             {
-                equipe.setNom(tfNomEquipe.getText());
+                equipe.setName(tfNomEquipe.getText());
                 
                 pce.miseAJour();
                 

@@ -41,7 +41,7 @@ public class Game_Client extends Game
     
     public Game_Client(Player joueur)
     {
-        setJoueurPrincipal(joueur);
+        setKeyPlayer(joueur);
         
         clientJeu = new ClientJeu(this);
     }

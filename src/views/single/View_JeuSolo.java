@@ -746,7 +746,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
 	{ 
 	    if(vaguePeutEtreLancee)
 	    {
-	        jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getEquipe());
+	        jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getTeam());
 	        ajouterInfoVagueSuivanteDansConsole();
 	        bLancerVagueSuivante.setEnabled(false);
 	        vaguePeutEtreLancee = false;
@@ -874,7 +874,7 @@ public class View_JeuSolo extends JFrame implements ActionListener,
         // raccourci de gain d'argent (debug)
         else if(keyChar == 'L')
         {
-            jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getEquipe());
+            jeu.lancerVagueSuivante(jeu.getJoueurPrincipal(), jeu.getJoueurPrincipal().getTeam());
             ajouterInfoVagueSuivanteDansConsole();
         }
         else if(keyCode == Configuration.getKeyCode(Configuration.AUG_VIT_JEU))

@@ -1,21 +1,3 @@
-/*
-  Copyright (C) 2010 Aurelien Da Campo
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-*/
-
 package models.game;
 
 import i18n.Language;
@@ -198,11 +180,11 @@ public abstract class Game implements PlayerListener,
     }
     
     /**
-     * Permet d'initialiser la partie avant le commencement
+     * To initialize the game before the start
      * 
      * @param joueur 
      */
-    synchronized public void initialiser()
+    synchronized public void initialize()
     {
         if(terrain == null)
             throw new IllegalStateException("Terrain nul");
@@ -227,10 +209,10 @@ public abstract class Game implements PlayerListener,
         for(Team equipe : teams)
         {
             // initialisation des vies restantes
-            equipe.setNbViesRestantes(terrain.getNbViesInitiales());
+            equipe.setLifeRemainingNumber(terrain.getNbViesInitiales());
             
             // initialisation des pieces d'or des joueurs
-            for(Player j : equipe.getJoueurs())
+            for(Player j : equipe.getPlayers())
             {
                 j.setScore(0);
                 j.setNbPiecesDOr(terrain.getNbPiecesOrInitiales());
@@ -253,7 +235,7 @@ public abstract class Game implements PlayerListener,
         estInitialise = false;
         estDemarre = false;
         
-        initialiser();
+        initialize();
         
         
         // arret des gestionnaires
@@ -270,9 +252,9 @@ public abstract class Game implements PlayerListener,
         // ajout de tous les joueurs
         for(Team e : teams)
         {
-            e.setNbViesRestantes(terrain.getNbViesInitiales());
+            e.setLifeRemainingNumber(terrain.getNbViesInitiales());
             
-            for(Player j : e.getJoueurs())    
+            for(Player j : e.getPlayers())    
             {
                 j.setNbPiecesDOr(terrain.getNbPiecesOrInitiales());
                 j.setScore(0);
@@ -474,7 +456,7 @@ public abstract class Game implements PlayerListener,
             // selection des equipes en jeu
             ArrayList<Team> equipesEnJeu = new ArrayList<Team>();
             for(Team equipe : teams)
-                if(!equipe.aPerdu())
+                if(!equipe.isLost())
                 {
                     // selection de l'equipe gagnante
                     if(equipe.getScore() > maxScore)
@@ -586,11 +568,11 @@ public abstract class Game implements PlayerListener,
     }
 
     /**
-     * Permet de recupérer la collection des équipes
+     * Retrieves a collection teams
      * 
      * @return la collection des équipes
      */
-    public ArrayList<Team> getEquipes()
+    public ArrayList<Team> getTeams()
     {
         return teams;
     }
@@ -608,7 +590,7 @@ public abstract class Game implements PlayerListener,
         
         // ajout de tous les joueurs
         for(Team e : teams)
-            for(Player j : e.getJoueurs())
+            for(Player j : e.getPlayers())
                 joueurs.add(j);
         
         // retour
@@ -634,7 +616,7 @@ public abstract class Game implements PlayerListener,
             try
             {              
                 // on tente l'ajout...
-                teams.get(i).ajouterJoueur(joueur);
+                teams.get(i).addPlayer(joueur);
                 
                 // ajout de l'ecouteur
                 joueur.setEcouteurDeJoueur(this);
@@ -675,11 +657,11 @@ public abstract class Game implements PlayerListener,
     }
     
     /**
-     * Permet de modifier le joueur principal du jeu
+     * Changes the key player of the game
      * 
      * @param joueur le joueur principal du jeu
      */
-    public void setJoueurPrincipal(Player joueur)
+    public void setKeyPlayer(Player joueur)
     {
         this.joueur = joueur;
         
@@ -724,9 +706,9 @@ public abstract class Game implements PlayerListener,
         Team equipe = creature.getEquipeCiblee();
         
         // si pas encore perdu
-        if(!equipe.aPerdu())
+        if(!equipe.isLost())
         {
-            equipe.perdreUneVie();
+            equipe.losingALife();
             
             if(edj != null)
             {
@@ -736,12 +718,12 @@ public abstract class Game implements PlayerListener,
                 // -> ajout au protocole EQUIPE_ETAT
                 // et appeler plutot edj.equipeMiseAJour(equipe) 
                 // pour tous les joueurs de l'equipe
-                for(Player joueur : equipe.getJoueurs())
+                for(Player joueur : equipe.getPlayers())
                     edj.joueurMisAJour(joueur);
             }
             
             // controle de la terminaison du jeu.
-            if(equipe.aPerdu())
+            if(equipe.isLost())
             {
                 if(edj != null)
                     edj.teamLost(equipe);
@@ -750,7 +732,7 @@ public abstract class Game implements PlayerListener,
                 // la partie n'est pas terminée
                 int nbEquipesRestantes = 0;
                 for(Team tmpEquipe : teams)
-                    if(!tmpEquipe.aPerdu())
+                    if(!tmpEquipe.isLost())
                         nbEquipesRestantes++;
              
                 // fin de la partie
@@ -902,7 +884,7 @@ public abstract class Game implements PlayerListener,
     public PlayerLocation getEmplacementJoueur(int idEmplacement)
     {
         for(Team equipe : teams)
-            for(PlayerLocation ej : equipe.getEmplacementsJoueur())
+            for(PlayerLocation ej : equipe.getPlayerLocations())
                 if(ej.getId() == idEmplacement)
                     return ej;
 
@@ -956,7 +938,7 @@ public abstract class Game implements PlayerListener,
         // tant qu'il n'y a pas de joueur ou que l'équipe a perdue
         // on prend la suivante...
         // au pire on retombera sur la même equipe qu'en argument
-        while(teams.get(i).getJoueurs().size() == 0 || teams.get(i).aPerdu())
+        while(teams.get(i).getPlayers().size() == 0 || teams.get(i).isLost())
             i = ++i % teams.size();
         
         return teams.get(i);

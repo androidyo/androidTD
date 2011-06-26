@@ -424,8 +424,8 @@ public class View_CreationTerrain extends    JFrame
         // creation de la premiere equipe
         Team equipe = new Team(1, Language.getTexte(Language.ID_TXT_EQUIPE)+" 1", Color.BLACK);
         equipe.ajouterZoneDepart(new Rectangle(40,40,40,40));
-        equipe.setZoneArriveeCreatures(new Rectangle(140,140,40,40));
-        equipe.ajouterEmplacementJoueur(new PlayerLocation(1, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
+        equipe.setZoneArrivalCreatures(new Rectangle(140,140,40,40));
+        equipe.addPlayerLocation(new PlayerLocation(1, new Rectangle(0,0,jeu.getTerrain().getLargeur(),jeu.getTerrain().getHauteur())));
         jeu.ajouterEquipe(equipe);
         
         fichierCourant = null;
@@ -486,11 +486,11 @@ public class View_CreationTerrain extends    JFrame
                 t.setJeu(j);
                 
                 Player joueur = new Player("Joueur Test");
-                j.setJoueurPrincipal(joueur);
+                j.setKeyPlayer(joueur);
                 j.ajouterJoueur(joueur);
      
                 t.initialize();
-                j.initialiser();
+                j.initialize();
                 
                 new View_JeuSolo(j)
                 {

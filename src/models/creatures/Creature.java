@@ -562,7 +562,7 @@ public abstract class Creature extends Rectangle
 	synchronized public void blesser(long degats, Player joueur)
 	{
 		// si pas deja morte et que le joueur peu la tuer
-		if(!estMorte() && joueur.getEquipe() == equipeCiblee)
+		if(!estMorte() && joueur.getTeam() == equipeCiblee)
 		{
 			// diminution de la sante
 			if(!invincible) // pour les clients...
@@ -707,7 +707,7 @@ public abstract class Creature extends Rectangle
     public boolean peutEtreAttaquee(Tower tour)
     {
         // si c'est pas une créature ennemie
-        if(tour.getPrioprietaire().getEquipe() != equipeCiblee)
+        if(tour.getPrioprietaire().getTeam() != equipeCiblee)
             return false;
         
         // elle est blessable
